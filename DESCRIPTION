@@ -1,0 +1,28 @@
+Package: fishr
+Type: Package
+Title: Access the Fish2 FlyEM Dataset
+Version: 0.1.0
+Authors@R: person("Gregory","Jefferis", email="jefferis@gmail.com",
+      role=c("aut", "cre"), comment = c(ORCID = "0000-0002-0587-9355"))
+Description: A thin wrapper around the malevnc package providing access to
+    the fish2 larval zebrafish EM dataset being proofread at Janelia Research
+    Campus as part of a collaboration with the Engert / Lichtman labs at Harvard
+    and Google Research. Currently provides convenience functions for reading 
+    meshes and setting dataset options.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Language: en-GB
+Depends:
+    R (>= 3.5),
+    nat (>= 1.10.2)
+Imports:
+    malevnc,
+    pbapply
+Remotes:
+    natverse/malevnc,
+    natverse/nat
+Suggests:
+    testthat (>= 3.0.0),
+    rgl
+Config/testthat/edition: 3
