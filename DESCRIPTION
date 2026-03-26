@@ -17,12 +17,16 @@ Depends:
     R (>= 3.5),
     nat (>= 1.10.2)
 Imports:
+    bit64,
     malevnc,
+    neuprintr (>= 1.3.4),
     pbapply
 Remotes:
     natverse/malevnc,
-    natverse/nat
+    natverse/nat,
+    natverse/neuprintr
 Suggests:
     testthat (>= 3.0.0),
     rgl
 Config/testthat/edition: 3
+RoxygenNote: 7.3.3
