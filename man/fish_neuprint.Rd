@@ -52,6 +52,7 @@ conn
 \code{\link[malevnc]{manc_neuprint}}
 
 Other neuprint: 
+\code{\link{fish_connection_table}()},
 \code{\link{fish_neuprint_meta}()}
 }
 \concept{neuprint}

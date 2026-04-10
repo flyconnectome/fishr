@@ -102,6 +102,75 @@ fish_neuprint_meta <- function(ids = NULL, conn = NULL, roiInfo = FALSE,
   if (is.null(ids)) res[order(bit64::as.integer64(res$bodyid)), ] else res
 }
 
+#' Connectivity query for fish2 neurons
+#'
+#' @param ids A set of body ids (see \code{\link{fish_ids}} for a range of ways
+#'   to specify these).
+#' @param moredetails \code{FALSE} (default) to use only the columns returned by
+#'   \code{neuprint_connection_table}, \code{TRUE} to join all additional fields
+#'   from \code{\link{fish_neuprint_meta}}, or a character vector naming
+#'   specific extra fields (e.g. \code{c("group")}).
+#' @param conn Optional, a \code{neuprint_connection} object. Defaults to
+#'   \code{\link{fish_neuprint}} to ensure that the query targets fish2.
+#' @inheritParams malevnc::manc_connection_table
+#' @inheritParams neuprintr::neuprint_connection_table
+#' @param ... Additional arguments passed to
+#'   \code{\link[neuprintr]{neuprint_connection_table}}.
+#' @inheritParams with_fish
+#'
+#' @return A data.frame.
+#' @seealso \code{\link[malevnc]{manc_connection_table}}
+#' @family neuprint
+#' @export
+#' @examples
+#' \donttest{
+#' fish_connection_table("RGC", partners = "outputs")
+#' fish_connection_table("RGC", partners = "outputs", summary = TRUE)
+#' }
+fish_connection_table <- function(ids, partners = c("inputs", "outputs"),
+                                  moredetails = FALSE,
+                                  summary = FALSE, threshold = 1L,
+                                  roi = NULL, by.roi = FALSE, conn = NULL, ...,
+                                  dataset = fish_default_dataset()) {
+  if (is.null(conn)) {
+    conn <- with_fish(fish_neuprint(), dataset = dataset)
+  }
+
+  ids <- fish_ids(ids, conn = conn)
+  res <- neuprintr::neuprint_connection_table(
+    ids,
+    partners = partners,
+    details = TRUE,
+    threshold = threshold,
+    conn = conn,
+    summary = summary,
+    roi = roi,
+    by.roi = by.roi,
+    ...
+  )
+
+  if ("bodyid" %in% colnames(res))
+    res$bodyid <- neuprintr:::id2char(res$bodyid)
+  if ("partner" %in% colnames(res))
+    res$partner <- neuprintr:::id2char(res$partner)
+
+  if (!isFALSE(moredetails) && nrow(res) > 0) {
+    if (is.character(moredetails)) {
+      extrafields <- moredetails
+    } else {
+      extrafields <- NULL
+    }
+    dets <- fish_neuprint_meta(unique(res$partner), conn = conn, dataset = dataset)
+    if (is.null(extrafields)) {
+      extrafields <- setdiff(colnames(dets), colnames(res))
+    }
+    dets <- dets[union("bodyid", extrafields)]
+    res <- dplyr::left_join(res, dets, by = c("partner" = "bodyid"))
+  }
+
+  res
+}
+
 #' @noRd
 neuprint_simplify_xyz <- function(x) {
   longform <- grepl("^list", x)
