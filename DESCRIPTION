@@ -19,7 +19,7 @@ Depends:
 Imports:
     bit64,
     malevnc,
-    neuprintr (>= 1.3.4),
+    neuprintr (>= 1.3.4.9100),
     pbapply
 Remotes:
     natverse/malevnc,
