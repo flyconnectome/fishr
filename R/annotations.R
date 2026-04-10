@@ -6,8 +6,8 @@
 #'
 #' @param ids One or more body ids, \code{NULL} (default) to fetch all
 #'   annotations, or a query string (see Details).
-#' @param node The DVID node (UUID) to query. Defaults to the root node set by
-#'   \code{\link{choose_fish}}.
+#' @param node The DVID node (UUID) to query. The default value of 'neutu' uses
+#'   the active neutu node i.e. normally the most up to date.
 #' @param rval Whether to return a fully parsed \code{"data.frame"} (default)
 #'   or an R \code{"list"}.
 #' @param columns_show Whether to show all columns or only those with a
@@ -49,7 +49,7 @@
 #' df <- fish_dvid_annotations("TRP.*")
 #' }
 fish_dvid_annotations <- function(ids = NULL,
-                                   node = getOption("malevnc.rootnode"),
+                                   node = 'neutu',
                                    rval = c("data.frame", "list"),
                                    columns_show = NULL,
                                    cache = FALSE) {

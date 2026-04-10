@@ -6,7 +6,7 @@
 \usage{
 fish_dvid_annotations(
   ids = NULL,
-  node = getOption("malevnc.rootnode"),
+  node = "neutu",
   rval = c("data.frame", "list"),
   columns_show = NULL,
   cache = FALSE
@@ -16,8 +16,8 @@ fish_dvid_annotations(
 \item{ids}{One or more body ids, \code{NULL} (default) to fetch all
 annotations, or a query string (see Details).}
 
-\item{node}{The DVID node (UUID) to query. Defaults to the root node set by
-\code{\link{choose_fish}}.}
+\item{node}{The DVID node (UUID) to query. The default value of 'neutu' uses
+the active neutu node i.e. normally the most up to date.}
 
 \item{rval}{Whether to return a fully parsed \code{"data.frame"} (default)
 or an R \code{"list"}.}
