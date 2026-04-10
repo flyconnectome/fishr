@@ -16,8 +16,9 @@
 #' @family fishr-package
 #' @examples
 #' \dontrun{
-#' ml <- read_fish_meshes(12345)
-#' plot3d(ml)
+#' # pick 10 RGC meshes to read in
+#' rgcs <- read_fish_meshes(fish_ids('RGC')[1:10])
+#' plot3d(rgcs)
 #' }
 read_fish_meshes <- function(ids,
                               node = 'neutu',

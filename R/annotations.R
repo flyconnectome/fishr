@@ -18,9 +18,9 @@
 #'
 #' @details Query string formats for filtering DVID annotations:
 #' \describe{
-#'   \item{\code{"/type:TRP.*"}}{Match the \code{type} field with regex
-#'     \code{TRP.*}.}
-#'   \item{\code{"TRP.*"}}{Equivalent shorthand — bare strings default to the
+#'   \item{\code{"/type:RGC..*"}}{Match the \code{type} field with regex
+#'     \code{RGC..*}.}
+#'   \item{\code{"RGC.*"}}{Equivalent shorthand — bare strings default to the
 #'     \code{type} field.}
 #'   \item{\code{"/status:Traced"}}{Match a different field.}
 #' }
@@ -35,18 +35,21 @@
 #' @export
 #' @family fishr-package
 #' @examples
-#' \dontrun{
-#' # fetch all annotations
-#' df <- fish_dvid_annotations()
-#'
+#' \donttest{
 #' # fetch annotations for specific bodies
-#' df <- fish_dvid_annotations(c(12345, 67890))
+#' fish_dvid_annotations(c(100003384, 100003412))
+#' }
+#' \dontrun{
+#' # fetch all annotations using 5m cache if possible
+#' df <- fish_dvid_annotations(cache=TRUE)
 #'
 #' # filter by type regex
-#' df <- fish_dvid_annotations("/type:TRP.*")
-#'
+#' df <- fish_dvid_annotations("/type:RGC.*", cache=T)
+#' }
+#' \donttest{
 #' # shorthand for type field
-#' df <- fish_dvid_annotations("TRP.*")
+#' df <- fish_dvid_annotations("RGC", cache=T)
+#' df
 #' }
 fish_dvid_annotations <- function(ids = NULL,
                                    node = 'neutu',

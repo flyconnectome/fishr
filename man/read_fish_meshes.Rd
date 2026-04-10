@@ -4,19 +4,14 @@
 \alias{read_fish_meshes}
 \title{Read meshes for fish2 body ids}
 \usage{
-read_fish_meshes(
-  ids,
-  node = getOption("malevnc.rootnode"),
-  units = c("nm", "raw", "microns"),
-  ...
-)
+read_fish_meshes(ids, node = "neutu", units = c("nm", "raw", "microns"), ...)
 }
 \arguments{
 \item{ids}{One or more body ids (numeric or character), or a query string
 accepted by \code{\link{fish_ids}}.}
 
-\item{node}{The DVID node (UUID) to query. Defaults to the root node set by
-\code{\link{choose_fish}}.}
+\item{node}{The DVID node (UUID) to query. The default value of 'neutu' uses
+the active neutu node i.e. normally the most up to date.}
 
 \item{units}{One of \code{"nm"} (default), \code{"raw"} (8 nm voxels), or
 \code{"microns"}.}
@@ -33,8 +28,9 @@ Fetches pre-computed neuroglancer meshes from the fish2 DVID
 }
 \examples{
 \dontrun{
-ml <- read_fish_meshes(12345)
-plot3d(ml)
+# pick 10 RGC meshes to read in
+rgcs <- read_fish_meshes(fish_ids('RGC')[1:10])
+plot3d(rgcs)
 }
 }
 \seealso{

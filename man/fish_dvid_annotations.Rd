@@ -41,9 +41,9 @@ A thin wrapper around \code{malevnc::\link[malevnc]{manc_dvid_annotations}}
 \details{
 Query string formats for filtering DVID annotations:
 \describe{
-  \item{\code{"/type:TRP.*"}}{Match the \code{type} field with regex
-    \code{TRP.*}.}
-  \item{\code{"TRP.*"}}{Equivalent shorthand — bare strings default to the
+  \item{\code{"/type:RGC..*"}}{Match the \code{type} field with regex
+    \code{RGC..*}.}
+  \item{\code{"RGC.*"}}{Equivalent shorthand — bare strings default to the
     \code{type} field.}
   \item{\code{"/status:Traced"}}{Match a different field.}
 }
@@ -54,18 +54,21 @@ already starts with \code{^}.  Queries fetch all annotations (with
 For neuprint-based id lookups, use \code{\link{fish_ids}} instead.
 }
 \examples{
-\dontrun{
-# fetch all annotations
-df <- fish_dvid_annotations()
-
+\donttest{
 # fetch annotations for specific bodies
-df <- fish_dvid_annotations(c(12345, 67890))
+fish_dvid_annotations(c(100003384, 100003412))
+}
+\dontrun{
+# fetch all annotations using 5m cache if possible
+df <- fish_dvid_annotations(cache=TRUE)
 
 # filter by type regex
-df <- fish_dvid_annotations("/type:TRP.*")
-
+df <- fish_dvid_annotations("/type:RGC.*", cache=T)
+}
+\donttest{
 # shorthand for type field
-df <- fish_dvid_annotations("TRP.*")
+df <- fish_dvid_annotations("RGC", cache=T)
+df
 }
 }
 \seealso{
