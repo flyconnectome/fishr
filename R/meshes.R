@@ -9,8 +9,10 @@
 #'   \code{"microns"}.
 #' @param ... Additional arguments passed to \code{httr::GET}.
 #'
-#' @return A \code{\link{neuronlist}} containing one or more \code{mesh3d}
+#' @return A \code{\link[nat:neuronlist]{neuronlist}} containing one or more
+#'   \code{mesh3d}
 #'   objects.
+#' @importFrom nat as.neuronlist
 #' @export
 #' @inheritParams fish_dvid_annotations
 #' @family fishr-package
@@ -30,7 +32,7 @@ read_fish_meshes <- function(ids,
   with_fish({
     res <- pbapply::pbsapply(ids, read_fish_mesh, node = node, ...,
                              simplify = FALSE)
-    res <- nat::as.neuronlist(res, AddClassToNeurons = FALSE)
+    res <- as.neuronlist(res, AddClassToNeurons = FALSE)
     switch(units, raw = res / 8, microns = res / 1000, res)
   })
 }

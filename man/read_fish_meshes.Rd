@@ -19,8 +19,8 @@ the active neutu node i.e. normally the most up to date.}
 \item{...}{Additional arguments passed to \code{httr::GET}.}
 }
 \value{
-A \code{\link{neuronlist}} containing one or more \code{mesh3d}
-  objects.
+A \code{\link[nat:neuronlist]{neuronlist}} containing one or more
+\code{mesh3d} objects.
 }
 \description{
 Fetches pre-computed neuroglancer meshes from the fish2 DVID

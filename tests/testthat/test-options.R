@@ -1,5 +1,7 @@
 test_that("fish_default_dataset reads option", {
-  withr::local_options(fishr.dataset = "fish2")
+  old <- getOption("fishr.dataset")
+  on.exit(options(fishr.dataset = old))
+  options(fishr.dataset = "fish2")
   expect_equal(fishr:::fish_default_dataset(), "fish2")
 })
 
