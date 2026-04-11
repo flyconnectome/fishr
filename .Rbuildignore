@@ -1,6 +1,7 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^\.claude$
+^AGENTS\.md$
 ^CLAUDE\.md$
 ^_pkgdown\.yml$
 ^docs$
