@@ -7,7 +7,7 @@
 fish_connection_table(
   ids,
   partners = c("inputs", "outputs"),
-  moredetails = c("class", "group", "type"),
+  moredetails = FALSE,
   summary = FALSE,
   threshold = 1L,
   roi = NULL,
@@ -24,10 +24,10 @@ to specify these).}
 \item{partners}{Either inputs or outputs. Redundant with \code{prepost}, but
 probably clearer.}
 
-\item{moredetails}{Either a logical (to add all fields when \code{TRUE}) or a
-character vector naming additional fields returned by
-\code{\link{fish_neuprint_meta}} that will be added to the results
-data.frame.}
+\item{moredetails}{\code{FALSE} (default) to use only the columns returned by
+\code{neuprint_connection_table}, \code{TRUE} to join all additional fields
+from \code{\link{fish_neuprint_meta}}, or a character vector naming
+specific extra fields (e.g. \code{c("group")}).}
 
 \item{summary}{When \code{TRUE} and more than one query neuron is given,
 summarises connectivity grouped by partner.}
