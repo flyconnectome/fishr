@@ -64,6 +64,7 @@ Other fishr-package:
 \code{\link{fish_dvid_annotations}()},
 \code{\link{fish_setup}()},
 \code{\link{read_fish_meshes}()},
+\code{\link{read_fish_neurons}()},
 \code{\link{with_fish}()}
 }
 \concept{fishr-package}

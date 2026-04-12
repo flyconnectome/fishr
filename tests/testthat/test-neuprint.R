@@ -20,6 +20,19 @@ test_that("fish_neuprint_meta returns metadata", {
   expect_type(meta$bodyid, "character")
 })
 
+test_that("read_fish_neurons returns a neuronlist", {
+  conn <- try(fish_neuprint(), silent = TRUE)
+  skip_if(inherits(conn, "try-error"),
+          message = "fish2 neuprint connection unavailable")
+
+  ids <- fish_ids("RGC", conn = conn)
+  skip_if(!length(ids) > 0, message = "no fish2 ids available for RGC")
+
+  neurons <- suppressWarnings(read_fish_neurons(ids[1], conn = conn))
+  expect_s3_class(neurons, "neuronlist")
+  expect_length(neurons, 1)
+})
+
 test_that("fish_connection_table works", {
   conn <- try(fish_neuprint(), silent = TRUE)
   skip_if(inherits(conn, "try-error"),
