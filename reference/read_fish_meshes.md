@@ -1,7 +1,6 @@
 # Read meshes for fish2 body ids
 
 Fetches pre-computed neuroglancer meshes from the fish2 DVID server.
-Meshes are returned in nm coordinates by default (8 nm voxels).
 
 ## Usage
 
@@ -24,7 +23,7 @@ read_fish_meshes(ids, node = "neutu", units = c("nm", "raw", "microns"), ...)
 
 - units:
 
-  One of `"nm"` (default), `"raw"` (8 nm voxels), or `"microns"`.
+  One of `"nm"` (default), `"raw"` (nominal voxel size), or `"microns"`.
 
 - ...:
 
@@ -36,12 +35,23 @@ read_fish_meshes(ids, node = "neutu", units = c("nm", "raw", "microns"), ...)
 A [`neuronlist`](https://rdrr.io/pkg/nat/man/neuronlist.html) containing
 one or more `mesh3d` objects.
 
+## Details
+
+It seems that the nominal voxel dimensions of the fish2 dataset are 16 x
+16 x 15 nm. Neuron meshes are already returned from DVID in physical nm
+scale but this voxel dimension is required to turn raw neuroglancer
+coordinates into nm. This means that if you click on a neuron in
+neuroglancer, the recorded location will match if you have chosen
+\`units="nm"\`. Alternatively you must multiply point locations from
+neuroglancer by c(16,16,15) to obtain points in nm space.
+
 ## See also
 
 Other fishr-package:
 [`fish_dvid_annotations()`](https://flyconnectome.github.io/fishr/reference/fish_dvid_annotations.md),
 [`fish_ids()`](https://flyconnectome.github.io/fishr/reference/fish_ids.md),
 [`fish_setup()`](https://flyconnectome.github.io/fishr/reference/fish_setup.md),
+[`read_fish_neurons()`](https://flyconnectome.github.io/fishr/reference/read_fish_neurons.md),
 [`with_fish()`](https://flyconnectome.github.io/fishr/reference/with_fish.md)
 
 ## Examples

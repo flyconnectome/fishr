@@ -12,10 +12,16 @@
   : Login to fish2 neuprint server
 - [`fish_neuprint_meta()`](https://flyconnectome.github.io/fishr/reference/fish_neuprint_meta.md)
   : Fetch neuprint metadata for fish2 neurons
+- [`fish_roi_meshes()`](https://flyconnectome.github.io/fishr/reference/fish_roi_meshes.md)
+  : Fetch one or more ROI meshes for fish2
+- [`fish_rois()`](https://flyconnectome.github.io/fishr/reference/fish_rois.md)
+  : Fetch the ROI hierarchy for fish2
 - [`fish_setup()`](https://flyconnectome.github.io/fishr/reference/fish_setup.md)
   : Interactive setup helper for fish2 authentication
 - [`read_fish_meshes()`](https://flyconnectome.github.io/fishr/reference/read_fish_meshes.md)
   : Read meshes for fish2 body ids
+- [`read_fish_neurons()`](https://flyconnectome.github.io/fishr/reference/read_fish_neurons.md)
+  : Read neuron skeletons via neuprint
 - [`with_fish()`](https://flyconnectome.github.io/fishr/reference/with_fish.md)
   [`choose_fish_dataset()`](https://flyconnectome.github.io/fishr/reference/with_fish.md)
   [`choose_fish()`](https://flyconnectome.github.io/fishr/reference/with_fish.md)

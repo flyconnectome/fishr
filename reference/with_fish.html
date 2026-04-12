@@ -92,7 +92,7 @@ When Clio dataset lookup is unavailable, choose_fish falls back to a
 <span></span>
 <span><span class="fu">choose_fish_dataset</span><span class="op">(</span>dataset <span class="op">=</span> <span class="st">"fish2"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">choose_fish</span><span class="op">(</span>dataset <span class="op">=</span> <span class="fu">fish_default_dataset</span><span class="op">(</span><span class="op">)</span>, set <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">choose_fish</span><span class="op">(</span>dataset <span class="op">=</span> <span class="fu">fish_default_dataset</span><span class="op">(</span><span class="op">)</span>, set <span class="op">=</span> <span class="cn">TRUE</span>, use_clio <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -112,6 +112,14 @@ evaluate with the specified dataset.</p></dd>
 <dt id="arg-set">set<a class="anchor" aria-label="anchor" href="#arg-set"></a></dt>
 <dd><p>Whether to set the relevant package options or just to return a
 list of the required options.</p></dd>
+
+
+<dt id="arg-use-clio">use_clio<a class="anchor" aria-label="anchor" href="#arg-use-clio"></a></dt>
+<dd><p>Whether to use a live Clio lookup for fish dataset settings.
+The default <code>NA</code> first reuses any cached live lookup for the dataset,
+otherwise it tries Clio and falls back to baked-in fish2 neuprint settings
+when available. Use <code>FALSE</code> to avoid Clio and rely only on cached or
+built-in settings. Use <code>TRUE</code> to require a live Clio lookup.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -135,7 +143,8 @@ list of the required options.</p></dd>
 <code><a href="fish_dvid_annotations.html">fish_dvid_annotations()</a></code>,
 <code><a href="fish_ids.html">fish_ids()</a></code>,
 <code><a href="fish_setup.html">fish_setup()</a></code>,
-<code><a href="read_fish_meshes.html">read_fish_meshes()</a></code></p></div>
+<code><a href="read_fish_meshes.html">read_fish_meshes()</a></code>,
+<code><a href="read_fish_neurons.html">read_fish_neurons()</a></code></p></div>
     </div>
 
     <div class="section level2">

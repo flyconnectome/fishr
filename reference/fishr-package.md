@@ -47,6 +47,25 @@ options()[grepl("^fishr", names(options()))]
 #> $fishr.dataset
 #> [1] "fish2"
 #> 
+#> $fishr.dataset_options
+#> $fishr.dataset_options$fish2
+#> $fishr.dataset_options$fish2$malevnc.server
+#> [1] "https://fishemf-cleaving.janelia.org"
+#> 
+#> $fishr.dataset_options$fish2$malevnc.rootnode
+#> [1] "634eed0328dc4fe183f2bcb9306572db"
+#> 
+#> $fishr.dataset_options$fish2$malevnc.dataset
+#> [1] "fish2"
+#> 
+#> $fishr.dataset_options$fish2$malevnc.neuprint
+#> [1] "https://neuprint-fish2.janelia.org"
+#> 
+#> $fishr.dataset_options$fish2$malevnc.neuprint_dataset
+#> [1] "fish2"
+#> 
+#> 
+#> 
 # }
 if (FALSE) { # \dontrun{
 with_fish(read_fish_meshes(12345))

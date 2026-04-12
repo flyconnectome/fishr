@@ -47,48 +47,49 @@
   <main id="main" class="col-md-9"><div class="section level1">
 <div class="page-header"><h1 id="fishr">fishr<a class="anchor" aria-label="anchor" href="#fishr"></a>
 </h1></div>
-<p><code>fishr</code> is a thin wrapper around <a href="https://github.com/natverse/malevnc" class="external-link">malevnc</a> for working with the <strong>fish2</strong> larval zebrafish whole-brain EM dataset in the same style as <a href="https://github.com/natverse/malecns" class="external-link">malecns</a> and <a href="https://github.com/natverse/yakuba" class="external-link">yakuba</a>.</p>
-<p>The fish2 dataset is currently being proofread at Janelia Research Campus.</p>
+<!-- badges: start -->
+
+<!-- badges: end -->
+<p>The goal of <strong>fishr</strong> is to provide <a href="https://natverse.org" class="external-link">natverse</a> access to the <strong>fish2</strong> larval zebrafish whole-brain EM dataset. It follows the same general pattern as <a href="https://github.com/natverse/malecns" class="external-link">malecns</a> and <a href="https://github.com/natverse/malevnc" class="external-link">malevnc</a>, providing dataset-specific helpers on top of the <a href="https://github.com/natverse/neuprintr" class="external-link">neuprintr</a> package and a bridge to the broader natverse connectomics tooling for computational neuroanatomy.</p>
+<p>The fish2 dataset is currently being proofread at Janelia Research Campus as part of a multi-institution collaboration.</p>
 <p>The initial package focuses on:</p>
 <ul>
-<li>dataset selection helpers (<code>choose_fish</code>, <code>with_fish</code>)</li>
+<li>dataset selection helpers (<code><a href="reference/with_fish.html">choose_fish()</a></code>, <code><a href="reference/with_fish.html">with_fish()</a></code>)</li>
+<li>body id lookup (<code><a href="reference/fish_ids.html">fish_ids()</a></code>)</li>
 <li>neuprint metadata and connectivity queries (<code>fish_neuprint_meta</code>, <code>fish_connection_table</code>)</li>
-<li>body id lookup (<code>fish_ids</code>)</li>
 <li>DVID body annotations (<code>fish_dvid_annotations</code>)</li>
-<li>neuroglancer meshes (<code>read_fish_meshes</code>)</li>
+<li>neuroglancer meshes and skeletons (<code>read_fish_meshes</code>, <code>read_fish_neurons</code>)</li>
 </ul>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
+<p>If you are new to R, we recommend installing the RStudio IDE and base R as detailed at <a href="https://posit.co/download/rstudio-desktop/#download" class="external-link uri">https://posit.co/download/rstudio-desktop/#download</a>.</p>
+<p>To install the fishr package and its dependencies, in your R terminal do:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install natmanager if needed</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"natmanager"</span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"natmanager"</span><span class="op">)</span></span>
 <span><span class="fu">natmanager</span><span class="fu">::</span><span class="fu">install</span><span class="op">(</span>pkgs <span class="op">=</span> <span class="st">"fishr"</span><span class="op">)</span></span></code></pre></div>
 <p>You also need to make sure that you are authenticated to both clio and neuprint.</p>
 <div class="section level3">
-<h3 id="authentication---neuprint">Authentication - Neuprint<a class="anchor" aria-label="anchor" href="#authentication---neuprint"></a>
+<h3 id="authentication">Authentication<a class="anchor" aria-label="anchor" href="#authentication"></a>
 </h3>
-<p>Access to neuprint requires authentication. See <a href="https://github.com/natverse/neuprintr#authentication" class="external-link uri">https://github.com/natverse/neuprintr#authentication</a> for details. The recommendation is to set the neuprint_token environment variable, which is available after logging in to the neuprint website. Follow the instructions at that link to get your token and edit your .Renviron file. Make sure you have a blank line at the end of the file.</p>
-<pre><code><span><span class="co"># nb this token is a dummy</span></span>
-<span><span class="va">neuprint_token</span><span class="op">=</span><span class="st">"asBatEsiOIJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImIsImxldmVsIjoicmVhZHdyaXRlIiwiaW1hZ2UtdXJsIjoiaHR0cHM7Ly9saDQuZ29vZ2xldXNlcmNvbnRlbnQuY29tLy1QeFVrTFZtbHdmcy9BQUFBQUFBQUFBDD9BQUFBQUFBQUFBQS9BQ0hpM3JleFZMeEI4Nl9FT1asb0dyMnV0QjJBcFJSZlI6MTczMjc1MjU2HH0.jhh1nMDBPl5A1HYKcszXM518NZeAhZG9jKy3hzVOWEU"</span></span></code></pre>
-<p>Note that you can optionally specify a default server dataset in this .Renviron file to ensure that all R functions from neuprintr (see below) also target the fish dataset by default:</p>
-<pre><code><span><span class="va">neuprint_server</span><span class="op">=</span><span class="st">"https://neuprint-fish2.janelia.org"</span></span>
-<span><span class="va">neuprint_dataset</span> <span class="op">=</span> <span class="st">"fish2"</span></span></code></pre>
-</div>
-<div class="section level3">
-<h3 id="authentication---clio">Authentication - Clio<a class="anchor" aria-label="anchor" href="#authentication---clio"></a>
-</h3>
-<p>You need to authenticate with Clio API to interact with the Clio/DVID annotation system. You do this via a Google OAuth “dance” in your web browser which is automatically triggered by <code><a href="reference/with_fish.html">choose_fish()</a></code>. Note that the Clio and neuprint tokens look similar, but are not the same. Note also that the neuprint token appears to be indefinite while the Clio token currently lasts 3 weeks.</p>
+<p>Access to neuprint requires authentication. We recommend running:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://flyconnectome.github.io/fishr/">fishr</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/fish_setup.html">fish_setup</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p>in an interactive R session and following the prompts. This will help you record your token and offer to set the fish2 dataset/server as the default for all neuprint commands. See <a href="https://github.com/natverse/neuprintr#authentication" class="external-link uri">https://github.com/natverse/neuprintr#authentication</a> to learn more about the relevant environment variables.</p>
+<p>You need to authenticate with Clio API to interact with the Clio/DVID annotation system. You do this via a Google OAuth “dance” in your web browser which is automatically triggered by <code><a href="reference/with_fish.html">choose_fish()</a></code> or functions that require Clio access. Note that the Clio and neuprint tokens look similar, but are not the same. Note also that the neuprint token appears to be indefinite while the Clio token currently lasts 3 weeks.</p>
 </div>
 </div>
 <div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
-<p>This example shows some basic activities including finding ids by type, fetching metadata and connectivity information and reading and plotting some retinal ganglion cell meshes.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<p>This example shows some basic activities including finding ids by type, fetching metadata and connectivity information, and reading and plotting some retinal ganglion cell meshes.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://flyconnectome.github.io/fishr/">fishr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/natverse/nat" class="external-link">nat</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="reference/with_fish.html">choose_fish</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co"># you only have to run this once, but you can </span></span>
+<span><span class="fu"><a href="reference/fish_setup.html">fish_setup</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># find some RGCs</span></span>
 <span><span class="va">rgc10</span><span class="op">=</span><span class="fu"><a href="reference/fish_ids.html">fish_ids</a></span><span class="op">(</span><span class="st">"RGC"</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span></span>
@@ -96,28 +97,45 @@
 <span><span class="fu"><a href="reference/fish_neuprint_meta.html">fish_neuprint_meta</a></span><span class="op">(</span><span class="va">rgc10</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># connectivity query</span></span>
-<span><span class="fu"><a href="reference/fish_neuprint_meta.html">fish_neuprint_meta</a></span><span class="op">(</span><span class="va">rgc10</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/fish_connection_table.html">fish_connection_table</a></span><span class="op">(</span><span class="va">rgc10</span>, partners <span class="op">=</span> <span class="st">"outputs"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># fetch some RGC meshes</span></span>
 <span><span class="va">rgcm</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/read_fish_meshes.html">read_fish_meshes</a></span><span class="op">(</span><span class="va">rgc10</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://dmurdoch.github.io/rgl/dev/reference/plot3d.html" class="external-link">plot3d</a></span><span class="op">(</span><span class="va">rgcm</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://dmurdoch.github.io/rgl/dev/reference/plot3d.html" class="external-link">plot3d</a></span><span class="op">(</span><span class="va">rgcm</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># read and plot one fish skeleton</span></span>
+<span><span class="va">rgcn</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/read_fish_neurons.html">read_fish_neurons</a></span><span class="op">(</span><span class="va">rgc10</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://dmurdoch.github.io/rgl/dev/reference/plot3d.html" class="external-link">plot3d</a></span><span class="op">(</span><span class="va">rgcn</span>, col <span class="op">=</span> <span class="st">"cyan"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Get meshes for some ROIs. NB not all ROIs have meshes.</span></span>
+<span><span class="va">roi.meshes</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/fish_roi_meshes.html">fish_roi_meshes</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Midbrain"</span>, <span class="st">"Hindbrain"</span><span class="op">)</span>, .progress <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></span>
+<span><span class="fu">wire3d</span><span class="op">(</span><span class="va">roi.meshes</span>, col<span class="op">=</span><span class="st">'grey'</span><span class="op">)</span></span></code></pre></div>
 <div class="section level3">
-<h3 id="using-malevnc-and-neuprintr-functions">using malevnc and neuprintr functions<a class="anchor" aria-label="anchor" href="#using-malevnc-and-neuprintr-functions"></a>
+<h3 id="other-useful-packages">other useful packages<a class="anchor" aria-label="anchor" href="#other-useful-packages"></a>
 </h3>
-<p>fishr has a set of core functions but there is a lot of useful functionality in other R packages for interacting with the flyem connectome data ecosystem especially <a href="https://natverse.org/malevnc/" class="external-link">malevnc</a> and <a href="https://natverse.org/neuprintr/" class="external-link">neuprintr</a>.</p>
+<p>fishr has a set of core functions but there is a lot of useful functionality in other R packages for interacting with the FlyEM connectome data ecosystem, especially <a href="https://natverse.org/malevnc/" class="external-link">malevnc</a> and <a href="https://natverse.org/neuprintr/" class="external-link">neuprintr</a>.</p>
+<div class="section level4">
+<h4 id="malevnc">malevnc<a class="anchor" aria-label="anchor" href="#malevnc"></a>
+</h4>
 <p>malevnc is especially useful for interacting with the annotation and segmentation infrastructure (clio/DVID). You can use any <a href="https://natverse.org/malevnc/reference/" class="external-link">function in the malevnc package</a> after wrapping it in <code><a href="reference/with_fish.html">with_fish()</a></code>.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/with_fish.html">with_fish</a></span><span class="op">(</span><span class="fu">malevnc</span><span class="fu">::</span><span class="fu"><a href="https://natverse.org/malevnc/reference/manc_body_annotations.html" class="external-link">clio_fields</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>If you only ever use the fish dataset then doing</p>
+<p>If you only ever use the fish dataset then doing <code><a href="reference/with_fish.html">choose_fish()</a></code> once per session means that all subsequent malevnc functions will target the fish2 dataset.</p>
 <pre><code><span><span class="fu"><a href="reference/with_fish.html">choose_fish</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu">malevnc</span><span class="fu">::</span><span class="fu"><a href="https://natverse.org/malevnc/reference/manc_body_annotations.html" class="external-link">clio_fields</a></span><span class="op">(</span><span class="op">)</span></span></code></pre>
-<p>once per session means that all subsequent malevbcqueries will be targeted at the fish2 dataset.</p>
-<p>Similarly you can use <a href="https://natverse.org/neuprintr/reference/" class="external-link">function in the base neuprintr package</a> package.</p>
-<p>If the fish dataset is the only (or last) neuprint connection made in a session then <a href="https://natverse.org/neuprintr/reference/index.html" class="external-link">all neuprintr functions</a> will target that dataset.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<p>This already happens if you follow default prompts when you run <code><a href="reference/fish_setup.html">fish_setup()</a></code>.</p>
+<p>The key end user application for the malevnc package right now is probably setting clio annotations via malevnc::manc_annotate_body()</p>
+</div>
+<div class="section level4">
+<h4 id="neuprintr">neuprintr<a class="anchor" aria-label="anchor" href="#neuprintr"></a>
+</h4>
+<p>Similarly you can use <a href="https://natverse.org/neuprintr/reference/" class="external-link">all functions in the base neuprintr package</a>. If you have followed the default prompts in <code><a href="reference/fish_setup.html">fish_setup()</a></code> and are not using other FlyEM datasets, then fish2 should be the default there too.</p>
+<p>If you use other neuprint datasets then neuprintr uses the last (or only) neuprint connection made in a session and will target that dataset.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fc</span><span class="op">=</span><span class="fu"><a href="reference/fish_neuprint.html">fish_neuprint</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">fc</span></span>
 <span><span class="fu">neuprintr</span><span class="fu">::</span><span class="fu"><a href="https://natverse.org/neuprintr/reference/neuprint_ROIs.html" class="external-link">neuprint_ROIs</a></span><span class="op">(</span>conn <span class="op">=</span> <span class="va">fc</span><span class="op">)</span></span></code></pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -143,7 +161,15 @@
 </ul>
 </div>
 
-
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://natverse.org" class="external-link"><img src="https://img.shields.io/badge/natverse-Part%20of%20the%20natverse-a241b6" alt="natverse"></a></li>
+<li><a href="https://flyconnectome.github.io/fishr/"><img src="https://img.shields.io/badge/docs-100%25-brightgreen.svg" alt="Docs"></a></li>
+<li><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
+<li><a href="https://github.com/flyconnectome/fishr/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/flyconnectome/fishr/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
+</ul>
+</div>
 
   </aside>
 </div>

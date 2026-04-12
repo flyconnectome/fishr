@@ -28,7 +28,7 @@ with_fish(expr, dataset = fish_default_dataset())
 
 choose_fish_dataset(dataset = "fish2")
 
-choose_fish(dataset = fish_default_dataset(), set = TRUE)
+choose_fish(dataset = fish_default_dataset(), set = TRUE, use_clio = NA)
 ```
 
 ## Arguments
@@ -46,6 +46,14 @@ choose_fish(dataset = fish_default_dataset(), set = TRUE)
 
   Whether to set the relevant package options or just to return a list
   of the required options.
+
+- use_clio:
+
+  Whether to use a live Clio lookup for fish dataset settings. The
+  default `NA` first reuses any cached live lookup for the dataset,
+  otherwise it tries Clio and falls back to baked-in fish2 neuprint
+  settings when available. Use `FALSE` to avoid Clio and rely only on
+  cached or built-in settings. Use `TRUE` to require a live Clio lookup.
 
 ## Value
 
@@ -70,7 +78,8 @@ Other fishr-package:
 [`fish_dvid_annotations()`](https://flyconnectome.github.io/fishr/reference/fish_dvid_annotations.md),
 [`fish_ids()`](https://flyconnectome.github.io/fishr/reference/fish_ids.md),
 [`fish_setup()`](https://flyconnectome.github.io/fishr/reference/fish_setup.md),
-[`read_fish_meshes()`](https://flyconnectome.github.io/fishr/reference/read_fish_meshes.md)
+[`read_fish_meshes()`](https://flyconnectome.github.io/fishr/reference/read_fish_meshes.md),
+[`read_fish_neurons()`](https://flyconnectome.github.io/fishr/reference/read_fish_neurons.md)
 
 ## Examples
 

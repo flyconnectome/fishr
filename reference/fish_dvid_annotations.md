@@ -79,6 +79,7 @@ Other fishr-package:
 [`fish_ids()`](https://flyconnectome.github.io/fishr/reference/fish_ids.md),
 [`fish_setup()`](https://flyconnectome.github.io/fishr/reference/fish_setup.md),
 [`read_fish_meshes()`](https://flyconnectome.github.io/fishr/reference/read_fish_meshes.md),
+[`read_fish_neurons()`](https://flyconnectome.github.io/fishr/reference/read_fish_neurons.md),
 [`with_fish()`](https://flyconnectome.github.io/fishr/reference/with_fish.md)
 
 ## Examples
@@ -87,8 +88,12 @@ Other fishr-package:
 # \donttest{
 # fetch annotations for specific bodies
 fish_dvid_annotations(c(100003384, 100003412))
-#> Warning: Clio dataset lookup failed; falling back to baked-in neuprint settings for `fish2`. Clio-backed functionality may be unavailable in this session.
-#> Error in (function (server = getOption("malevnc.server")) {    if (is.null(server))         stop("Please use options(malevnc.server) to set the URL of the emdata server!")    pu = tryCatch(httr::parse_url(server), error = function(e) stop("Unable to parse malevnc.server URL:",         server))    server_down <- is.null(curl::nslookup(pu$hostname, error = FALSE))    if (server_down) {        internet_ok <- !is.null(curl::nslookup("google.com",             error = FALSE))        if (internet_ok)             stop("Cannot reach malevnc server. Please check `options('malevnc.server')")        else stop("Cannot reach malevnc server or google. Please check your internet connection!")    }    server})(): Please use options(malevnc.server) to set the URL of the emdata server!
+#> # A tibble: 2 × 10
+#>      bodyid connectivity_type status   user  group instance type  class keywords
+#>       <dbl> <chr>             <chr>    <chr> <int> <chr>    <chr> <chr> <chr>   
+#> 1 100003384 NA                Sensory… NA        0 RGC_R    RGC   NA    NA      
+#> 2 100003412 NA                Sensory… bergs     0 RGC_R    RGC   NA    NA      
+#> # ℹ 1 more variable: comment <chr>
 # }
 if (FALSE) { # \dontrun{
 # fetch all annotations using 5m cache if possible
@@ -100,16 +105,21 @@ df <- fish_dvid_annotations("/type:RGC.*", cache=T)
 # \donttest{
 # shorthand for type field
 df <- fish_dvid_annotations("RGC", cache=T)
-#> Warning: Clio dataset lookup failed; falling back to baked-in neuprint settings for `fish2`. Clio-backed functionality may be unavailable in this session.
-#> Error in (function (server = getOption("malevnc.server")) {    if (is.null(server))         stop("Please use options(malevnc.server) to set the URL of the emdata server!")    pu = tryCatch(httr::parse_url(server), error = function(e) stop("Unable to parse malevnc.server URL:",         server))    server_down <- is.null(curl::nslookup(pu$hostname, error = FALSE))    if (server_down) {        internet_ok <- !is.null(curl::nslookup("google.com",             error = FALSE))        if (internet_ok)             stop("Cannot reach malevnc server. Please check `options('malevnc.server')")        else stop("Cannot reach malevnc server or google. Please check your internet connection!")    }    server})(): Please use options(malevnc.server) to set the URL of the emdata server!
 df
-#> function (x, df1, df2, ncp, log = FALSE) 
-#> {
-#>     if (missing(ncp)) 
-#>         .Call(C_df, x, df1, df2, log)
-#>     else .Call(C_dnf, x, df1, df2, ncp, log)
-#> }
-#> <bytecode: 0x55a4a212a078>
-#> <environment: namespace:stats>
+#> # A tibble: 4,030 × 10
+#>       bodyid connectivity_type status  user  group instance type  class keywords
+#>        <dbl> <chr>             <chr>   <chr> <int> <chr>    <chr> <chr> <chr>   
+#>  1 100003384 NA                Sensor… NA        0 RGC_R    RGC   NA    NA      
+#>  2 100003412 NA                Sensor… bergs     0 RGC_R    RGC   NA    NA      
+#>  3 100004561 NA                Sensor… NA       NA RGC_R    RGC   NA    NA      
+#>  4 100005196 NA                Sensor… bergs     0 RGC_R    RGC   NA    NA      
+#>  5 100006092 NA                Sensor… NA        0 RGC_R    RGC   NA    NA      
+#>  6 100006479 NA                Sensor… NA        0 RGC_R    RGC   NA    NA      
+#>  7 100007723 NA                Sensor… NA        0 RGC_R    RGC   NA    NA      
+#>  8 100009896 NA                Sensor… NA        0 RGC_R    RGC   NA    NA      
+#>  9 100011090 NA                Sensor… NA        0 RGC_R    RGC   NA    NA      
+#> 10 100014375 NA                Sensor… NA        0 RGC_R    RGC   NA    NA      
+#> # ℹ 4,020 more rows
+#> # ℹ 1 more variable: comment <chr>
 # }
 ```
