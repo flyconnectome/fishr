@@ -22,7 +22,8 @@ Imports:
     dplyr,
     malevnc,
     neuprintr (>= 1.3.4.9100),
-    pbapply
+    pbapply,
+    rappdirs
 Remotes:
     natverse/malevnc,
     natverse/nat,

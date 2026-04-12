@@ -262,8 +262,13 @@ fish_clio_state <- function(tokenfile = fish_clio_tokenfile()) {
 }
 
 fish_clio_tokenfile <- function() {
-  user_data_dir <- getFromNamespace("user_data_dir", "rappdirs")
-  file.path(user_data_dir(appname = "rpkg-malevnc"), "flyem_token.json")
+  # TODO: remove this once malevnc exposes a helper to check whether a
+  # Clio token is available without triggering token fetch/browser auth.
+  # Ideally that helper would also validate token expiry.
+  file.path(
+    rappdirs::user_data_dir(appname = "rpkg-malevnc"),
+    "flyem_token.json"
+  )
 }
 
 fish_cli_clio_status <- function(state) {
