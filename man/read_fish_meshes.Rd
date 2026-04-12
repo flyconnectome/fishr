@@ -38,6 +38,7 @@ plot3d(rgcs)
 Other fishr-package: 
 \code{\link{fish_dvid_annotations}()},
 \code{\link{fish_ids}()},
+\code{\link{fish_setup}()},
 \code{\link{with_fish}()}
 }
 \concept{fishr-package}

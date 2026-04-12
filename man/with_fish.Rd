@@ -73,6 +73,7 @@ read_fish_meshes(12345)
 Other fishr-package: 
 \code{\link{fish_dvid_annotations}()},
 \code{\link{fish_ids}()},
+\code{\link{fish_setup}()},
 \code{\link{read_fish_meshes}()}
 }
 \concept{fishr-package}
