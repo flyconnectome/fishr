@@ -74,8 +74,8 @@ fish_neuprint_token <- function() {
 #' @family neuprint
 #' @export
 #' @examples
-#' \dontrun{
-#' fish_neuprint_meta()
+#' \donttest{
+#' head(fish_neuprint_meta("RGC"))
 #' }
 fish_neuprint_meta <- function(ids = NULL, conn = NULL, roiInfo = FALSE,
                                 simplify.xyz = TRUE, ...,
@@ -132,8 +132,8 @@ fish_neuprint_meta <- function(ids = NULL, conn = NULL, roiInfo = FALSE,
 #' @family neuprint
 #' @export
 #' @examples
-#' \dontrun{
-#' fish_rois()
+#' \donttest{
+#' head(fish_rois())
 #' }
 fish_rois <- function(root = NULL, rval = c("edgelist", "graph"),
                       cache = FALSE, conn = NULL, ...,
@@ -174,9 +174,8 @@ fish_rois <- function(root = NULL, rval = c("edgelist", "graph"),
 #' @family neuprint
 #' @export
 #' @examples
-#' \dontrun{
-#' rois <- fish_rois()
-#' fish_roi_meshes(unique(c(rois$from, rois$to))[1:2])
+#' \donttest{
+#' fish_roi_meshes(c("Midbrain", "Hindbrain"), .progress = "none")
 #' }
 fish_roi_meshes <- function(rois, units = c("nm", "raw", "microns"),
                             OmitFailures = TRUE, conn = NULL, ...,
@@ -192,7 +191,7 @@ fish_roi_meshes <- function(rois, units = c("nm", "raw", "microns"),
   }
 
   roi_hierarchy <- fish_rois(conn = conn, dataset = dataset, cache = TRUE)
-  available_rois <- unique(c(roi_hierarchy$from, roi_hierarchy$to))
+  available_rois <- unique(c(roi_hierarchy$parent, roi_hierarchy$roi))
   available_rois <- sort(stats::na.omit(available_rois))
   missing_rois <- setdiff(rois, available_rois)
   if (length(missing_rois)) {

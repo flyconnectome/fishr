@@ -25,11 +25,13 @@
 #' @export
 #' @family fishr-package
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # neuprint query by type
-#' fish_ids("DNa02")
+#' fish_ids("RGC")
 #' # neuprint where clause
-#' fish_ids("where:status='Traced'")
+#' fish_ids("where:n.type='RGC'")
+#' }
+#' \dontrun{
 #' # numeric ids passed through
 #' fish_ids(c(12345, 67890))
 #' # from a data.frame
