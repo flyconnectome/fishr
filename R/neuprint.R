@@ -156,21 +156,21 @@ fish_rois <- function(root = NULL, rval = c("edgelist", "graph"),
 #' Fetch one or more ROI meshes for fish2
 #'
 #' @param rois Character vector of ROI names.
-#' @param units One of \code{"nm"} (default), \code{"raw"} (8 nm voxels), or
+#' @param units One of \code{"nm"} (default), \code{"raw"} (voxels), or
 #'   \code{"microns"}.
-#' @param OmitFailures Whether to omit ROI meshes that could not be read from
-#'   the server (default \code{TRUE}).
 #' @param conn Optional, a \code{neuprint_connection} object. Defaults to
 #'   \code{\link{fish_neuprint}} to ensure that the query targets fish2.
-#' @param ... Additional arguments passed to \code{\link[nat]{nlapply}}.
-#'   This allows progress reporting and simple parallelisation.
+#' @param ... Additional arguments passed to \code{\link[nat]{nlapply}}. This
+#'   allows progress reporting and simple parallelisation.
 #' @inheritParams with_fish
+#' @details It seems that the nominal voxel dimensions of the dataset are 16 x
+#' 16 x 15 nm. ROI meshes are returned from neuprint in raw voxel space and are
+#' scaled up by this factor to give the default nm scaling.
 #'
 #' @return A \code{shapelist3d} containing one or more ROI \code{mesh3d}
-#'   objects.
+#'   objects. Missing meshes are dropped with a warning.
 #' @seealso \code{\link[neuprintr]{neuprint_ROI_mesh}},
-#'   \code{\link[nat]{nlapply}},
-#'   \code{\link{fish_rois}}
+#'   \code{\link[nat]{nlapply}}, \code{\link{fish_rois}}
 #' @family neuprint
 #' @export
 #' @examples
@@ -178,7 +178,7 @@ fish_rois <- function(root = NULL, rval = c("edgelist", "graph"),
 #' fish_roi_meshes(c("Midbrain", "Hindbrain"), .progress = "none")
 #' }
 fish_roi_meshes <- function(rois, units = c("nm", "raw", "microns"),
-                            OmitFailures = TRUE, conn = NULL, ...,
+                            conn = NULL, ...,
                             dataset = fish_default_dataset()) {
   units <- match.arg(units)
   rois <- unique(as.character(rois))
@@ -191,8 +191,7 @@ fish_roi_meshes <- function(rois, units = c("nm", "raw", "microns"),
   }
 
   roi_hierarchy <- fish_rois(conn = conn, dataset = dataset, cache = TRUE)
-  available_rois <- unique(c(roi_hierarchy$parent, roi_hierarchy$roi))
-  available_rois <- sort(stats::na.omit(available_rois))
+  available_rois <- union(roi_hierarchy$parent, roi_hierarchy$roi)
   missing_rois <- setdiff(rois, available_rois)
   if (length(missing_rois)) {
     stop(
@@ -202,14 +201,16 @@ fish_roi_meshes <- function(rois, units = c("nm", "raw", "microns"),
       call. = FALSE
     )
   }
-
-  idx <- nat::as.neuronlist(stats::setNames(seq_along(rois), rois))
+  # little hack to ensure nlapply result is named
+  names(rois)=rois
   res <- nat::nlapply(
-    idx,
-    function(i) neuprintr::neuprint_ROI_mesh(rois[[i]], dataset = dataset, conn = conn),
+    rois,
+    neuprintr::neuprint_ROI_mesh,
+    dataset = dataset, conn = conn,
     OmitFailures = FALSE,
     ...
   )
+
   failed <- vapply(res, inherits, logical(1), "try-error")
   if (any(failed)) {
     failed_rois <- names(res)[failed]
@@ -218,16 +219,11 @@ fish_roi_meshes <- function(rois, units = c("nm", "raw", "microns"),
       " could not be read from the server.",
       call. = FALSE
     )
-    if (isTRUE(OmitFailures)) {
-      res <- res[!failed]
-    }
+    res <- res[!failed]
   }
-
-  ok <- !vapply(res, inherits, logical(1), "try-error")
-  res[ok] <- lapply(res[ok], fish_scale_roi_mesh, units = units)
-  if (all(ok)) {
-    class(res) <- c("shapelist3d", "list")
-  }
+  class(res) <- union("shapelist3d", class(res))
+  voxdims_nm=c(16,16,15)
+  res=switch(units, raw = res, nm = res*voxdims_nm, res * (voxdims_nm / 1000))
   res
 }
 

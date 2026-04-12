@@ -79,5 +79,5 @@ test_that("fish_roi_meshes supports one or more ROI meshes and units", {
   expect_length(meshes_raw, 2)
   expect_true(inherits(meshes_nm, "shapelist3d"))
   expect_length(meshes_nm, 1)
-  expect_equal(meshes_nm[[1]]$vb[1:3, ], meshes_raw[[1]]$vb[1:3, ] * 8)
+  expect_equal(meshes_nm[[1]]$vb[1:3, ], meshes_raw[[1]]$vb[1:3, ] * c(16,16,15))
 })

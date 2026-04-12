@@ -1,17 +1,24 @@
 #' Read meshes for fish2 body ids
 #'
 #' @description Fetches pre-computed neuroglancer meshes from the fish2 DVID
-#'   server. Meshes are returned in nm coordinates by default (8 nm voxels).
+#'   server.
+#'
+#' @details It seems that the nominal voxel dimensions of the fish2 dataset are
+#'   16 x 16 x 15 nm. Neuron meshes are already returned from DVID in physical
+#'   nm scale but this voxel dimension is required to turn raw neuroglancer
+#'   coordinates into nm. This means that if you click on a neuron in
+#'   neuroglancer, the recorded location will match if you have chosen
+#'   `units="nm"`. Alternatively you must multiply point locations from
+#'   neuroglancer by c(16,16,15) to obtain points in nm space.
 #'
 #' @param ids One or more body ids (numeric or character), or a query string
 #'   accepted by \code{\link{fish_ids}}.
-#' @param units One of \code{"nm"} (default), \code{"raw"} (8 nm voxels), or
-#'   \code{"microns"}.
+#' @param units One of \code{"nm"} (default), \code{"raw"} (nominal voxel size),
+#'   or \code{"microns"}.
 #' @param ... Additional arguments passed to \code{httr::GET}.
 #'
 #' @return A \code{\link[nat:neuronlist]{neuronlist}} containing one or more
-#'   \code{mesh3d}
-#'   objects.
+#'   \code{mesh3d} objects.
 #' @importFrom nat as.neuronlist
 #' @export
 #' @inheritParams fish_dvid_annotations
@@ -29,18 +36,17 @@ read_fish_meshes <- function(ids,
   units <- match.arg(units)
   ids   <- fish_ids(ids, as_character = TRUE, mustWork = TRUE, unique = TRUE)
   node <- with_fish(malevnc:::manc_nodespec(node, several.ok = F))
-  with_fish({
-    res <- pbapply::pbsapply(ids, read_fish_mesh, node = node, ...,
-                             simplify = FALSE)
-    res <- as.neuronlist(res, AddClassToNeurons = FALSE)
-    switch(units, raw = res / 8, microns = res / 1000, res)
-  })
+  res <- pbapply::pbsapply(ids, read_fish_mesh, node = node, ...,
+                           simplify = FALSE)
+  res <- as.neuronlist(res, AddClassToNeurons = FALSE)
+  switch(units, raw = res / c(16,16,15), microns = res / 1000, res)
 }
 
 read_fish_mesh <- function(id, node = NULL, ...) {
-  u <- with_fish(malevnc:::manc_serverurl(
-    "api/node/%s/segmentation_meshes/key/%s.ngmesh?app=natverse",
-    node, id
-  ))
-  with_fish(malevnc:::read_neuroglancer_mesh(u, ...))
+  with_fish({
+    u <- malevnc:::manc_serverurl(
+      "api/node/%s/segmentation_meshes/key/%s.ngmesh?app=natverse",
+      node, id)
+    malevnc:::read_neuroglancer_mesh(u, ...)
+  })
 }

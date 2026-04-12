@@ -13,19 +13,27 @@ accepted by \code{\link{fish_ids}}.}
 \item{node}{The DVID node (UUID) to query. The default value of 'neutu' uses
 the active neutu node i.e. normally the most up to date.}
 
-\item{units}{One of \code{"nm"} (default), \code{"raw"} (8 nm voxels), or
-\code{"microns"}.}
+\item{units}{One of \code{"nm"} (default), \code{"raw"} (nominal voxel size),
+or \code{"microns"}.}
 
 \item{...}{Additional arguments passed to \code{httr::GET}.}
 }
 \value{
 A \code{\link[nat:neuronlist]{neuronlist}} containing one or more
-  \code{mesh3d}
-  objects.
+  \code{mesh3d} objects.
 }
 \description{
 Fetches pre-computed neuroglancer meshes from the fish2 DVID
-  server. Meshes are returned in nm coordinates by default (8 nm voxels).
+  server.
+}
+\details{
+It seems that the nominal voxel dimensions of the fish2 dataset are
+  16 x 16 x 15 nm. Neuron meshes are already returned from DVID in physical
+  nm scale but this voxel dimension is required to turn raw neuroglancer
+  coordinates into nm. This means that if you click on a neuron in
+  neuroglancer, the recorded location will match if you have chosen
+  `units="nm"`. Alternatively you must multiply point locations from
+  neuroglancer by c(16,16,15) to obtain points in nm space.
 }
 \examples{
 \dontrun{

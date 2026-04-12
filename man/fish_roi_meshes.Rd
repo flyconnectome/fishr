@@ -7,7 +7,6 @@
 fish_roi_meshes(
   rois,
   units = c("nm", "raw", "microns"),
-  OmitFailures = TRUE,
   conn = NULL,
   ...,
   dataset = fish_default_dataset()
@@ -16,27 +15,29 @@ fish_roi_meshes(
 \arguments{
 \item{rois}{Character vector of ROI names.}
 
-\item{units}{One of \code{"nm"} (default), \code{"raw"} (8 nm voxels), or
+\item{units}{One of \code{"nm"} (default), \code{"raw"} (voxels), or
 \code{"microns"}.}
-
-\item{OmitFailures}{Whether to omit ROI meshes that could not be read from
-the server (default \code{TRUE}).}
 
 \item{conn}{Optional, a \code{neuprint_connection} object. Defaults to
 \code{\link{fish_neuprint}} to ensure that the query targets fish2.}
 
-\item{...}{Additional arguments passed to \code{\link[nat]{nlapply}}.
-This allows progress reporting and simple parallelisation.}
+\item{...}{Additional arguments passed to \code{\link[nat]{nlapply}}. This
+allows progress reporting and simple parallelisation.}
 
 \item{dataset}{The name of the dataset as reported in Clio (default
 \code{"fish2"}).}
 }
 \value{
 A \code{shapelist3d} containing one or more ROI \code{mesh3d}
-  objects.
+  objects. Missing meshes are dropped with a warning.
 }
 \description{
 Fetch one or more ROI meshes for fish2
+}
+\details{
+It seems that the nominal voxel dimensions of the dataset are 16 x
+16 x 15 nm. ROI meshes are returned from neuprint in raw voxel space and are
+scaled up by this factor to give the default nm scaling.
 }
 \examples{
 \donttest{
@@ -45,8 +46,7 @@ fish_roi_meshes(c("Midbrain", "Hindbrain"), .progress = "none")
 }
 \seealso{
 \code{\link[neuprintr]{neuprint_ROI_mesh}},
-  \code{\link[nat]{nlapply}},
-  \code{\link{fish_rois}}
+  \code{\link[nat]{nlapply}}, \code{\link{fish_rois}}
 
 Other neuprint: 
 \code{\link{fish_connection_table}()},
