@@ -75,7 +75,7 @@ test_that("fish_rois returns an ROI hierarchy", {
   rois <- fish_rois(conn = conn)
   expect_s3_class(rois, "data.frame")
   expect_true(nrow(rois) > 0)
-  expect_true(all(c("from", "to") %in% colnames(rois)))
+  expect_true(all(c("parent", "roi") %in% colnames(rois)))
 })
 
 test_that("fish_roi_meshes supports one or more ROI meshes and units", {
@@ -83,9 +83,9 @@ test_that("fish_roi_meshes supports one or more ROI meshes and units", {
   skip_if(inherits(conn, "try-error"),
           message = "fish2 neuprint connection unavailable")
 
-  rois <- fish_rois()
-  roi_names <- intersect(c("Neuropil", "Midbrain"), rois)
-  skip_if(length(roi_names) < 1, message = "not enough ROI names available")
+  rois <- fish_rois(conn = conn)
+  roi_names <- intersect(c("Midbrain", "Hindbrain"), rois$roi)
+  skip_if(length(roi_names) < 2, message = "not enough ROI names available")
 
   meshes_raw <- fish_roi_meshes(roi_names[1:2], units = "raw", conn = conn,
                                 .progress = "none")
