@@ -15,6 +15,7 @@ jobs:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       neuprint_token: ${{ secrets.NEUPRINT_TOKEN }}
       CLIO_TOKEN: ${{ secrets.CLIO_TOKEN }}
+      RGL_USE_NULL: TRUE
     steps:
       - uses: actions/checkout@v4
 
