@@ -48,6 +48,8 @@ fish_neuprint_meta()
 
 Other neuprint: 
 \code{\link{fish_connection_table}()},
-\code{\link{fish_neuprint}()}
+\code{\link{fish_neuprint}()},
+\code{\link{fish_roi_meshes}()},
+\code{\link{fish_rois}()}
 }
 \concept{neuprint}

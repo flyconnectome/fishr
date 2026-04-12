@@ -68,6 +68,8 @@ fish_connection_table("RGC", partners = "outputs", summary = TRUE)
 
 Other neuprint: 
 \code{\link{fish_neuprint}()},
-\code{\link{fish_neuprint_meta}()}
+\code{\link{fish_neuprint_meta}()},
+\code{\link{fish_roi_meshes}()},
+\code{\link{fish_rois}()}
 }
 \concept{neuprint}
