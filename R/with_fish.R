@@ -27,6 +27,26 @@ fish_known_dataset_options <- function(dataset) {
   )
 }
 
+fish_dataset_options_cache <- function() {
+  getOption("fishr.dataset_options", default = list())
+}
+
+fish_cached_dataset_options <- function(dataset = fish_default_dataset()) {
+  dataset <- normalise_fish_dataset(dataset)
+  fish_dataset_options_cache()[[dataset]]
+}
+
+fish_cache_dataset_options <- function(ops, dataset = NULL) {
+  if (is.null(dataset)) {
+    dataset <- ops$malevnc.dataset
+  }
+  dataset <- normalise_fish_dataset(dataset)
+  cache <- fish_dataset_options_cache()
+  cache[[dataset]] <- ops
+  options(fishr.dataset_options = cache)
+  invisible(ops)
+}
+
 #' Evaluate an expression after temporarily setting malevnc options
 #'
 #' @description \code{with_fish} temporarily changes the server/dataset options
@@ -42,6 +62,11 @@ fish_known_dataset_options <- function(dataset) {
 #'   evaluate with the specified dataset.
 #' @param dataset The name of the dataset as reported in Clio (default
 #'   \code{"fish2"}).
+#' @param use_clio Whether to use a live Clio lookup for fish dataset settings.
+#'   The default \code{NA} first reuses any cached live lookup for the dataset,
+#'   otherwise it tries Clio and falls back to baked-in fish2 neuprint settings
+#'   when available. Use \code{FALSE} to avoid Clio and rely only on cached or
+#'   built-in settings. Use \code{TRUE} to require a live Clio lookup.
 #' @inheritParams malevnc::choose_malevnc_dataset
 #'
 #' @return \code{with_fish} returns the result of \code{expr}.
@@ -98,14 +123,25 @@ choose_fish_dataset <- function(dataset = "fish2") {
 #'   Clio-backed functionality may be unavailable in
 #'   that session.
 #' @export
-choose_fish <- function(dataset = fish_default_dataset(), set = TRUE) {
+choose_fish <- function(dataset = fish_default_dataset(), set = TRUE,
+                        use_clio = NA) {
   dataset <- normalise_fish_dataset(dataset)
-  tryCatch(
-    malevnc::choose_flyem_dataset(dataset = dataset, set = set),
-    error = function(e) {
+  ops <- if (isTRUE(use_clio)) NULL else fish_cached_dataset_options(dataset)
+
+  if (is.null(ops) && !isFALSE(use_clio)) {
+    live_ops <- tryCatch(
+      malevnc::choose_flyem_dataset(dataset = dataset, set = FALSE),
+      error = identity
+    )
+
+    if (!inherits(live_ops, "error")) {
+      ops <- fish_cache_dataset_options(live_ops, dataset = dataset)
+    } else if (isTRUE(use_clio)) {
+      stop(live_ops)
+    } else {
       ops <- fish_known_dataset_options(dataset)
       if (is.null(ops)) {
-        stop(e)
+        stop(live_ops)
       }
 
       warning(
@@ -114,7 +150,19 @@ choose_fish <- function(dataset = fish_default_dataset(), set = TRUE) {
         "in this session.",
         call. = FALSE
       )
-      if (isTRUE(set)) options(ops) else ops
     }
-  )
+  }
+
+  if (is.null(ops)) {
+    ops <- fish_known_dataset_options(dataset)
+    if (is.null(ops)) {
+      stop(
+        "No cached or built-in configuration is available for fish dataset `",
+        dataset, "`.",
+        call. = FALSE
+      )
+    }
+  }
+
+  if (isTRUE(set)) options(ops) else ops
 }

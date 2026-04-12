@@ -8,6 +8,7 @@ fish_neuprint(
   token = fish_neuprint_token(),
   dataset = NULL,
   Force = FALSE,
+  use_clio = FALSE,
   ...
 )
 }
@@ -21,6 +22,11 @@ of \code{options(fishr.dataset)}, normally changed by
 \code{\link{choose_fish_dataset}}).}
 
 \item{Force}{Passed to \code{neuprintr::neuprint_login}.}
+
+\item{use_clio}{Whether to use a live Clio lookup for fish dataset settings
+before opening the neuprint connection. The default \code{FALSE} reuses
+cached live lookup results when available and otherwise relies on built-in
+fish2 neuprint settings.}
 
 \item{...}{Additional arguments passed to
 \code{\link[neuprintr]{neuprint_login}}.}

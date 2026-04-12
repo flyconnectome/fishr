@@ -10,7 +10,7 @@ with_fish(expr, dataset = fish_default_dataset())
 
 choose_fish_dataset(dataset = "fish2")
 
-choose_fish(dataset = fish_default_dataset(), set = TRUE)
+choose_fish(dataset = fish_default_dataset(), set = TRUE, use_clio = NA)
 }
 \arguments{
 \item{expr}{An expression involving \code{malevnc}/\code{fishr} functions to
@@ -21,6 +21,12 @@ evaluate with the specified dataset.}
 
 \item{set}{Whether to set the relevant package options or just to return a
 list of the required options.}
+
+\item{use_clio}{Whether to use a live Clio lookup for fish dataset settings.
+The default \code{NA} first reuses any cached live lookup for the dataset,
+otherwise it tries Clio and falls back to baked-in fish2 neuprint settings
+when available. Use \code{FALSE} to avoid Clio and rely only on cached or
+built-in settings. Use \code{TRUE} to require a live Clio lookup.}
 }
 \value{
 \code{with_fish} returns the result of \code{expr}.

@@ -14,6 +14,10 @@
 #'   \code{fish_neuprint} (which would otherwise be chosen based on the value
 #'   of \code{options(fishr.dataset)}, normally changed by
 #'   \code{\link{choose_fish_dataset}}).
+#' @param use_clio Whether to use a live Clio lookup for fish dataset settings
+#'   before opening the neuprint connection. The default \code{FALSE} reuses
+#'   cached live lookup results when available and otherwise relies on built-in
+#'   fish2 neuprint settings.
 #' @param Force Passed to \code{neuprintr::neuprint_login}.
 #' @param ... Additional arguments passed to
 #'   \code{\link[neuprintr]{neuprint_login}}.
@@ -29,15 +33,17 @@
 #' conn
 #' }
 fish_neuprint <- function(token = fish_neuprint_token(),
-                           dataset = NULL, Force = FALSE, ...) {
-  ops <- choose_fish(set = FALSE)
+                          dataset = NULL, Force = FALSE,
+                          use_clio = FALSE, ...) {
   if (is.null(dataset)) {
-    dataset <- ops$malevnc.neuprint_dataset
+    dataset <- fish_default_dataset()
   }
+  dataset <- normalise_fish_dataset(dataset)
+  ops <- choose_fish(dataset = dataset, set = FALSE, use_clio = use_clio)
 
   neuprintr::neuprint_login(
     server = ops$malevnc.neuprint,
-    dataset = tolower(dataset),
+    dataset = tolower(ops$malevnc.neuprint_dataset),
     token = token,
     Force = Force,
     ...
