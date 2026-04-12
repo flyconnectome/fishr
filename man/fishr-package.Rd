@@ -45,6 +45,13 @@ options()[grepl("^fishr", names(options()))]
 with_fish(read_fish_meshes(12345))
 }
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://flyconnectome.github.io/fishr/}
+}
+
+}
 \author{
 \strong{Maintainer}: Gregory Jefferis \email{jefferis@gmail.com} (\href{https://orcid.org/0000-0002-0587-9355}{ORCID})
 

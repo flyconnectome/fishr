@@ -28,7 +28,7 @@
 #' conn <- fish_neuprint()
 #' conn
 #' }
-fish_neuprint <- function(token = Sys.getenv("neuprint_token"),
+fish_neuprint <- function(token = fish_neuprint_token(),
                            dataset = NULL, Force = FALSE, ...) {
   ops <- choose_fish(set = FALSE)
   if (is.null(dataset)) {
@@ -42,6 +42,11 @@ fish_neuprint <- function(token = Sys.getenv("neuprint_token"),
     Force = Force,
     ...
   )
+}
+
+fish_neuprint_token <- function() {
+  token <- neuprintr:::getenvoroption("token")[["token"]]
+  if (is.null(token)) "" else token
 }
 
 #' Fetch neuprint metadata for fish2 neurons

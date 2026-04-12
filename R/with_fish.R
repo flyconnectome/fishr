@@ -35,7 +35,7 @@ fish_known_dataset_options <- function(dataset) {
 #'
 #' @details \code{choose_fish} first tries a live Clio lookup via
 #'   \code{malevnc::choose_flyem_dataset}. If that fails (e.g. no network / no
-#'   Clio token), it falls back to baked-in neuprint settings. DVID-backed
+#'   Clio token), it falls back to baked-in neuprint settings. Clio-backed
 #'   functions will be unavailable in that fallback session.
 #'
 #' @param expr An expression involving \code{malevnc}/\code{fishr} functions to
@@ -95,7 +95,7 @@ choose_fish_dataset <- function(dataset = "fish2") {
 #'
 #'   When Clio dataset lookup is unavailable, \code{choose_fish} falls back to a
 #'   built-in neuprint-only configuration for the main fish2 dataset.
-#'   DVID/Clio-backed functionality (e.g. mesh reading) may be unavailable in
+#'   Clio-backed functionality may be unavailable in
 #'   that session.
 #' @export
 choose_fish <- function(dataset = fish_default_dataset(), set = TRUE) {
@@ -110,7 +110,7 @@ choose_fish <- function(dataset = fish_default_dataset(), set = TRUE) {
 
       warning(
         "Clio dataset lookup failed; falling back to baked-in neuprint settings ",
-        "for `", dataset, "`. DVID/Clio-backed functionality may be unavailable ",
+        "for `", dataset, "`. Clio-backed functionality may be unavailable ",
         "in this session.",
         call. = FALSE
       )

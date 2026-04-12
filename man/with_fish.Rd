@@ -47,13 +47,13 @@ list of the required options.}
 
   When Clio dataset lookup is unavailable, \code{choose_fish} falls back to a
   built-in neuprint-only configuration for the main fish2 dataset.
-  DVID/Clio-backed functionality (e.g. mesh reading) may be unavailable in
+  Clio-backed functionality may be unavailable in
   that session.
 }
 \details{
 \code{choose_fish} first tries a live Clio lookup via
   \code{malevnc::choose_flyem_dataset}. If that fails (e.g. no network / no
-  Clio token), it falls back to baked-in neuprint settings. DVID-backed
+  Clio token), it falls back to baked-in neuprint settings. Clio-backed
   functions will be unavailable in that fallback session.
 }
 \examples{

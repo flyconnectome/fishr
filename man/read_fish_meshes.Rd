@@ -20,7 +20,8 @@ the active neutu node i.e. normally the most up to date.}
 }
 \value{
 A \code{\link[nat:neuronlist]{neuronlist}} containing one or more
-\code{mesh3d} objects.
+  \code{mesh3d}
+  objects.
 }
 \description{
 Fetches pre-computed neuroglancer meshes from the fish2 DVID

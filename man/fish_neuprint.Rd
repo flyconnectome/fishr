@@ -5,7 +5,7 @@
 \title{Login to fish2 neuprint server}
 \usage{
 fish_neuprint(
-  token = Sys.getenv("neuprint_token"),
+  token = fish_neuprint_token(),
   dataset = NULL,
   Force = FALSE,
   ...
