@@ -40,8 +40,8 @@ The ROI hierarchy as either an edge list or \code{igraph} object.
 Fetch the ROI hierarchy for fish2
 }
 \examples{
-\dontrun{
-fish_rois()
+\donttest{
+head(fish_rois())
 }
 }
 \seealso{

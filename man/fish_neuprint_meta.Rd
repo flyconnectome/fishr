@@ -39,8 +39,8 @@ A data.frame with one row for each unique input id and \code{NA}s for
 Fetch neuprint metadata for fish2 neurons
 }
 \examples{
-\dontrun{
-fish_neuprint_meta()
+\donttest{
+head(fish_neuprint_meta("RGC"))
 }
 }
 \seealso{

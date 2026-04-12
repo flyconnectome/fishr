@@ -39,9 +39,8 @@ A \code{shapelist3d} containing one or more ROI \code{mesh3d}
 Fetch one or more ROI meshes for fish2
 }
 \examples{
-\dontrun{
-rois <- fish_rois()
-fish_roi_meshes(unique(c(rois$from, rois$to))[1:2])
+\donttest{
+fish_roi_meshes(c("Midbrain", "Hindbrain"), .progress = "none")
 }
 }
 \seealso{
