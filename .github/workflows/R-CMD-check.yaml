@@ -13,6 +13,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      neuprint_token: ${{ secrets.NEUPRINT_TOKEN }}
+      CLIO_TOKEN: ${{ secrets.CLIO_TOKEN }}
     steps:
       - uses: actions/checkout@v4
 
