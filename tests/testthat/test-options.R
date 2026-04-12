@@ -20,6 +20,47 @@ test_that("choose_fish with set=FALSE returns options list", {
   expect_true("malevnc.neuprint_dataset" %in% names(ops))
 })
 
+test_that("choose_fish with use_clio=FALSE falls back to built-in fish2 settings", {
+  old_cache <- getOption("fishr.dataset_options")
+  on.exit(options(fishr.dataset_options = old_cache), add = TRUE)
+  options(fishr.dataset_options = NULL)
+
+  ops <- choose_fish(set = FALSE, use_clio = FALSE)
+  expect_identical(ops$malevnc.neuprint, "https://neuprint-fish2.janelia.org")
+  expect_identical(ops$malevnc.neuprint_dataset, "fish2")
+})
+
+test_that("choose_fish with use_clio=FALSE prefers cached live settings", {
+  old_cache <- getOption("fishr.dataset_options")
+  on.exit(options(fishr.dataset_options = old_cache), add = TRUE)
+  options(
+    fishr.dataset_options = list(
+      fish2 = list(
+        malevnc.dataset = "fish2",
+        malevnc.neuprint = "https://example.org",
+        malevnc.neuprint_dataset = "fish2-alt",
+        malevnc.server = "https://clio.example.org",
+        malevnc.rootnode = "abc"
+      )
+    )
+  )
+
+  ops <- choose_fish(dataset = "fish2", set = FALSE, use_clio = FALSE)
+  expect_identical(ops$malevnc.neuprint, "https://example.org")
+  expect_identical(ops$malevnc.neuprint_dataset, "fish2-alt")
+})
+
+test_that("choose_fish with use_clio=FALSE errors for unknown datasets", {
+  old_cache <- getOption("fishr.dataset_options")
+  on.exit(options(fishr.dataset_options = old_cache), add = TRUE)
+  options(fishr.dataset_options = NULL)
+
+  expect_error(
+    choose_fish(dataset = "unknown-fish", set = FALSE, use_clio = FALSE),
+    "No cached or built-in configuration"
+  )
+})
+
 test_that("with_fish restores options", {
   old_ds <- getOption("malevnc.dataset")
   on.exit(options(malevnc.dataset = old_ds))
