@@ -352,7 +352,7 @@ fish_read_renviron_vars <- function(path) {
 fish_renviron_values <- function(lines) {
   parsed <- lapply(lines, fish_parse_renviron_line)
   parsed <- Filter(Negate(is.null), parsed)
-  if (!length(parsed)) {
+  if (!length(parsed) > 0) {
     return(character())
   }
 
