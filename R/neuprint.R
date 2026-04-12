@@ -75,7 +75,7 @@ fish_neuprint_meta <- function(ids = NULL, conn = NULL, roiInfo = FALSE,
                                 simplify.xyz = TRUE, ...,
                                 dataset = fish_default_dataset()) {
   if (is.null(conn)) {
-    conn <- with_fish(fish_neuprint(), dataset = dataset)
+    conn <- fish_neuprint(dataset = dataset)
   }
 
   if (is.null(ids)) {
@@ -138,7 +138,7 @@ fish_connection_table <- function(ids, partners = c("inputs", "outputs"),
                                   roi = NULL, by.roi = FALSE, conn = NULL, ...,
                                   dataset = fish_default_dataset()) {
   if (is.null(conn)) {
-    conn <- with_fish(fish_neuprint(), dataset = dataset)
+    conn <- fish_neuprint(dataset = dataset)
   }
 
   ids <- fish_ids(ids, conn = conn)
