@@ -27,7 +27,8 @@ Imports:
 Remotes:
     natverse/malevnc,
     natverse/nat,
-    natverse/neuprintr
+    natverse/neuprintr,
+    natverse/coconat
 Suggests:
     testthat (>= 3.0.0),
     rgl,
