@@ -22,6 +22,8 @@
   : Read meshes for fish2 body ids
 - [`read_fish_neurons()`](https://flyconnectome.github.io/fishr/reference/read_fish_neurons.md)
   : Read neuron skeletons via neuprint
+- [`register_fish_coconat()`](https://flyconnectome.github.io/fishr/reference/register_fish_coconat.md)
+  : Register fish2 dataset for coconatfly
 - [`with_fish()`](https://flyconnectome.github.io/fishr/reference/with_fish.md)
   [`choose_fish_dataset()`](https://flyconnectome.github.io/fishr/reference/with_fish.md)
   [`choose_fish()`](https://flyconnectome.github.io/fishr/reference/with_fish.md)

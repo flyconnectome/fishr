@@ -51,7 +51,7 @@
 
 <!-- badges: end -->
 <p>The goal of <strong>fishr</strong> is to provide <a href="https://natverse.org" class="external-link">natverse</a> access to the <strong>fish2</strong> larval zebrafish whole-brain EM dataset. It follows the same general pattern as <a href="https://github.com/natverse/malecns" class="external-link">malecns</a> and <a href="https://github.com/natverse/malevnc" class="external-link">malevnc</a>, providing dataset-specific helpers on top of the <a href="https://github.com/natverse/neuprintr" class="external-link">neuprintr</a> package and a bridge to the broader natverse connectomics tooling for computational neuroanatomy.</p>
-<p>The fish2 dataset is currently being proofread at Janelia Research Campus as part of a multi-institution collaboration.</p>
+<p>The fish2 dataset is currently being proofread at Janelia Research Campus as part of a multi-institution collaboration including Harvard and Google Research.</p>
 <p>The initial package focuses on:</p>
 <ul>
 <li>dataset selection helpers (<code><a href="reference/with_fish.html">choose_fish()</a></code>, <code><a href="reference/with_fish.html">with_fish()</a></code>)</li>
@@ -59,6 +59,7 @@
 <li>neuprint metadata and connectivity queries (<code>fish_neuprint_meta</code>, <code>fish_connection_table</code>)</li>
 <li>DVID body annotations (<code>fish_dvid_annotations</code>)</li>
 <li>neuroglancer meshes and skeletons (<code>read_fish_meshes</code>, <code>read_fish_neurons</code>)</li>
+<li>support for the coconat interface (<code>register_fish_coconat</code>)</li>
 </ul>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
@@ -135,6 +136,19 @@
 <code class="sourceCode R"><span><span class="va">fc</span><span class="op">=</span><span class="fu"><a href="reference/fish_neuprint.html">fish_neuprint</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">fc</span></span>
 <span><span class="fu">neuprintr</span><span class="fu">::</span><span class="fu"><a href="https://natverse.org/neuprintr/reference/neuprint_ROIs.html" class="external-link">neuprint_ROIs</a></span><span class="op">(</span>conn <span class="op">=</span> <span class="va">fc</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level4">
+<h4 id="coconatfly">coconatfly<a class="anchor" aria-label="anchor" href="#coconatfly"></a>
+</h4>
+<p>You can also register fish2 as an extra dataset for <a href="https://natverse.org/coconatfly/" class="external-link">coconatfly</a>. Even if fish2 is not a fly this package provides a uniform approach to connectome analysis including connectivity clustering functions.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/register_fish_coconat.html">register_fish_coconat</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">rgcmeta</span><span class="op">=</span><span class="fu">coconatfly</span><span class="fu">::</span><span class="fu">cf_meta</span><span class="op">(</span><span class="fu">coconatfly</span><span class="fu">::</span><span class="fu">cf_ids</span><span class="op">(</span>fish2 <span class="op">=</span> <span class="st">"RGC"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">rgcmeta</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html" class="external-link">slice_head</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">1000</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="co"># nb we need group = F because the partner neurons aren't really typed yet</span></span>
+<span>  <span class="fu">coconatfly</span><span class="fu">::</span><span class="fu">cf_cosine_plot</span><span class="op">(</span>partners <span class="op">=</span> <span class="st">'o'</span>, group <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
 </div>

@@ -88,12 +88,12 @@ Other fishr-package:
 # \donttest{
 # fetch annotations for specific bodies
 fish_dvid_annotations(c(100003384, 100003412))
-#> # A tibble: 2 × 10
-#>      bodyid connectivity_type status   user  group instance type  class keywords
-#>       <dbl> <chr>             <chr>    <chr> <int> <chr>    <chr> <chr> <chr>   
-#> 1 100003384 NA                Sensory… NA        0 RGC_R    RGC   NA    NA      
-#> 2 100003412 NA                Sensory… bergs     0 RGC_R    RGC   NA    NA      
-#> # ℹ 1 more variable: comment <chr>
+#> # A tibble: 2 × 11
+#>     bodyid connectivity_type per_node_sc status user  group instance type  class
+#>      <dbl> <chr>                   <dbl> <chr>  <chr> <int> <chr>    <chr> <chr>
+#> 1   1.00e8 NA                         NA Senso… NA        0 RGC_R    RGC   NA   
+#> 2   1.00e8 NA                         NA Senso… bergs     0 RGC_R    RGC   NA   
+#> # ℹ 2 more variables: keywords <chr>, comment <chr>
 # }
 if (FALSE) { # \dontrun{
 # fetch all annotations using 5m cache if possible
@@ -106,20 +106,20 @@ df <- fish_dvid_annotations("/type:RGC.*", cache=T)
 # shorthand for type field
 df <- fish_dvid_annotations("RGC", cache=T)
 df
-#> # A tibble: 4,030 × 10
-#>       bodyid connectivity_type status  user  group instance type  class keywords
-#>        <dbl> <chr>             <chr>   <chr> <int> <chr>    <chr> <chr> <chr>   
-#>  1 100003384 NA                Sensor… NA        0 RGC_R    RGC   NA    NA      
-#>  2 100003412 NA                Sensor… bergs     0 RGC_R    RGC   NA    NA      
-#>  3 100004561 NA                Sensor… NA       NA RGC_R    RGC   NA    NA      
-#>  4 100005196 NA                Sensor… bergs     0 RGC_R    RGC   NA    NA      
-#>  5 100006092 NA                Sensor… NA        0 RGC_R    RGC   NA    NA      
-#>  6 100006479 NA                Sensor… NA        0 RGC_R    RGC   NA    NA      
-#>  7 100007723 NA                Sensor… NA        0 RGC_R    RGC   NA    NA      
-#>  8 100009896 NA                Sensor… NA        0 RGC_R    RGC   NA    NA      
-#>  9 100011090 NA                Sensor… NA        0 RGC_R    RGC   NA    NA      
-#> 10 100014375 NA                Sensor… NA        0 RGC_R    RGC   NA    NA      
+#> # A tibble: 4,030 × 11
+#>     bodyid connectivity_type per_node_sc status user  group instance type  class
+#>      <dbl> <chr>                   <dbl> <chr>  <chr> <int> <chr>    <chr> <chr>
+#>  1  1.00e8 NA                         NA Senso… NA        0 RGC_R    RGC   NA   
+#>  2  1.00e8 NA                         NA Senso… bergs     0 RGC_R    RGC   NA   
+#>  3  1.00e8 NA                         NA Senso… NA       NA RGC_R    RGC   NA   
+#>  4  1.00e8 NA                         NA Senso… bergs     0 RGC_R    RGC   NA   
+#>  5  1.00e8 NA                         NA Senso… NA        0 RGC_R    RGC   NA   
+#>  6  1.00e8 NA                         NA Senso… NA        0 RGC_R    RGC   NA   
+#>  7  1.00e8 NA                         NA Senso… NA        0 RGC_R    RGC   NA   
+#>  8  1.00e8 NA                         NA Senso… NA        0 RGC_R    RGC   NA   
+#>  9  1.00e8 NA                         NA Senso… NA        0 RGC_R    RGC   NA   
+#> 10  1.00e8 NA                         NA Senso… NA        0 RGC_R    RGC   NA   
 #> # ℹ 4,020 more rows
-#> # ℹ 1 more variable: comment <chr>
+#> # ℹ 2 more variables: keywords <chr>, comment <chr>
 # }
 ```
