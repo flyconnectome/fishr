@@ -19,7 +19,7 @@ and a bridge to the broader natverse connectomics tooling for computational
 neuroanatomy.
 
 The fish2 dataset is currently being proofread at Janelia Research Campus as 
-part of a multi-institution collaboration including Harvard and Google.
+part of a multi-institution collaboration including Harvard and Google Research.
 
 The initial package focuses on:
 
@@ -28,6 +28,7 @@ The initial package focuses on:
 - neuprint metadata and connectivity queries (`fish_neuprint_meta`, `fish_connection_table`)
 - DVID body annotations (`fish_dvid_annotations`)
 - neuroglancer meshes and skeletons (`read_fish_meshes`, `read_fish_neurons`)
+- support for the coconat interface (`register_fish_coconat`)
 
 ## Installation
 
@@ -147,6 +148,11 @@ fly this package provides a uniform approach to connectome analysis including
 connectivity clustering functions.
 
 ```r
+library(dplyr)
 register_fish_coconat()
 rgcmeta=coconatfly::cf_meta(coconatfly::cf_ids(fish2 = "RGC"))
+rgcmeta %>% 
+  slice_head(n=1000) %>% 
+  # nb we need group = F because the partner neurons aren't really typed yet
+  coconatfly::cf_cosine_plot(partners = 'o', group = FALSE)
 ```
