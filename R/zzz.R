@@ -12,21 +12,27 @@
 .onAttach <- function(libname, pkgname) {
   if (!nzchar(fish_neuprint_token())) {
     packageStartupMessage(
-      cli::format_warning("No {.code neuprint_token} was found.")
+      cli::format_message(paste0(cli::symbol$warning, " ", "No {.code neuprint_token} was found."))
     )
     if (interactive()) {
       packageStartupMessage(
         cli::format_message(
-          "Run {.run [fish_setup()](fishr::fish_setup())} to set up fishr for first use. See {.url https://flyconnectome.github.io/fishr/} for more information."
+          "Run {.run [fish_setup()](fishr::fish_setup())} to set up fishr for first use."
         )
       )
     } else {
       packageStartupMessage(
         cli::format_message(
-          "Run {.code fish_setup()} in an interactive session to set up fishr for first use. See {.url https://flyconnectome.github.io/fishr/} for more information."
+          "Run {.code fish_setup()} in an interactive session to set up fishr for first use."
         )
       )
     }
+  } else {
+    packageStartupMessage(
+      cli::format_message(
+        "See {.url https://flyconnectome.github.io/fishr/} for more information about fishr."
+      )
+    )
   }
 
   invisible()

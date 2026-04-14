@@ -45,6 +45,22 @@ fish_setup <- function(set_session = interactive()) {
   cli::cli_h2("Neuprint token")
   fish_cli_env_status(token, "neuprint_token")
 
+  if (!nzchar(token$value) && nzchar(token$renviron_preferred_value) && interactive()) {
+    if (fish_prompt_yes_no(
+      "Read the saved neuprint token from .Renviron into this session now?",
+      default = TRUE
+    )) {
+      if (isTRUE(fish_read_user_renviron(renviron))) {
+        cli::cli_alert_success("Read saved settings from {.file {renviron}}.")
+        token <- fish_envvar_state("neuprint_token", renviron_vars = renviron_vars)
+        server <- fish_envvar_state("neuprint_server", renviron_vars = renviron_vars)
+        dataset <- fish_envvar_state("neuprint_dataset", renviron_vars = renviron_vars)
+      } else {
+        cli::cli_alert_warning("Unable to read {.file {renviron}} into this session.")
+      }
+    }
+  }
+
   token_needs_write <- fish_needs_renviron_update(token, token$value)
   if (token_needs_write || !nzchar(token$value)) {
     cli::cli_alert_info("Get a fish2 neuprint token from {account_link}.")
@@ -338,6 +354,13 @@ fish_user_renviron_path <- function() {
     path <- "~/.Renviron"
   }
   path.expand(path)
+}
+
+fish_read_user_renviron <- function(path = fish_user_renviron_path()) {
+  tryCatch(
+    isTRUE(readRenviron(path)),
+    error = function(e) FALSE
+  )
 }
 
 fish_read_renviron_vars <- function(path) {
