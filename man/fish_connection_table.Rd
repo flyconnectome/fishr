@@ -8,6 +8,7 @@ fish_connection_table(
   ids,
   partners = c("inputs", "outputs"),
   moredetails = FALSE,
+  details = TRUE,
   summary = FALSE,
   threshold = 1L,
   roi = NULL,
@@ -28,6 +29,9 @@ probably clearer.}
 \code{neuprint_connection_table}, \code{TRUE} to join all additional fields
 from \code{\link{fish_neuprint_meta}}, or a character vector naming
 specific extra fields (e.g. \code{c("group")}).}
+
+\item{details}{Whether to request detailed metadata columns directly from
+\code{\link[neuprintr]{neuprint_connection_table}} (default \code{TRUE}).}
 
 \item{summary}{When \code{TRUE} and more than one query neuron is given,
 summarises connectivity grouped by partner.}

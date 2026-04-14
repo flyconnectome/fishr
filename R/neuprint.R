@@ -235,6 +235,8 @@ fish_roi_meshes <- function(rois, units = c("nm", "raw", "microns"),
 #'   \code{neuprint_connection_table}, \code{TRUE} to join all additional fields
 #'   from \code{\link{fish_neuprint_meta}}, or a character vector naming
 #'   specific extra fields (e.g. \code{c("group")}).
+#' @param details Whether to request detailed metadata columns directly from
+#'   \code{\link[neuprintr]{neuprint_connection_table}} (default \code{TRUE}).
 #' @param conn Optional, a \code{neuprint_connection} object. Defaults to
 #'   \code{\link{fish_neuprint}} to ensure that the query targets fish2.
 #' @inheritParams malevnc::manc_connection_table
@@ -254,6 +256,7 @@ fish_roi_meshes <- function(rois, units = c("nm", "raw", "microns"),
 #' }
 fish_connection_table <- function(ids, partners = c("inputs", "outputs"),
                                   moredetails = FALSE,
+                                  details = TRUE,
                                   summary = FALSE, threshold = 1L,
                                   roi = NULL, by.roi = FALSE, conn = NULL, ...,
                                   dataset = fish_default_dataset()) {
@@ -261,11 +264,11 @@ fish_connection_table <- function(ids, partners = c("inputs", "outputs"),
     conn <- fish_neuprint(dataset = dataset)
   }
 
-  ids <- fish_ids(ids, conn = conn)
+  ids <- fish_ids(ids, conn = conn, unique = TRUE)
   res <- neuprintr::neuprint_connection_table(
     ids,
     partners = partners,
-    details = TRUE,
+    details = details,
     threshold = threshold,
     conn = conn,
     summary = summary,

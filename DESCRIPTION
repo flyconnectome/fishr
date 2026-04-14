@@ -30,7 +30,8 @@ Remotes:
     natverse/neuprintr
 Suggests:
     testthat (>= 3.0.0),
-    rgl
+    rgl,
+    coconat
 Config/testthat/edition: 3
 RoxygenNote: 7.3.3
 URL: https://flyconnectome.github.io/fishr/

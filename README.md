@@ -18,7 +18,8 @@ helpers on top of the [neuprintr](https://github.com/natverse/neuprintr) package
 and a bridge to the broader natverse connectomics tooling for computational
 neuroanatomy.
 
-The fish2 dataset is currently being proofread at Janelia Research Campus as part of a multi-institution collaboration.
+The fish2 dataset is currently being proofread at Janelia Research Campus as 
+part of a multi-institution collaboration including Harvard and Google.
 
 The initial package focuses on:
 
@@ -136,4 +137,16 @@ neuprint connection made in a session and will target that dataset.
 fc=fish_neuprint()
 fc
 neuprintr::neuprint_ROIs(conn = fc)
+```
+
+#### coconatfly
+
+You can also register fish2 as an extra dataset for
+[coconatfly](https://natverse.org/coconatfly/). Even if fish2 is not a
+fly this package provides a uniform approach to connectome analysis including
+connectivity clustering functions.
+
+```r
+register_fish_coconat()
+rgcmeta=coconatfly::cf_meta(coconatfly::cf_ids(fish2 = "RGC"))
 ```
