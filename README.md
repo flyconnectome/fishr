@@ -151,8 +151,21 @@ connectivity clustering functions.
 library(dplyr)
 register_fish_coconat()
 rgcmeta=coconatfly::cf_meta(coconatfly::cf_ids(fish2 = "RGC"))
+rgcmeta
+```
+
+After fetching metadata we can try connectivity clustering 
+a subset of the neurons, in this case those from the right eye ...
+```r
 rgcmeta %>% 
-  slice_head(n=1000) %>% 
+  filter(side=="R") %>% 
   # nb we need group = F because the partner neurons aren't really typed yet
   coconatfly::cf_cosine_plot(partners = 'o', group = FALSE)
+
+hc = rgcmeta %>% 
+  filter(side=="R") %>% 
+  # nb we need group = F because the partner neurons aren't really typed yet
+  coconatfly::cf_cosine_plot(partners = 'o', group = FALSE, heatmap=F)
+hcm = coconat::add_cluster_info(cf_meta(hc), hc, h = 1)
 ```
+
