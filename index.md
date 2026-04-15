@@ -17,16 +17,20 @@ and Google Research.
 The initial package focuses on:
 
 - dataset selection helpers
-  ([`choose_fish()`](https://flyconnectome.github.io/fishr/reference/with_fish.md),
-  [`with_fish()`](https://flyconnectome.github.io/fishr/reference/with_fish.md))
+  ([`choose_fish()`](https://flyconnectome.github.io/fishr/reference/with_fish.html),
+  [`with_fish()`](https://flyconnectome.github.io/fishr/reference/with_fish.html))
 - body id lookup
-  ([`fish_ids()`](https://flyconnectome.github.io/fishr/reference/fish_ids.md))
-- neuprint metadata and connectivity queries (`fish_neuprint_meta`,
-  `fish_connection_table`)
-- DVID body annotations (`fish_dvid_annotations`)
-- neuroglancer meshes and skeletons (`read_fish_meshes`,
-  `read_fish_neurons`)
-- support for the coconat interface (`register_fish_coconat`)
+  ([`fish_ids()`](https://flyconnectome.github.io/fishr/reference/fish_ids.html))
+- neuprint metadata and connectivity queries
+  ([`fish_neuprint_meta()`](https://flyconnectome.github.io/fishr/reference/fish_neuprint_meta.html),
+  [`fish_connection_table()`](https://flyconnectome.github.io/fishr/reference/fish_connection_table.html))
+- DVID body annotations
+  ([`fish_dvid_annotations()`](https://flyconnectome.github.io/fishr/reference/fish_dvid_annotations.html))
+- neuroglancer meshes and skeletons
+  ([`read_fish_meshes()`](https://flyconnectome.github.io/fishr/reference/read_fish_meshes.html),
+  [`read_fish_neurons()`](https://flyconnectome.github.io/fishr/reference/read_fish_neurons.html))
+- support for the coconat interface
+  ([`register_fish_coconat()`](https://flyconnectome.github.io/fishr/reference/register_fish_coconat.html))
 
 ## Installation
 
