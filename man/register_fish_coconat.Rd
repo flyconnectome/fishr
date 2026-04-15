@@ -15,7 +15,7 @@ Invisible \code{NULL}.
 }
 \description{
 Register fish2 dataset adapters for use with
-\href{https://natverse.org/coconatfly}{coconatfly}.
+  \href{https://natverse.org/coconatfly}{coconatfly}.
 }
 \examples{
 \dontrun{

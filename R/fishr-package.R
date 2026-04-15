@@ -1,5 +1,7 @@
 #' @keywords internal
 #' @importFrom coconat id2char
+#' @importFrom dplyr %>%
+#' @importFrom rlang .data
 #' @section Package Options:
 #'
 #' \itemize{

@@ -49,6 +49,6 @@ test_that("coconatfly can query fish2 after registration", {
 
   expect_true(length(ids) >= 1)
   expect_true(all(c("id", "type", "dataset") %in% colnames(meta)))
-  expect_true(all(c("bodyid", "somaLocation") %in% colnames(meta_all)))
+  expect_true(all(c("status", "somaLocation") %in% colnames(meta_all)))
   expect_true(all(c("pre_id", "post_id", "weight") %in% colnames(partners)))
 })

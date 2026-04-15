@@ -82,45 +82,57 @@ fish_cfids <- function(ids = NULL, integer64 = FALSE, unique = FALSE, ...,
 }
 
 #' @noRd
+#' @importFrom dplyr all_of case_when select rename
 fish_cfmeta <- function(ids = NULL, ignore.case = FALSE, fixed = FALSE,
                         unique = TRUE, ...,
                         dataset = fish_default_dataset()) {
   df <- fish_neuprint_meta(ids, dataset = dataset, ...)
-
-  instance <- df$name
-  needs_instance <- is.na(instance) | !nzchar(instance)
-  instance[needs_instance] <- df$type[needs_instance]
-  needs_instance <- is.na(instance) | !nzchar(instance)
-  instance[needs_instance] <- df$bodyid[needs_instance]
-
-  out <- data.frame(
-    id = as.character(df$bodyid),
-    side = NA_character_,
-    class = if ("class" %in% colnames(df)) df$class else NA_character_,
-    subclass = NA_character_,
-    subsubclass = NA_character_,
-    type = if ("type" %in% colnames(df)) df$type else NA_character_,
-    lineage = NA_character_,
-    instance = instance,
-    group = if ("group" %in% colnames(df)) df$group else NA,
-    status = if ("status" %in% colnames(df)) df$status else NA_character_,
-    name = if ("name" %in% colnames(df)) df$name else NA_character_,
-    stringsAsFactors = FALSE
+  missing_cols <- setdiff(
+    c("side", "name", "group", "class", "notes", "soma"),
+    colnames(df)
   )
+  for (col in missing_cols) {
+    df[[col]] <- NA_character_
+  }
 
-  extras <- df
-  extras <- extras[setdiff(colnames(extras), c("class", "type", "group", "status", "name"))]
+  selcols <- c(
+    "id",
+    "side",
+    "type",
+    "instance",
+    "class",
+    "subclass",
+    "subsubclass",
+    "lineage",
+    "notes",
+    "soma",
+    "group"
+  )
+  df <- df %>%
+    mutate(
+      side = dplyr::case_when(
+        !is.na(.data$side) ~ substr(toupper(.data$side), 1, 1),
+        !is.na(.data$name) & nzchar(.data$name) ~ stringr::str_match(.data$name, "_([LR])(?:_|$)")[, 2],
+        TRUE ~ NA_character_
+      ),
+      id = id2char(.data$bodyid),
+      instance = .data$name,
+      subclass = NA_character_,
+      subsubclass = NA_character_,
+      lineage = NA_character_,
+      group = id2char(.data$group)
+    )
 
-  cbind(out, extras, stringsAsFactors = FALSE)
+  df %>%
+    select(all_of(selcols), dplyr::everything()) %>%
+    select(-all_of(c("bodyid", "name")))
 }
 
 #' @noRd
+#' @importFrom dplyr mutate select
 fish_cfpartners <- function(ids, partners = c("outputs", "inputs"),
                             threshold = 1L, ...,
                             dataset = fish_default_dataset()) {
-  partners <- match.arg(partners)
-  ids <- fish_ids(ids, as_character = TRUE, unique = TRUE)
-  conn <- fish_neuprint(dataset = dataset)
   res <- fish_connection_table(
     ids,
     partners = partners,
@@ -128,34 +140,8 @@ fish_cfpartners <- function(ids, partners = c("outputs", "inputs"),
     summary = FALSE,
     details = FALSE,
     moredetails = FALSE,
-    conn = conn,
     dataset = dataset,
     ...
   )
-
-  if (!nrow(res) > 0) {
-    out <- data.frame(
-      pre_id = character(),
-      post_id = character(),
-      weight = integer(),
-      stringsAsFactors = FALSE
-    )
-    return(out)
-  }
-
-  if (partners == "outputs") {
-    data.frame(
-      pre_id = as.character(res$bodyid),
-      post_id = as.character(res$partner),
-      weight = res$weight,
-      stringsAsFactors = FALSE
-    )
-  } else {
-    data.frame(
-      pre_id = as.character(res$partner),
-      post_id = as.character(res$bodyid),
-      weight = res$weight,
-      stringsAsFactors = FALSE
-    )
-  }
+  res
 }

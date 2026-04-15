@@ -23,7 +23,9 @@ Imports:
     malevnc,
     neuprintr (>= 1.3.4.9100),
     pbapply,
-    rappdirs
+    rappdirs,
+    rlang,
+    stringr,
     coconat
 Remotes:
     natverse/malevnc,
