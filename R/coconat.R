@@ -14,15 +14,6 @@
 #' coconatfly::cf_meta(coconatfly::cf_ids(fish2 = "RGC"))
 #' }
 register_fish_coconat <- function(showerror = TRUE) {
-  if (!requireNamespace("coconatfly", quietly = !showerror)) {
-    if (!showerror) {
-      return(invisible(NULL))
-    }
-    stop(
-      "Package 'coconatfly' is required. Install with: ",
-      "devtools::install_github('natverse/coconatfly')"
-    )
-  }
   if (!requireNamespace("coconat", quietly = !showerror)) {
     if (!showerror) {
       return(invisible(NULL))
@@ -48,6 +39,14 @@ register_fish_coconat <- function(showerror = TRUE) {
     idfun = fish_cfids,
     partnerfun = fish_cfpartners
   )
+
+  if (!nzchar(system.file(package = "coconatfly"))) {
+    warning(
+      "Package 'coconatfly' is not installed. Install it to use the ",
+      "registered fish2 dataset via coconatfly::cf_* functions.",
+      call. = FALSE
+    )
+  }
 
   invisible(NULL)
 }
