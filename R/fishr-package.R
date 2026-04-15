@@ -1,4 +1,5 @@
 #' @keywords internal
+#' @importFrom coconat id2char
 #' @section Package Options:
 #'
 #' \itemize{

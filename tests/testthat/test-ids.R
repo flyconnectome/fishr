@@ -10,8 +10,7 @@ test_that(".fish_query_df filters correctly", {
   df <- data.frame(
     bodyid = c(1, 2, 3, 4),
     type = c("TRP01", "TRP02", "MBON01", "DN01"),
-    status = c("Traced", "Traced", "Orphan", "Traced"),
-    stringsAsFactors = FALSE
+    status = c("Traced", "Traced", "Orphan", "Traced")
   )
 
   # /field:regex form
@@ -35,12 +34,12 @@ test_that(".fish_query_df filters correctly", {
 })
 
 test_that(".fish_query_df errors on bad field", {
-  df <- data.frame(bodyid = 1, type = "X", stringsAsFactors = FALSE)
+  df <- data.frame(bodyid = 1, type = "X")
   expect_error(fishr:::.fish_query_df("/nosuchfield:foo", df), "Unknown field")
 })
 
 test_that(".fish_query_df errors on malformed query", {
-  df <- data.frame(bodyid = 1, type = "X", stringsAsFactors = FALSE)
+  df <- data.frame(bodyid = 1, type = "X")
   expect_error(fishr:::.fish_query_df("/a:b:c", df), "Cannot parse")
 })
 
@@ -86,7 +85,7 @@ test_that("fish_ids preserves >53-bit ids as integer64", {
 
 test_that("fish_ids round-trips >53-bit ids from data.frame", {
   big <- "9007199254740993"
-  df <- data.frame(bodyid = big, stringsAsFactors = FALSE)
+  df <- data.frame(bodyid = big)
   ids <- fish_ids(df, mustWork = FALSE)
   expect_equal(ids, big)
 })

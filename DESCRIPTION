@@ -14,7 +14,7 @@ Encoding: UTF-8
 LazyData: true
 Language: en-GB
 Depends:
-    R (>= 3.5),
+    R (>= 4.0),
     nat (>= 1.10.2)
 Imports:
     bit64,
@@ -24,6 +24,7 @@ Imports:
     neuprintr (>= 1.3.4.9100),
     pbapply,
     rappdirs
+    coconat
 Remotes:
     natverse/malevnc,
     natverse/nat,
@@ -31,8 +32,7 @@ Remotes:
     natverse/coconat
 Suggests:
     testthat (>= 3.0.0),
-    rgl,
-    coconat
+    rgl
 Config/testthat/edition: 3
 RoxygenNote: 7.3.3
 URL: https://flyconnectome.github.io/fishr/

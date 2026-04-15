@@ -278,9 +278,9 @@ fish_connection_table <- function(ids, partners = c("inputs", "outputs"),
   )
 
   if ("bodyid" %in% colnames(res))
-    res$bodyid <- neuprintr:::id2char(res$bodyid)
+    res$bodyid <- id2char(res$bodyid)
   if ("partner" %in% colnames(res))
-    res$partner <- neuprintr:::id2char(res$partner)
+    res$partner <- id2char(res$partner)
 
   if (!isFALSE(moredetails) && nrow(res) > 0) {
     if (is.character(moredetails)) {
