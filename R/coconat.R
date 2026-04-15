@@ -18,9 +18,20 @@ register_fish_coconat <- function(showerror = TRUE) {
     if (!showerror) {
       return(invisible(NULL))
     }
+    coconat_link <- cli::style_hyperlink("coconat", "https://natverse.org/coconat/")
+    coconatfly_link <- cli::style_hyperlink("coconatfly", "https://natverse.org/coconatfly/")
     stop(
-      "Package 'coconat' is required. Install with: ",
-      "devtools::install_github('natverse/coconat')"
+      paste(
+        paste(
+          "Package", coconat_link, "is required to register fish2 for",
+          coconatfly_link, "."
+        ),
+        cli::format_message(
+          "Install it with {.run [natmanager::install(pkgs = \"coconat\")](natmanager::install(pkgs = \"coconat\"))}."
+        ),
+        sep = "\n"
+      ),
+      call. = FALSE
     )
   }
 
@@ -29,7 +40,7 @@ register_fish_coconat <- function(showerror = TRUE) {
     shortname = "zf",
     species = "Danio rerio",
     sex = "U",
-    age = "larval",
+    age = "6 dpf",
     namespace = "coconatfly",
     description = paste(
       "The fish2 larval zebrafish whole-brain EM dataset imaged at Harvard and",
@@ -41,10 +52,17 @@ register_fish_coconat <- function(showerror = TRUE) {
   )
 
   if (!nzchar(system.file(package = "coconatfly"))) {
-    warning(
-      "Package 'coconatfly' is not installed. Install it to use the ",
-      "registered fish2 dataset via coconatfly::cf_* functions.",
-      call. = FALSE
+    coconat_link <- cli::style_hyperlink("coconat", "https://natverse.org/coconat/")
+    coconatfly_link <- cli::style_hyperlink("coconatfly", "https://natverse.org/coconatfly/")
+    cli::cli_warn(
+      c(
+        "!" = paste(
+          "Package", coconatfly_link,
+          "is not installed, so the registered fish2 dataset is not usable yet."
+        ),
+        "i" = "Install it with {.run [natmanager::install(pkgs = \"coconatfly\")](natmanager::install(pkgs = \"coconatfly\"))} to use {.code coconatfly::cf_*()} functions."
+      ),
+      call = NULL
     )
   }
 
