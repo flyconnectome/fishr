@@ -77,10 +77,6 @@ Other fishr-package:
 ``` r
 # \donttest{
 rgcsk3 <- read_fish_neurons(fish_ids("RGC")[1:3])
-#> Warning: The `father` argument of `dfs()` is deprecated as of igraph 2.2.0.
-#> ℹ Please use the `parent` argument instead.
-#> ℹ The deprecated feature was likely used in the nat package.
-#>   Please report the issue at <https://github.com/natverse/nat/issues>.
 plot(rgcsk3, WithNodes=FALSE)
 
 # }

@@ -67,33 +67,33 @@ Other neuprint:
 ``` r
 # \donttest{
 head(fish_neuprint_meta("RGC"))
-#>      bodyid post pre downstream upstream synweight    statusLabel
-#> 1 110888244    2 287        318        2       320 Sensory Anchor
-#> 2 110916137    2 141        149        2       151 Sensory Anchor
-#> 3 110958352    1  62         70        1        71 Sensory Anchor
-#> 4 100009896    2  89         90        2        92 Sensory Anchor
-#> 5 100015071    0 128        135        0       135 Sensory Anchor
-#> 6 100015468    2 290        316        2       318 Sensory Anchor
-#>   connectivityType  name type perNodeSc group class keywords comment
-#> 1             <NA> RGC_R  RGC        NA     0  <NA>     <NA>    <NA>
-#> 2             <NA> RGC_R  RGC        NA     0  <NA>     <NA>    <NA>
-#> 3             <NA> RGC_R  RGC        NA     0  <NA>     <NA>    <NA>
-#> 4             <NA> RGC_R  RGC        NA     0  <NA>     <NA>    <NA>
-#> 5             <NA> RGC_R  RGC        NA     0  <NA>     <NA>    <NA>
-#> 6             <NA> RGC_R  RGC        NA     0  <NA>     <NA>    <NA>
-#>   somaLocation somaId somaVoxels zapbenchId closestLandmarkLocation
-#> 1                  NA         NA         NA                    <NA>
-#> 2                  NA         NA         NA                    <NA>
-#> 3                  NA         NA         NA                    <NA>
-#> 4                  NA         NA         NA                    <NA>
-#> 5                  NA         NA         NA                    <NA>
-#> 6                  NA         NA         NA                    <NA>
-#>   closestLandmarkDistanceMicrons tosomaLocation status  voxels  soma
-#> 1                             NA           <NA> Anchor 8805954 FALSE
-#> 2                             NA           <NA> Anchor 5075924 FALSE
-#> 3                             NA           <NA> Anchor 3678756 FALSE
-#> 4                             NA           <NA> Anchor 6228154 FALSE
-#> 5                             NA           <NA> Anchor 5774341 FALSE
-#> 6                             NA           <NA> Anchor 9488378 FALSE
+#>      bodyid post pre downstream upstream synweight connectivityType perNodeSc
+#> 1 111554667    1 213        223        1       224             <NA>        NA
+#> 2 111584814    0 259        282        0       282             <NA>        NA
+#> 3 111627703    1 258        282        1       283             <NA>        NA
+#> 4 111636789    0 124        127        0       127             <NA>        NA
+#> 5 111647724    2 257        296        2       298             <NA>        NA
+#> 6 111656787    3 167        172        3       175             <NA>        NA
+#>      statusLabel group  name type class keywords comment somaLocation somaId
+#> 1 Sensory Anchor     0 RGC_R  RGC  <NA>     <NA>    <NA>                  NA
+#> 2 Sensory Anchor     0 RGC_R  RGC  <NA>     <NA>    <NA>                  NA
+#> 3 Sensory Anchor     0 RGC_R  RGC  <NA>     <NA>    <NA>                  NA
+#> 4 Sensory Anchor     0 RGC_R  RGC  <NA>     <NA>    <NA>                  NA
+#> 5 Sensory Anchor     0 RGC_R  RGC  <NA>     <NA>    <NA>                  NA
+#> 6 Sensory Anchor     0 RGC_R  RGC  <NA>     <NA>    <NA>                  NA
+#>   somaVoxels zapbenchId closestLandmarkLocation closestLandmarkDistanceMicrons
+#> 1         NA         NA                    <NA>                             NA
+#> 2         NA         NA                    <NA>                             NA
+#> 3         NA         NA                    <NA>                             NA
+#> 4         NA         NA                    <NA>                             NA
+#> 5         NA         NA                    <NA>                             NA
+#> 6         NA         NA                    <NA>                             NA
+#>   tosomaLocation status  voxels  soma
+#> 1           <NA> Anchor 7777932 FALSE
+#> 2           <NA> Anchor 8305652 FALSE
+#> 3           <NA> Anchor 9189373 FALSE
+#> 4           <NA> Anchor 5670692 FALSE
+#> 5           <NA> Anchor 7134334 FALSE
+#> 6           <NA> Anchor 8825884 FALSE
 # }
 ```
