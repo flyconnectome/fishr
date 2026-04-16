@@ -2,3 +2,29 @@ url: https://flyconnectome.github.io/fishr/
 template:
   bootstrap: 5
 
+reference:
+- title: Overview and setup
+  contents:
+  - '`fishr-package`'
+  - '`fish_setup`'
+- title: Data access
+  contents:
+  - '`with_fish`'
+  - '`choose_fish_dataset`'
+  - '`choose_fish`'
+  - '`fish_neuprint`'
+- title: Metadata
+  contents:
+  - '`fish_ids`'
+  - '`fish_neuprint_meta`'
+  - '`fish_dvid_annotations`'
+- title: connectivity and associated analysis
+  contents:
+  - '`fish_connection_table`'
+  - '`register_fish_coconat`'
+- title: Meshes and Skeletons
+  contents:
+  - '`fish_rois`'
+  - '`fish_roi_meshes`'
+  - '`read_fish_meshes`'
+  - '`read_fish_neurons`'
