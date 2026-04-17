@@ -43,7 +43,7 @@ do:
 ``` r
 # install natmanager if needed
 if (!requireNamespace("natmanager")) install.packages("natmanager")
-natmanager::install(pkgs = "fishr")
+natmanager::install(pkgs = "flyconnectome/fishr")
 ```
 
 You also need to make sure that you are authenticated to both clio and
