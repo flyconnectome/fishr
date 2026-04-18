@@ -21,7 +21,10 @@ fish_annotate(
 Please see \code{malevnc::\link[malevnc]{manc_annotate_body}} for other
 options.}
 
-\item{test}{Whether to use the clio test sore}
+\item{test}{Whether to do a dry run without writing annotations. Because
+fish2 does not currently appear to have a separate Clio test server, the
+default \code{TRUE} returns the supplied annotations and does not send them
+to Clio.}
 
 \item{version}{Optional clio version to associate with this annotation. The
 default \code{NULL} uses the current version returned by the API.}
@@ -55,7 +58,9 @@ to \code{Inf} to insist that all records are sent in a single request.
 \item{...}{Additional parameters passed to \code{pbapply::\link{pbsapply}}}
 }
 \value{
-The result returned by \code{\link[malevnc]{manc_annotate_body}}.
+When \code{test=FALSE}, the result returned by
+  \code{\link[malevnc]{manc_annotate_body}}. When \code{test=TRUE}, returns
+  the checked input \code{x}.
 }
 \description{
 Set one or more Clio body annotations for the fish2 dataset.
@@ -70,8 +75,9 @@ This function sets annotations for one or more bodyids. Logically
   The function wraps \code{malevnc::\link[malevnc]{manc_annotate_body}} for
   the fish2 dataset. The default \code{test=TRUE} is retained for safety, but
   there does not currently appear to be a separate fish2 annotation test
-  server. Please inspect the returned metadata carefully before assuming the
-  result matches what you intended to write.
+  server. Therefore \code{test=TRUE} currently returns the supplied
+  annotations without sending them to Clio. Please inspect these carefully
+  before rerunning with \code{test=FALSE}.
 }
 \examples{
 \dontrun{

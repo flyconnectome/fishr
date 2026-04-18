@@ -84,20 +84,26 @@ fish_dvid_annotations <- function(ids = NULL,
 #'   The function wraps \code{malevnc::\link[malevnc]{manc_annotate_body}} for
 #'   the fish2 dataset. The default \code{test=TRUE} is retained for safety, but
 #'   there does not currently appear to be a separate fish2 annotation test
-#'   server. Please inspect the returned metadata carefully before assuming the
-#'   result matches what you intended to write.
+#'   server. Therefore \code{test=TRUE} currently returns the supplied
+#'   annotations without sending them to Clio. Please inspect these carefully
+#'   before rerunning with \code{test=FALSE}.
 #'
 #' @param x Annotation data usually as a data.frame containing a bodyid column.
 #'   Please see \code{malevnc::\link[malevnc]{manc_annotate_body}} for other
 #'   options.
-#' @param test Whether to use the clio test sore
+#' @param test Whether to do a dry run without writing annotations. Because
+#'   fish2 does not currently appear to have a separate Clio test server, the
+#'   default \code{TRUE} returns the supplied annotations and does not send them
+#'   to Clio.
 #' @param chunksize When you have many bodies to annotate the request will by
 #'   default be sent 50 records at a time to avoid any issue with timeouts. Set
 #'   to \code{Inf} to insist that all records are sent in a single request.
 #'   \bold{NB only applies when \code{x} is a data.frame}.
 #' @inheritParams malevnc::manc_annotate_body
 #'
-#' @return The result returned by \code{\link[malevnc]{manc_annotate_body}}.
+#' @return When \code{test=FALSE}, the result returned by
+#'   \code{\link[malevnc]{manc_annotate_body}}. When \code{test=TRUE}, returns
+#'   the checked input \code{x}.
 #' @export
 #' @family live-annotations
 #'
@@ -113,6 +119,9 @@ fish_annotate <- function(x, test = TRUE, version = NULL,
   if (is.data.frame(x) && "bodyid" %in% colnames(x)) {
     x$bodyid <- fish_ids(x$bodyid, as_character = FALSE, unique = FALSE)
   }
+
+  if(is.data.frame(x) && !'bodyid' %in% colnames(x))
+    stop("`x` does not contain a bodyid column")
 
   if (isTRUE(test)) {
     message(

@@ -48,6 +48,8 @@ with_fish(read_fish_meshes(12345))
 Useful links:
 \itemize{
   \item \url{https://flyconnectome.github.io/fishr/}
+  \item \url{https://github.com/flyconnectome/fishr}
+  \item Report bugs at \url{https://github.com/flyconnectome/fishr/issues}
 }
 
 
