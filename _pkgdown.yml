@@ -13,21 +13,19 @@ reference:
   - '`choose_fish_dataset`'
   - '`choose_fish`'
   - '`fish_neuprint`'
-- title: Metadata
+- title: Query ids, metadata and connectivity
   contents:
   - '`fish_ids`'
   - '`fish_neuprint_meta`'
-- title: Annotations
-  contents:
-  - '`fish_dvid_annotations`'
-  - '`fish_annotate`'
-- title: Connectivity and associated analysis
-  contents:
   - '`fish_connection_table`'
   - '`register_fish_coconat`'
-- title: Meshes and Skeletons
+- title: 3D Meshes and Skeletons
   contents:
   - '`fish_rois`'
   - '`fish_roi_meshes`'
   - '`read_fish_meshes`'
   - '`read_fish_neurons`'
+- title: Read and set live annotations
+  contents:
+  - '`fish_dvid_annotations`'
+  - '`fish_annotate`'
