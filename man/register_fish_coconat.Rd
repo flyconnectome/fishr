@@ -23,3 +23,10 @@ register_fish_coconat()
 coconatfly::cf_meta(coconatfly::cf_ids(fish2 = "RGC"))
 }
 }
+\seealso{
+Other data-queries: 
+\code{\link{fish_connection_table}()},
+\code{\link{fish_ids}()},
+\code{\link{fish_neuprint_meta}()}
+}
+\concept{data-queries}

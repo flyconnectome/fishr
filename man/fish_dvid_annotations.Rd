@@ -72,12 +72,7 @@ df
 }
 }
 \seealso{
-Other fishr-package: 
-\code{\link{fish_annotate}()},
-\code{\link{fish_ids}()},
-\code{\link{fish_setup}()},
-\code{\link{read_fish_meshes}()},
-\code{\link{read_fish_neurons}()},
-\code{\link{with_fish}()}
+Other live-annotations: 
+\code{\link{fish_annotate}()}
 }
-\concept{fishr-package}
+\concept{live-annotations}

@@ -79,12 +79,7 @@ fish_annotate(data.frame(bodyid = 100003384, group = 100003384), test = TRUE)
 }
 }
 \seealso{
-Other fishr-package: 
-\code{\link{fish_dvid_annotations}()},
-\code{\link{fish_ids}()},
-\code{\link{fish_setup}()},
-\code{\link{read_fish_meshes}()},
-\code{\link{read_fish_neurons}()},
-\code{\link{with_fish}()}
+Other live-annotations: 
+\code{\link{fish_dvid_annotations}()}
 }
-\concept{fishr-package}
+\concept{live-annotations}

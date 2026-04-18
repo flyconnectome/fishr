@@ -60,12 +60,9 @@ fish_ids(df)
 }
 }
 \seealso{
-Other fishr-package: 
-\code{\link{fish_annotate}()},
-\code{\link{fish_dvid_annotations}()},
-\code{\link{fish_setup}()},
-\code{\link{read_fish_meshes}()},
-\code{\link{read_fish_neurons}()},
-\code{\link{with_fish}()}
+Other data-queries: 
+\code{\link{fish_connection_table}()},
+\code{\link{fish_neuprint_meta}()},
+\code{\link{register_fish_coconat}()}
 }
-\concept{fishr-package}
+\concept{data-queries}

@@ -74,7 +74,7 @@ fish_cache_dataset_options <- function(ops, dataset = NULL) {
 #'   previous option values, matching \code{\link{options}}.
 #' @seealso \code{\link[malevnc]{choose_flyem_dataset}},
 #'   \code{\link[malevnc]{choose_malevnc_dataset}}
-#' @family fishr-package
+#' @family setup-data-access
 #' @export
 #' @examples
 #' \dontrun{

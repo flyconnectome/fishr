@@ -18,7 +18,7 @@
 #'
 #' @return Invisibly returns a list describing the detected configuration and
 #'   any values written to \code{.Renviron}.
-#' @family fishr-package
+#' @family setup-data-access
 #' @export
 #' @examples
 #' \dontrun{

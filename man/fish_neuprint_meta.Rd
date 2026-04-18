@@ -46,10 +46,9 @@ head(fish_neuprint_meta("RGC"))
 \seealso{
 \code{\link[malevnc]{manc_neuprint_meta}}
 
-Other neuprint: 
+Other data-queries: 
 \code{\link{fish_connection_table}()},
-\code{\link{fish_neuprint}()},
-\code{\link{fish_roi_meshes}()},
-\code{\link{fish_rois}()}
+\code{\link{fish_ids}()},
+\code{\link{register_fish_coconat}()}
 }
-\concept{neuprint}
+\concept{data-queries}

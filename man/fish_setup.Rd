@@ -35,12 +35,9 @@ fish_setup()
 }
 }
 \seealso{
-Other fishr-package: 
-\code{\link{fish_annotate}()},
-\code{\link{fish_dvid_annotations}()},
-\code{\link{fish_ids}()},
-\code{\link{read_fish_meshes}()},
-\code{\link{read_fish_neurons}()},
+Other setup-data-access: 
+\code{\link{fish_neuprint}()},
+\code{\link{fishr-package}},
 \code{\link{with_fish}()}
 }
-\concept{fishr-package}
+\concept{setup-data-access}

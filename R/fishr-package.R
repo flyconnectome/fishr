@@ -2,6 +2,7 @@
 #' @importFrom coconat id2char
 #' @importFrom dplyr %>%
 #' @importFrom rlang .data
+#' @family setup-data-access
 #' @section Package Options:
 #'
 #' \itemize{
@@ -30,10 +31,9 @@
 #'   }
 #'
 #' @examples
-#' \donttest{
-#' options()[grepl("^fishr", names(options()))]
-#' }
 #' \dontrun{
+#' options()[grepl("^fishr", names(options()))]
+#' options()[grepl("^malevnc", names(options()))]
 #' with_fish(read_fish_meshes(12345))
 #' }
 "_PACKAGE"

@@ -38,10 +38,9 @@ A thin wrapper around the malevnc package providing access to the fish2 larval z
 }
 
 \examples{
-\donttest{
-options()[grepl("^fishr", names(options()))]
-}
 \dontrun{
+options()[grepl("^fishr", names(options()))]
+options()[grepl("^malevnc", names(options()))]
 with_fish(read_fish_meshes(12345))
 }
 }
@@ -51,9 +50,15 @@ Useful links:
   \item \url{https://flyconnectome.github.io/fishr/}
 }
 
+
+Other setup-data-access: 
+\code{\link{fish_neuprint}()},
+\code{\link{fish_setup}()},
+\code{\link{with_fish}()}
 }
 \author{
 \strong{Maintainer}: Gregory Jefferis \email{jefferis@gmail.com} (\href{https://orcid.org/0000-0002-0587-9355}{ORCID})
 
 }
+\concept{setup-data-access}
 \keyword{internal}

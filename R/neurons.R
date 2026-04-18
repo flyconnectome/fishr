@@ -18,7 +18,7 @@
 #'   more neurons.
 #' @seealso \code{\link[malevnc]{manc_read_neurons}}, and nat functions
 #'   including \code{\link[nat]{neuron}}, \code{\link[nat]{neuronlist}}.
-#' @family fishr-package
+#' @family 3d-meshes-skeletons
 #' @export
 #' @examples
 #' \donttest{

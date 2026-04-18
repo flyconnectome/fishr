@@ -43,12 +43,9 @@ plot3d(rgcs)
 }
 }
 \seealso{
-Other fishr-package: 
-\code{\link{fish_annotate}()},
-\code{\link{fish_dvid_annotations}()},
-\code{\link{fish_ids}()},
-\code{\link{fish_setup}()},
-\code{\link{read_fish_neurons}()},
-\code{\link{with_fish}()}
+Other 3d-meshes-skeletons: 
+\code{\link{fish_roi_meshes}()},
+\code{\link{fish_rois}()},
+\code{\link{read_fish_neurons}()}
 }
-\concept{fishr-package}
+\concept{3d-meshes-skeletons}

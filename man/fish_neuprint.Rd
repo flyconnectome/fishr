@@ -57,10 +57,9 @@ conn
 \seealso{
 \code{\link[malevnc]{manc_neuprint}}
 
-Other neuprint: 
-\code{\link{fish_connection_table}()},
-\code{\link{fish_neuprint_meta}()},
-\code{\link{fish_roi_meshes}()},
-\code{\link{fish_rois}()}
+Other setup-data-access: 
+\code{\link{fish_setup}()},
+\code{\link{fishr-package}},
+\code{\link{with_fish}()}
 }
-\concept{neuprint}
+\concept{setup-data-access}

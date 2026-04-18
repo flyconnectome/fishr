@@ -22,7 +22,7 @@
 #' @importFrom nat as.neuronlist
 #' @export
 #' @inheritParams fish_dvid_annotations
-#' @family fishr-package
+#' @family 3d-meshes-skeletons
 #' @examples
 #' \dontrun{
 #' # pick 10 RGC meshes to read in

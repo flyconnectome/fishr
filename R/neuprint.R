@@ -25,7 +25,7 @@
 #' @return A \code{neuprint_connection} object returned by
 #'   \code{\link[neuprintr]{neuprint_login}}.
 #' @seealso \code{\link[malevnc]{manc_neuprint}}
-#' @family neuprint
+#' @family setup-data-access
 #' @export
 #' @examples
 #' \donttest{
@@ -71,7 +71,7 @@ fish_neuprint_token <- function() {
 #' @return A data.frame with one row for each unique input id and \code{NA}s for
 #'   all columns except \code{bodyid} when neuprint holds no metadata.
 #' @seealso \code{\link[malevnc]{manc_neuprint_meta}}
-#' @family neuprint
+#' @family data-queries
 #' @export
 #' @examples
 #' \donttest{
@@ -129,7 +129,7 @@ fish_neuprint_meta <- function(ids = NULL, conn = NULL, roiInfo = FALSE,
 #' @return The ROI hierarchy as either an edge list or \code{igraph} object.
 #' @seealso \code{\link[neuprintr]{neuprint_ROI_hierarchy}},
 #'   \code{\link{fish_roi_meshes}}
-#' @family neuprint
+#' @family 3d-meshes-skeletons
 #' @export
 #' @examples
 #' \donttest{
@@ -171,7 +171,7 @@ fish_rois <- function(root = NULL, rval = c("edgelist", "graph"),
 #'   objects. Missing meshes are dropped with a warning.
 #' @seealso \code{\link[neuprintr]{neuprint_ROI_mesh}},
 #'   \code{\link[nat]{nlapply}}, \code{\link{fish_rois}}
-#' @family neuprint
+#' @family 3d-meshes-skeletons
 #' @export
 #' @examples
 #' \donttest{
@@ -247,7 +247,7 @@ fish_roi_meshes <- function(rois, units = c("nm", "raw", "microns"),
 #'
 #' @return A data.frame.
 #' @seealso \code{\link[malevnc]{manc_connection_table}}
-#' @family neuprint
+#' @family data-queries
 #' @export
 #' @examples
 #' \donttest{

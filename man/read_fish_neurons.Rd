@@ -53,12 +53,9 @@ plot(rgcsk3, WithNodes=FALSE)
 \code{\link[malevnc]{manc_read_neurons}}, and nat functions
   including \code{\link[nat]{neuron}}, \code{\link[nat]{neuronlist}}.
 
-Other fishr-package: 
-\code{\link{fish_annotate}()},
-\code{\link{fish_dvid_annotations}()},
-\code{\link{fish_ids}()},
-\code{\link{fish_setup}()},
-\code{\link{read_fish_meshes}()},
-\code{\link{with_fish}()}
+Other 3d-meshes-skeletons: 
+\code{\link{fish_roi_meshes}()},
+\code{\link{fish_rois}()},
+\code{\link{read_fish_meshes}()}
 }
-\concept{fishr-package}
+\concept{3d-meshes-skeletons}

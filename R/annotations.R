@@ -33,7 +33,7 @@
 #' @return A \code{tibble} of body annotations. See
 #'   \code{malevnc::\link[malevnc]{manc_dvid_annotations}} for column details.
 #' @export
-#' @family fishr-package
+#' @family live-annotations
 #' @examples
 #' \donttest{
 #' # fetch annotations for specific bodies
@@ -99,7 +99,7 @@ fish_dvid_annotations <- function(ids = NULL,
 #'
 #' @return The result returned by \code{\link[malevnc]{manc_annotate_body}}.
 #' @export
-#' @family fishr-package
+#' @family live-annotations
 #'
 #' @examples
 #' \dontrun{

@@ -23,7 +23,7 @@
 #'   \code{bit64::integer64} when \code{integer64=TRUE} or
 #'   \code{as_character=FALSE}.
 #' @export
-#' @family fishr-package
+#' @family data-queries
 #' @examples
 #' \donttest{
 #' # neuprint query by type

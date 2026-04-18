@@ -6,6 +6,7 @@
 #' @param showerror Logical; when \code{FALSE}, return invisibly if
 #'   dependencies are missing.
 #' @return Invisible \code{NULL}.
+#' @family data-queries
 #' @export
 #'
 #' @examples
