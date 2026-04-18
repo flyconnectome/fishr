@@ -36,11 +36,9 @@ the current session so that things work immediately.
 
 ## See also
 
-Other fishr-package:
-[`fish_dvid_annotations()`](https://flyconnectome.github.io/fishr/reference/fish_dvid_annotations.md),
-[`fish_ids()`](https://flyconnectome.github.io/fishr/reference/fish_ids.md),
-[`read_fish_meshes()`](https://flyconnectome.github.io/fishr/reference/read_fish_meshes.md),
-[`read_fish_neurons()`](https://flyconnectome.github.io/fishr/reference/read_fish_neurons.md),
+Other setup-data-access:
+[`fish_neuprint()`](https://flyconnectome.github.io/fishr/reference/fish_neuprint.md),
+[`fishr-package`](https://flyconnectome.github.io/fishr/reference/fishr-package.md),
 [`with_fish()`](https://flyconnectome.github.io/fishr/reference/with_fish.md)
 
 ## Examples

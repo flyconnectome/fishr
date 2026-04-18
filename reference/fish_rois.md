@@ -60,11 +60,10 @@ The ROI hierarchy as either an edge list or `igraph` object.
 [`neuprint_ROI_hierarchy`](https://natverse.org/neuprintr/reference/neuprint_ROI_hierarchy.html),
 [`fish_roi_meshes`](https://flyconnectome.github.io/fishr/reference/fish_roi_meshes.md)
 
-Other neuprint:
-[`fish_connection_table()`](https://flyconnectome.github.io/fishr/reference/fish_connection_table.md),
-[`fish_neuprint()`](https://flyconnectome.github.io/fishr/reference/fish_neuprint.md),
-[`fish_neuprint_meta()`](https://flyconnectome.github.io/fishr/reference/fish_neuprint_meta.md),
-[`fish_roi_meshes()`](https://flyconnectome.github.io/fishr/reference/fish_roi_meshes.md)
+Other 3d-meshes-skeletons:
+[`fish_roi_meshes()`](https://flyconnectome.github.io/fishr/reference/fish_roi_meshes.md),
+[`read_fish_meshes()`](https://flyconnectome.github.io/fishr/reference/read_fish_meshes.md),
+[`read_fish_neurons()`](https://flyconnectome.github.io/fishr/reference/read_fish_neurons.md)
 
 ## Examples
 

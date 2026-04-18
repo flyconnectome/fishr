@@ -17,23 +17,18 @@
 - [`fish_neuprint()`](https://flyconnectome.github.io/fishr/reference/fish_neuprint.md)
   : Login to fish2 neuprint server
 
-## Metadata
+## Query ids, metadata and connectivity
 
 - [`fish_ids()`](https://flyconnectome.github.io/fishr/reference/fish_ids.md)
   : Resolve fish2 body ids from a variety of inputs
 - [`fish_neuprint_meta()`](https://flyconnectome.github.io/fishr/reference/fish_neuprint_meta.md)
   : Fetch neuprint metadata for fish2 neurons
-- [`fish_dvid_annotations()`](https://flyconnectome.github.io/fishr/reference/fish_dvid_annotations.md)
-  : Read DVID body annotations for fish2 body ids
-
-## connectivity and associated analysis
-
 - [`fish_connection_table()`](https://flyconnectome.github.io/fishr/reference/fish_connection_table.md)
   : Connectivity query for fish2 neurons
 - [`register_fish_coconat()`](https://flyconnectome.github.io/fishr/reference/register_fish_coconat.md)
   : Register fish2 dataset for coconatfly
 
-## Meshes and Skeletons
+## 3D Meshes and Skeletons
 
 - [`fish_rois()`](https://flyconnectome.github.io/fishr/reference/fish_rois.md)
   : Fetch the ROI hierarchy for fish2
@@ -43,3 +38,10 @@
   : Read meshes for fish2 body ids
 - [`read_fish_neurons()`](https://flyconnectome.github.io/fishr/reference/read_fish_neurons.md)
   : Read neuron skeletons via neuprint
+
+## Read and set live annotations
+
+- [`fish_dvid_annotations()`](https://flyconnectome.github.io/fishr/reference/fish_dvid_annotations.md)
+  : Read DVID body annotations for fish2 body ids
+- [`fish_annotate()`](https://flyconnectome.github.io/fishr/reference/fish_annotate.md)
+  : Set body annotations for fish2 via Clio

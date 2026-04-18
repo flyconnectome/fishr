@@ -74,12 +74,10 @@ that fallback session.
 [`choose_flyem_dataset`](https://natverse.org/malevnc/reference/choose_malevnc_dataset.html),
 [`choose_malevnc_dataset`](https://natverse.org/malevnc/reference/choose_malevnc_dataset.html)
 
-Other fishr-package:
-[`fish_dvid_annotations()`](https://flyconnectome.github.io/fishr/reference/fish_dvid_annotations.md),
-[`fish_ids()`](https://flyconnectome.github.io/fishr/reference/fish_ids.md),
+Other setup-data-access:
+[`fish_neuprint()`](https://flyconnectome.github.io/fishr/reference/fish_neuprint.md),
 [`fish_setup()`](https://flyconnectome.github.io/fishr/reference/fish_setup.md),
-[`read_fish_meshes()`](https://flyconnectome.github.io/fishr/reference/read_fish_meshes.md),
-[`read_fish_neurons()`](https://flyconnectome.github.io/fishr/reference/read_fish_neurons.md)
+[`fishr-package`](https://flyconnectome.github.io/fishr/reference/fishr-package.md)
 
 ## Examples
 

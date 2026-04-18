@@ -37,6 +37,7 @@
 <li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="search.json">
 </form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/flyconnectome/fishr/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
 
@@ -111,6 +112,11 @@
 <span><span class="co"># Get meshes for some ROIs. NB not all ROIs have meshes.</span></span>
 <span><span class="va">roi.meshes</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/fish_roi_meshes.html">fish_roi_meshes</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Midbrain"</span>, <span class="st">"Hindbrain"</span><span class="op">)</span>, .progress <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></span>
 <span><span class="fu">wire3d</span><span class="op">(</span><span class="va">roi.meshes</span>, col<span class="op">=</span><span class="st">'grey'</span><span class="op">)</span></span></code></pre></div>
+<p>You can also set annotations programmatically. By default this will associate them with your email (and a timestamp) just like the Clio web interface. This can be very useful but be careful (and ask for help quickly on slack if you suspect an accident)!</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">anns</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>bodyid<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1001</span>,<span class="fl">1002</span><span class="op">)</span>, side<span class="op">=</span><span class="st">'R'</span>, type<span class="op">=</span><span class="st">'RGC_AF8'</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/fish_annotate.html">fish_annotate</a></span><span class="op">(</span><span class="va">anns</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/fish_annotate.html">fish_annotate</a></span><span class="op">(</span><span class="va">anns</span>, test<span class="op">=</span><span class="cn">F</span><span class="op">)</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="other-useful-packages">other useful packages<a class="anchor" aria-label="anchor" href="#other-useful-packages"></a>
 </h3>
@@ -119,7 +125,7 @@
 <h4 id="malevnc">malevnc<a class="anchor" aria-label="anchor" href="#malevnc"></a>
 </h4>
 <p>malevnc is especially useful for interacting with the annotation and segmentation infrastructure (clio/DVID). You can use any <a href="https://natverse.org/malevnc/reference/" class="external-link">function in the malevnc package</a> after wrapping it in <code><a href="reference/with_fish.html">with_fish()</a></code>.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/with_fish.html">with_fish</a></span><span class="op">(</span><span class="fu">malevnc</span><span class="fu">::</span><span class="fu"><a href="https://natverse.org/malevnc/reference/manc_body_annotations.html" class="external-link">clio_fields</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>If you only ever use the fish dataset then doing <code><a href="reference/with_fish.html">choose_fish()</a></code> once per session means that all subsequent malevnc functions will target the fish2 dataset.</p>
 <pre><code><span><span class="fu"><a href="reference/with_fish.html">choose_fish</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -132,7 +138,7 @@
 </h4>
 <p>Similarly you can use <a href="https://natverse.org/neuprintr/reference/" class="external-link">all functions in the base neuprintr package</a>. If you have followed the default prompts in <code><a href="reference/fish_setup.html">fish_setup()</a></code> and are not using other FlyEM datasets, then fish2 should be the default there too.</p>
 <p>If you use other neuprint datasets then neuprintr uses the last (or only) neuprint connection made in a session and will target that dataset.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fc</span><span class="op">=</span><span class="fu"><a href="reference/fish_neuprint.html">fish_neuprint</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">fc</span></span>
 <span><span class="fu">neuprintr</span><span class="fu">::</span><span class="fu"><a href="https://natverse.org/neuprintr/reference/neuprint_ROIs.html" class="external-link">neuprint_ROIs</a></span><span class="op">(</span>conn <span class="op">=</span> <span class="va">fc</span><span class="op">)</span></span></code></pre></div>
@@ -141,13 +147,13 @@
 <h4 id="coconatfly">coconatfly<a class="anchor" aria-label="anchor" href="#coconatfly"></a>
 </h4>
 <p>You can also register fish2 as an extra dataset for <a href="https://natverse.org/coconatfly/" class="external-link">coconatfly</a>. Even if fish2 is not a fly this package provides a uniform approach to connectome analysis including connectivity clustering functions.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/register_fish_coconat.html">register_fish_coconat</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">rgcmeta</span><span class="op">=</span><span class="fu">coconatfly</span><span class="fu">::</span><span class="fu">cf_meta</span><span class="op">(</span><span class="fu">coconatfly</span><span class="fu">::</span><span class="fu">cf_ids</span><span class="op">(</span>fish2 <span class="op">=</span> <span class="st">"RGC"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">rgcmeta</span></span></code></pre></div>
 <p>After fetching metadata we can try connectivity clustering a subset of the neurons, in this case those from the right eye …</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rgcmeta</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">side</span><span class="op">==</span><span class="st">"R"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="co"># nb we need group = F because the partner neurons aren't really typed yet</span></span>
@@ -162,7 +168,15 @@
 </div>
 </div>
 </div>
-  </main><aside class="col-md-3"><div class="license">
+  </main><aside class="col-md-3"><div class="links">
+<h2 data-toc-skip>Links</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/flyconnectome/fishr/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/flyconnectome/fishr/issues" class="external-link">Report a bug</a></li>
+</ul>
+</div>
+
+<div class="license">
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="https://www.r-project.org/Licenses/GPL-3" class="external-link">GPL-3</a></li>

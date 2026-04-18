@@ -75,12 +75,8 @@ instead.
 
 ## See also
 
-Other fishr-package:
-[`fish_ids()`](https://flyconnectome.github.io/fishr/reference/fish_ids.md),
-[`fish_setup()`](https://flyconnectome.github.io/fishr/reference/fish_setup.md),
-[`read_fish_meshes()`](https://flyconnectome.github.io/fishr/reference/read_fish_meshes.md),
-[`read_fish_neurons()`](https://flyconnectome.github.io/fishr/reference/read_fish_neurons.md),
-[`with_fish()`](https://flyconnectome.github.io/fishr/reference/with_fish.md)
+Other live-annotations:
+[`fish_annotate()`](https://flyconnectome.github.io/fishr/reference/fish_annotate.md)
 
 ## Examples
 

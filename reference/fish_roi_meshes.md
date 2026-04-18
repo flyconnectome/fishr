@@ -57,11 +57,10 @@ scaled up by this factor to give the default nm scaling.
 [`nlapply`](https://rdrr.io/pkg/nat/man/nlapply.html),
 [`fish_rois`](https://flyconnectome.github.io/fishr/reference/fish_rois.md)
 
-Other neuprint:
-[`fish_connection_table()`](https://flyconnectome.github.io/fishr/reference/fish_connection_table.md),
-[`fish_neuprint()`](https://flyconnectome.github.io/fishr/reference/fish_neuprint.md),
-[`fish_neuprint_meta()`](https://flyconnectome.github.io/fishr/reference/fish_neuprint_meta.md),
-[`fish_rois()`](https://flyconnectome.github.io/fishr/reference/fish_rois.md)
+Other 3d-meshes-skeletons:
+[`fish_rois()`](https://flyconnectome.github.io/fishr/reference/fish_rois.md),
+[`read_fish_meshes()`](https://flyconnectome.github.io/fishr/reference/read_fish_meshes.md),
+[`read_fish_neurons()`](https://flyconnectome.github.io/fishr/reference/read_fish_neurons.md)
 
 ## Examples
 

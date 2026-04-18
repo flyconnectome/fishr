@@ -34,6 +34,11 @@ Useful links:
 
 - <https://flyconnectome.github.io/fishr/>
 
+Other setup-data-access:
+[`fish_neuprint()`](https://flyconnectome.github.io/fishr/reference/fish_neuprint.md),
+[`fish_setup()`](https://flyconnectome.github.io/fishr/reference/fish_setup.md),
+[`with_fish()`](https://flyconnectome.github.io/fishr/reference/with_fish.md)
+
 ## Author
 
 **Maintainer**: Gregory Jefferis <jefferis@gmail.com>
@@ -42,32 +47,9 @@ Useful links:
 ## Examples
 
 ``` r
-# \donttest{
-options()[grepl("^fishr", names(options()))]
-#> $fishr.dataset
-#> [1] "fish2"
-#> 
-#> $fishr.dataset_options
-#> $fishr.dataset_options$fish2
-#> $fishr.dataset_options$fish2$malevnc.server
-#> [1] "https://fishemf-cleaving.janelia.org"
-#> 
-#> $fishr.dataset_options$fish2$malevnc.rootnode
-#> [1] "634eed0328dc4fe183f2bcb9306572db"
-#> 
-#> $fishr.dataset_options$fish2$malevnc.dataset
-#> [1] "fish2"
-#> 
-#> $fishr.dataset_options$fish2$malevnc.neuprint
-#> [1] "https://neuprint-fish2.janelia.org"
-#> 
-#> $fishr.dataset_options$fish2$malevnc.neuprint_dataset
-#> [1] "fish2"
-#> 
-#> 
-#> 
-# }
 if (FALSE) { # \dontrun{
+options()[grepl("^fishr", names(options()))]
+options()[grepl("^malevnc", names(options()))]
 with_fish(read_fish_meshes(12345))
 } # }
 ```

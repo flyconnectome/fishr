@@ -65,12 +65,10 @@ and nat functions including
 [`neuron`](https://rdrr.io/pkg/nat/man/neuron.html),
 [`neuronlist`](https://rdrr.io/pkg/nat/man/neuronlist.html).
 
-Other fishr-package:
-[`fish_dvid_annotations()`](https://flyconnectome.github.io/fishr/reference/fish_dvid_annotations.md),
-[`fish_ids()`](https://flyconnectome.github.io/fishr/reference/fish_ids.md),
-[`fish_setup()`](https://flyconnectome.github.io/fishr/reference/fish_setup.md),
-[`read_fish_meshes()`](https://flyconnectome.github.io/fishr/reference/read_fish_meshes.md),
-[`with_fish()`](https://flyconnectome.github.io/fishr/reference/with_fish.md)
+Other 3d-meshes-skeletons:
+[`fish_roi_meshes()`](https://flyconnectome.github.io/fishr/reference/fish_roi_meshes.md),
+[`fish_rois()`](https://flyconnectome.github.io/fishr/reference/fish_rois.md),
+[`read_fish_meshes()`](https://flyconnectome.github.io/fishr/reference/read_fish_meshes.md)
 
 ## Examples
 

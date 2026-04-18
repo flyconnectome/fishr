@@ -65,11 +65,10 @@ session.
 
 [`manc_neuprint`](https://natverse.org/malevnc/reference/manc_neuprint.html)
 
-Other neuprint:
-[`fish_connection_table()`](https://flyconnectome.github.io/fishr/reference/fish_connection_table.md),
-[`fish_neuprint_meta()`](https://flyconnectome.github.io/fishr/reference/fish_neuprint_meta.md),
-[`fish_roi_meshes()`](https://flyconnectome.github.io/fishr/reference/fish_roi_meshes.md),
-[`fish_rois()`](https://flyconnectome.github.io/fishr/reference/fish_rois.md)
+Other setup-data-access:
+[`fish_setup()`](https://flyconnectome.github.io/fishr/reference/fish_setup.md),
+[`fishr-package`](https://flyconnectome.github.io/fishr/reference/fishr-package.md),
+[`with_fish()`](https://flyconnectome.github.io/fishr/reference/with_fish.md)
 
 ## Examples
 
@@ -81,6 +80,6 @@ conn
 #>   https://neuprint-fish2.janelia.org
 #> with default dataset:
 #>    fish2 
-#> Login active since: Fri, 17 Apr 2026 14:17:13 GMT
+#> Login active since: Sat, 18 Apr 2026 08:31:10 GMT
 # }
 ```

@@ -18,6 +18,7 @@
       <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/flyconnectome/fishr/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul></div>
 
 
@@ -27,7 +28,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Fetch neuprint metadata for fish2 neurons</h1>
-
+      <small class="dont-index">Source: <a href="https://github.com/flyconnectome/fishr/blob/main/R/neuprint.R" class="external-link"><code>R/neuprint.R</code></a></small>
       <div class="d-none name"><code>fish_neuprint_meta.Rd</code></div>
     </div>
 
@@ -88,45 +89,44 @@ simple <code>"x,y,z"</code> format (default <code>TRUE</code>).</p></dd>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p><code><a href="https://natverse.org/malevnc/reference/manc_neuprint_meta.html" class="external-link">manc_neuprint_meta</a></code></p>
-<p>Other neuprint:
+<p>Other data-queries:
 <code><a href="fish_connection_table.html">fish_connection_table()</a></code>,
-<code><a href="fish_neuprint.html">fish_neuprint()</a></code>,
-<code><a href="fish_roi_meshes.html">fish_roi_meshes()</a></code>,
-<code><a href="fish_rois.html">fish_rois()</a></code></p></div>
+<code><a href="fish_ids.html">fish_ids()</a></code>,
+<code><a href="register_fish_coconat.html">register_fish_coconat()</a></code></p></div>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu">fish_neuprint_meta</span><span class="op">(</span><span class="st">"RGC"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      bodyid post pre downstream upstream synweight    statusLabel</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 110888244    2 287        318        2       320 Sensory Anchor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 110916137    2 141        149        2       151 Sensory Anchor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 110958352    1  62         70        1        71 Sensory Anchor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 100009896    2  89         90        2        92 Sensory Anchor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 100015071    0 128        135        0       135 Sensory Anchor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6 100015468    2 290        316        2       318 Sensory Anchor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   connectivityType perNodeSc group  name type comment class keywords</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1             &lt;NA&gt;        NA     0 RGC_R  RGC    &lt;NA&gt;  &lt;NA&gt;     &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2             &lt;NA&gt;        NA     0 RGC_R  RGC    &lt;NA&gt;  &lt;NA&gt;     &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3             &lt;NA&gt;        NA     0 RGC_R  RGC    &lt;NA&gt;  &lt;NA&gt;     &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4             &lt;NA&gt;        NA     0 RGC_R  RGC    &lt;NA&gt;  &lt;NA&gt;     &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5             &lt;NA&gt;        NA     0 RGC_R  RGC    &lt;NA&gt;  &lt;NA&gt;     &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6             &lt;NA&gt;        NA     0 RGC_R  RGC    &lt;NA&gt;  &lt;NA&gt;     &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   somaLocation somaId somaVoxels zapbenchId closestLandmarkLocation</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1                  NA         NA         NA                    &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2                  NA         NA         NA                    &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3                  NA         NA         NA                    &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4                  NA         NA         NA                    &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5                  NA         NA         NA                    &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6                  NA         NA         NA                    &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   closestLandmarkDistanceMicrons tosomaLocation status  voxels  soma</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1                             NA           &lt;NA&gt; Anchor 8805954 FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2                             NA           &lt;NA&gt; Anchor 5075924 FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3                             NA           &lt;NA&gt; Anchor 3678756 FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4                             NA           &lt;NA&gt; Anchor 6228154 FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5                             NA           &lt;NA&gt; Anchor 5774341 FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6                             NA           &lt;NA&gt; Anchor 9488378 FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      bodyid post pre downstream upstream synweight connectivityType perNodeSc</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 110888244    2 287        318        2       320             &lt;NA&gt;        NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 110916137    2 141        149        2       151             &lt;NA&gt;        NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 110958352    1  62         70        1        71             &lt;NA&gt;        NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 100009896    2  89         90        2        92             &lt;NA&gt;        NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 100015071    0 128        135        0       135             &lt;NA&gt;        NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6 100015468    2 290        316        2       318             &lt;NA&gt;        NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      statusLabel  name type group class keywords comment somaLocation somaId</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 Sensory Anchor RGC_R  RGC     0  &lt;NA&gt;     &lt;NA&gt;    &lt;NA&gt;                  NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 Sensory Anchor RGC_R  RGC     0  &lt;NA&gt;     &lt;NA&gt;    &lt;NA&gt;                  NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 Sensory Anchor RGC_R  RGC     0  &lt;NA&gt;     &lt;NA&gt;    &lt;NA&gt;                  NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 Sensory Anchor RGC_R  RGC     0  &lt;NA&gt;     &lt;NA&gt;    &lt;NA&gt;                  NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 Sensory Anchor RGC_R  RGC     0  &lt;NA&gt;     &lt;NA&gt;    &lt;NA&gt;                  NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6 Sensory Anchor RGC_R  RGC     0  &lt;NA&gt;     &lt;NA&gt;    &lt;NA&gt;                  NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   somaVoxels zapbenchId closestLandmarkLocation closestLandmarkDistanceMicrons</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1         NA         NA                    &lt;NA&gt;                             NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2         NA         NA                    &lt;NA&gt;                             NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3         NA         NA                    &lt;NA&gt;                             NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4         NA         NA                    &lt;NA&gt;                             NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5         NA         NA                    &lt;NA&gt;                             NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6         NA         NA                    &lt;NA&gt;                             NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   tosomaLocation status  voxels  soma</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1           &lt;NA&gt; Anchor 8805954 FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2           &lt;NA&gt; Anchor 5075924 FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3           &lt;NA&gt; Anchor 3678756 FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4           &lt;NA&gt; Anchor 6228154 FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5           &lt;NA&gt; Anchor 5774341 FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6           &lt;NA&gt; Anchor 9488378 FALSE</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
