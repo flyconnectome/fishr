@@ -70,3 +70,72 @@ fish_dvid_annotations <- function(ids = NULL,
     df <- .fish_query_df(query, df)
   df
 }
+
+#' Set body annotations for fish2 via Clio
+#'
+#' @description Set one or more Clio body annotations for the fish2 dataset.
+#'
+#' @details This function sets annotations for one or more bodyids. Logically
+#'   these annotations move with the bodyid (rather than a point location on the
+#'   object). The rules for annotation merges/transfers seem to work well in
+#'   practice but in general detailed annotations should be reserved for
+#'   large/mature bodies.
+#'
+#'   The function wraps \code{malevnc::\link[malevnc]{manc_annotate_body}} for
+#'   the fish2 dataset. The default \code{test=TRUE} is retained for safety, but
+#'   there does not currently appear to be a separate fish2 annotation test
+#'   server. Please inspect the returned metadata carefully before assuming the
+#'   result matches what you intended to write.
+#'
+#' @param x Annotation data usually as a data.frame containing a bodyid column.
+#'   Please see \code{malevnc::\link[malevnc]{manc_annotate_body}} for other
+#'   options.
+#' @param test Whether to use the clio test sore
+#' @param chunksize When you have many bodies to annotate the request will by
+#'   default be sent 50 records at a time to avoid any issue with timeouts. Set
+#'   to \code{Inf} to insist that all records are sent in a single request.
+#'   \bold{NB only applies when \code{x} is a data.frame}.
+#' @inheritParams malevnc::manc_annotate_body
+#'
+#' @return The result returned by \code{\link[malevnc]{manc_annotate_body}}.
+#' @export
+#' @family fishr-package
+#'
+#' @examples
+#' \dontrun{
+#' fish_annotate(data.frame(bodyid = 100003384, group = 100003384), test = TRUE)
+#' }
+fish_annotate <- function(x, test = TRUE, version = NULL,
+                          write_empty_fields = FALSE,
+                          allow_new_fields = FALSE,
+                          designated_user = NULL,
+                          protect = c("user"), chunksize = 50, ...) {
+  if (is.data.frame(x) && "bodyid" %in% colnames(x)) {
+    x$bodyid <- fish_ids(x$bodyid, as_character = FALSE, unique = FALSE)
+  }
+
+  if (isTRUE(test)) {
+    message(
+      "Please check your supplied annotations carefully (fish2 does not currently ",
+      "appear to have a separate annotation test server) and then set `test=FALSE`."
+    )
+    return(x)
+  }
+
+  res <- with_fish(
+    malevnc::manc_annotate_body(
+      x,
+      test = test,
+      version = version,
+      write_empty_fields = write_empty_fields,
+      allow_new_fields = allow_new_fields,
+      designated_user = designated_user,
+      protect = protect,
+      chunksize = chunksize,
+      query = FALSE,
+      ...
+    )
+  )
+
+  invisible(res)
+}

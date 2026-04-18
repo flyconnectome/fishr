@@ -54,6 +54,7 @@ plot(rgcsk3, WithNodes=FALSE)
   including \code{\link[nat]{neuron}}, \code{\link[nat]{neuronlist}}.
 
 Other fishr-package: 
+\code{\link{fish_annotate}()},
 \code{\link{fish_dvid_annotations}()},
 \code{\link{fish_ids}()},
 \code{\link{fish_setup}()},

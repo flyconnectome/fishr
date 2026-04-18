@@ -97,6 +97,17 @@ roi.meshes <- fish_roi_meshes(c("Midbrain", "Hindbrain"), .progress = "none")
 wire3d(roi.meshes, col='grey')
 ```
 
+You can also set annotations programmatically. By default this will associate
+them with your email (and a timestamp) just like the Clio web interface. This
+can be very useful but be careful (and ask for help quickly on slack if you
+suspect an accident)!
+
+```r
+anns=data.frame(bodyid=c(1001,1002), side='R', type='RGC_AF8')
+fish_annotate(anns)
+fish_annotate(anns, test=F)
+```
+
 ### other useful packages
 fishr has a set of core functions but there is a lot of useful functionality in
 other R packages for interacting with the FlyEM connectome data ecosystem,

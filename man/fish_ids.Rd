@@ -61,6 +61,7 @@ fish_ids(df)
 }
 \seealso{
 Other fishr-package: 
+\code{\link{fish_annotate}()},
 \code{\link{fish_dvid_annotations}()},
 \code{\link{fish_setup}()},
 \code{\link{read_fish_meshes}()},

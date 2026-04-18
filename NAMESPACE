@@ -2,6 +2,7 @@
 
 export(choose_fish)
 export(choose_fish_dataset)
+export(fish_annotate)
 export(fish_connection_table)
 export(fish_dvid_annotations)
 export(fish_ids)

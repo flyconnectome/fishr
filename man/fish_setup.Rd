@@ -36,6 +36,7 @@ fish_setup()
 }
 \seealso{
 Other fishr-package: 
+\code{\link{fish_annotate}()},
 \code{\link{fish_dvid_annotations}()},
 \code{\link{fish_ids}()},
 \code{\link{read_fish_meshes}()},

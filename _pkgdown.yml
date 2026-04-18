@@ -17,8 +17,11 @@ reference:
   contents:
   - '`fish_ids`'
   - '`fish_neuprint_meta`'
+- title: Annotations
+  contents:
   - '`fish_dvid_annotations`'
-- title: connectivity and associated analysis
+  - '`fish_annotate`'
+- title: Connectivity and associated analysis
   contents:
   - '`fish_connection_table`'
   - '`register_fish_coconat`'

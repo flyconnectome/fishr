@@ -44,6 +44,7 @@ plot3d(rgcs)
 }
 \seealso{
 Other fishr-package: 
+\code{\link{fish_annotate}()},
 \code{\link{fish_dvid_annotations}()},
 \code{\link{fish_ids}()},
 \code{\link{fish_setup}()},

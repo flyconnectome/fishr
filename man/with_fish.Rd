@@ -77,6 +77,7 @@ read_fish_meshes(12345)
   \code{\link[malevnc]{choose_malevnc_dataset}}
 
 Other fishr-package: 
+\code{\link{fish_annotate}()},
 \code{\link{fish_dvid_annotations}()},
 \code{\link{fish_ids}()},
 \code{\link{fish_setup}()},
