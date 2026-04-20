@@ -62,7 +62,10 @@ options.</p></dd>
 
 
 <dt id="arg-test">test<a class="anchor" aria-label="anchor" href="#arg-test"></a></dt>
-<dd><p>Whether to use the clio test sore</p></dd>
+<dd><p>Whether to do a dry run without writing annotations. Because
+fish2 does not currently appear to have a separate Clio test server, the
+default <code>TRUE</code> returns the supplied annotations and does not send them
+to Clio.</p></dd>
 
 
 <dt id="arg-version">version<a class="anchor" aria-label="anchor" href="#arg-version"></a></dt>
@@ -112,7 +115,9 @@ to <code>Inf</code> to insist that all records are sent in a single request.
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>The result returned by <code><a href="https://natverse.org/malevnc/reference/manc_annotate_body.html" class="external-link">manc_annotate_body</a></code>.</p>
+    <p>When <code>test=FALSE</code>, the result returned by
+  <code><a href="https://natverse.org/malevnc/reference/manc_annotate_body.html" class="external-link">manc_annotate_body</a></code>. When <code>test=TRUE</code>, returns
+  the checked input <code>x</code>.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -124,8 +129,9 @@ to <code>Inf</code> to insist that all records are sent in a single request.
 <p>The function wraps <code>malevnc::<a href="https://natverse.org/malevnc/reference/manc_annotate_body.html" class="external-link">manc_annotate_body</a></code> for
   the fish2 dataset. The default <code>test=TRUE</code> is retained for safety, but
   there does not currently appear to be a separate fish2 annotation test
-  server. Please inspect the returned metadata carefully before assuming the
-  result matches what you intended to write.</p>
+  server. Therefore <code>test=TRUE</code> currently returns the supplied
+  annotations without sending them to Clio. Please inspect these carefully
+  before rerunning with <code>test=FALSE</code>.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>

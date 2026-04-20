@@ -34,6 +34,10 @@ Useful links:
 
 - <https://flyconnectome.github.io/fishr/>
 
+- <https://github.com/flyconnectome/fishr>
+
+- Report bugs at <https://github.com/flyconnectome/fishr/issues>
+
 Other setup-data-access:
 [`fish_neuprint()`](https://flyconnectome.github.io/fishr/reference/fish_neuprint.md),
 [`fish_setup()`](https://flyconnectome.github.io/fishr/reference/fish_setup.md),

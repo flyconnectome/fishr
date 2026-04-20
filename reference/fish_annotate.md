@@ -29,7 +29,10 @@ fish_annotate(
 
 - test:
 
-  Whether to use the clio test sore
+  Whether to do a dry run without writing annotations. Because fish2
+  does not currently appear to have a separate Clio test server, the
+  default `TRUE` returns the supplied annotations and does not send them
+  to Clio.
 
 - version:
 
@@ -76,8 +79,9 @@ fish_annotate(
 
 ## Value
 
-The result returned by
+When `test=FALSE`, the result returned by
 [`manc_annotate_body`](https://natverse.org/malevnc/reference/manc_annotate_body.html).
+When `test=TRUE`, returns the checked input `x`.
 
 ## Details
 
@@ -91,8 +95,9 @@ The function wraps
 `malevnc::`[`manc_annotate_body`](https://natverse.org/malevnc/reference/manc_annotate_body.html)
 for the fish2 dataset. The default `test=TRUE` is retained for safety,
 but there does not currently appear to be a separate fish2 annotation
-test server. Please inspect the returned metadata carefully before
-assuming the result matches what you intended to write.
+test server. Therefore `test=TRUE` currently returns the supplied
+annotations without sending them to Clio. Please inspect these carefully
+before rerunning with `test=FALSE`.
 
 ## See also
 
