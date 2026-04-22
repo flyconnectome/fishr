@@ -82,54 +82,54 @@ fish_dvid_annotations <- function(ids = NULL,
 #'   large/mature bodies.
 #'
 #'   The function wraps \code{malevnc::\link[malevnc]{manc_annotate_body}} for
-#'   the fish2 dataset. The default \code{test=TRUE} is retained for safety, but
-#'   there does not currently appear to be a separate fish2 annotation test
-#'   server. Therefore \code{test=TRUE} currently returns the supplied
-#'   annotations without sending them to Clio. Please inspect these carefully
-#'   before rerunning with \code{test=FALSE}.
+#'   the fish2 dataset. Safe-by-default: the default \code{dry_run=TRUE}
+#'   returns a preview of the POST body that would be sent to Clio without
+#'   writing anything. Inspect the preview and then rerun with
+#'   \code{dry_run=FALSE} to commit the changes. Fish2 does not currently
+#'   have a separate Clio test server, so \code{test=FALSE} is the default.
 #'
 #' @param x Annotation data usually as a data.frame containing a bodyid column.
 #'   Please see \code{malevnc::\link[malevnc]{manc_annotate_body}} for other
 #'   options.
-#' @param test Whether to do a dry run without writing annotations. Because
-#'   fish2 does not currently appear to have a separate Clio test server, the
-#'   default \code{TRUE} returns the supplied annotations and does not send them
-#'   to Clio.
+#' @param test Whether to use the Clio test store. Default \code{FALSE}
+#'   writes to production (fish2 has no separate test server); see
+#'   \code{\link[malevnc]{manc_annotate_body}}.
+#' @param dry_run When \code{TRUE} (the default) no data is written; a preview
+#'   tibble of the POST body is returned. Pass \code{dry_run = FALSE} to
+#'   actually write. See \code{\link[malevnc]{manc_annotate_body}} for full
+#'   details.
 #' @param chunksize When you have many bodies to annotate the request will by
 #'   default be sent 50 records at a time to avoid any issue with timeouts. Set
 #'   to \code{Inf} to insist that all records are sent in a single request.
 #'   \bold{NB only applies when \code{x} is a data.frame}.
 #' @inheritParams malevnc::manc_annotate_body
 #'
-#' @return When \code{test=FALSE}, the result returned by
-#'   \code{\link[malevnc]{manc_annotate_body}}. When \code{test=TRUE}, returns
-#'   the checked input \code{x}.
+#' @return The result returned by \code{\link[malevnc]{manc_annotate_body}}:
+#'   \code{NULL} invisibly when writing, or a preview \code{tibble} when
+#'   \code{dry_run=TRUE}.
 #' @export
 #' @family live-annotations
 #'
 #' @examples
 #' \dontrun{
-#' fish_annotate(data.frame(bodyid = 100003384, group = 100003384), test = TRUE)
+#' # preview what would be written
+#' fish_annotate(data.frame(bodyid = 100003384, group = 100003384))
+#' # actually write
+#' fish_annotate(data.frame(bodyid = 100003384, group = 100003384),
+#'               dry_run = FALSE)
 #' }
-fish_annotate <- function(x, test = TRUE, version = NULL,
+fish_annotate <- function(x, test = FALSE, version = NULL,
                           write_empty_fields = FALSE,
                           allow_new_fields = FALSE,
                           designated_user = NULL,
-                          protect = c("user"), chunksize = 50, ...) {
+                          protect = c("user"), chunksize = 50,
+                          dry_run = TRUE, ...) {
   if (is.data.frame(x) && "bodyid" %in% colnames(x)) {
     x$bodyid <- fish_ids(x$bodyid, as_character = FALSE, unique = FALSE)
   }
 
   if(is.data.frame(x) && !'bodyid' %in% colnames(x))
     stop("`x` does not contain a bodyid column")
-
-  if (isTRUE(test)) {
-    message(
-      "Please check your supplied annotations carefully (fish2 does not currently ",
-      "appear to have a separate annotation test server) and then set `test=FALSE`."
-    )
-    return(x)
-  }
 
   res <- with_fish(
     malevnc::manc_annotate_body(
@@ -142,9 +142,10 @@ fish_annotate <- function(x, test = TRUE, version = NULL,
       protect = protect,
       chunksize = chunksize,
       query = FALSE,
+      dry_run = dry_run,
       ...
     )
   )
 
-  invisible(res)
+  if (isTRUE(dry_run)) res else invisible(res)
 }

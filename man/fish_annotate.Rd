@@ -6,13 +6,14 @@
 \usage{
 fish_annotate(
   x,
-  test = TRUE,
+  test = FALSE,
   version = NULL,
   write_empty_fields = FALSE,
   allow_new_fields = FALSE,
   designated_user = NULL,
   protect = c("user"),
   chunksize = 50,
+  dry_run = TRUE,
   ...
 )
 }
@@ -21,10 +22,9 @@ fish_annotate(
 Please see \code{malevnc::\link[malevnc]{manc_annotate_body}} for other
 options.}
 
-\item{test}{Whether to do a dry run without writing annotations. Because
-fish2 does not currently appear to have a separate Clio test server, the
-default \code{TRUE} returns the supplied annotations and does not send them
-to Clio.}
+\item{test}{Whether to use the Clio test store. Default \code{FALSE}
+writes to production (fish2 has no separate test server); see
+\code{\link[malevnc]{manc_annotate_body}}.}
 
 \item{version}{Optional clio version to associate with this annotation. The
 default \code{NULL} uses the current version returned by the API.}
@@ -55,12 +55,17 @@ default be sent 50 records at a time to avoid any issue with timeouts. Set
 to \code{Inf} to insist that all records are sent in a single request.
 \bold{NB only applies when \code{x} is a data.frame}.}
 
+\item{dry_run}{When \code{TRUE} (the default) no data is written; a preview
+tibble of the POST body is returned. Pass \code{dry_run = FALSE} to
+actually write. See \code{\link[malevnc]{manc_annotate_body}} for full
+details.}
+
 \item{...}{Additional parameters passed to \code{pbapply::\link{pbsapply}}}
 }
 \value{
-When \code{test=FALSE}, the result returned by
-  \code{\link[malevnc]{manc_annotate_body}}. When \code{test=TRUE}, returns
-  the checked input \code{x}.
+The result returned by \code{\link[malevnc]{manc_annotate_body}}:
+  \code{NULL} invisibly when writing, or a preview \code{tibble} when
+  \code{dry_run=TRUE}.
 }
 \description{
 Set one or more Clio body annotations for the fish2 dataset.
@@ -73,15 +78,19 @@ This function sets annotations for one or more bodyids. Logically
   large/mature bodies.
 
   The function wraps \code{malevnc::\link[malevnc]{manc_annotate_body}} for
-  the fish2 dataset. The default \code{test=TRUE} is retained for safety, but
-  there does not currently appear to be a separate fish2 annotation test
-  server. Therefore \code{test=TRUE} currently returns the supplied
-  annotations without sending them to Clio. Please inspect these carefully
-  before rerunning with \code{test=FALSE}.
+  the fish2 dataset. Safe-by-default: the default \code{dry_run=TRUE}
+  returns a preview of the POST body that would be sent to Clio without
+  writing anything. Inspect the preview and then rerun with
+  \code{dry_run=FALSE} to commit the changes. Fish2 does not currently
+  have a separate Clio test server, so \code{test=FALSE} is the default.
 }
 \examples{
 \dontrun{
-fish_annotate(data.frame(bodyid = 100003384, group = 100003384), test = TRUE)
+# preview what would be written
+fish_annotate(data.frame(bodyid = 100003384, group = 100003384))
+# actually write
+fish_annotate(data.frame(bodyid = 100003384, group = 100003384),
+              dry_run = FALSE)
 }
 }
 \seealso{

@@ -20,7 +20,7 @@ Imports:
     bit64,
     cli,
     dplyr,
-    malevnc,
+    malevnc (>= 0.4.0),
     neuprintr (>= 1.3.4.9100),
     pbapply,
     rappdirs,
