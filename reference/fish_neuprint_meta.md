@@ -66,20 +66,21 @@ Other data-queries:
 ``` r
 # \donttest{
 head(fish_neuprint_meta("RGC"))
-#>      bodyid post pre downstream upstream synweight connectivityType perNodeSc
-#> 1 110888244    2 287        318        2       320             <NA>        NA
-#> 2 110916137    2 141        149        2       151             <NA>        NA
-#> 3 110958352    1  62         70        1        71             <NA>        NA
-#> 4 100009896    2  89         90        2        92             <NA>        NA
-#> 5 100015071    0 128        135        0       135             <NA>        NA
-#> 6 100015468    2 290        316        2       318             <NA>        NA
-#>      statusLabel  name type group class keywords comment somaLocation somaId
-#> 1 Sensory Anchor RGC_R  RGC     0  <NA>     <NA>    <NA>                  NA
-#> 2 Sensory Anchor RGC_R  RGC     0  <NA>     <NA>    <NA>                  NA
-#> 3 Sensory Anchor RGC_R  RGC     0  <NA>     <NA>    <NA>                  NA
-#> 4 Sensory Anchor RGC_R  RGC     0  <NA>     <NA>    <NA>                  NA
-#> 5 Sensory Anchor RGC_R  RGC     0  <NA>     <NA>    <NA>                  NA
-#> 6 Sensory Anchor RGC_R  RGC     0  <NA>     <NA>    <NA>                  NA
+#> Warning: NAs introduced by coercion to integer64 range
+#>      bodyid post pre downstream upstream synweight    statusLabel group  name
+#> 1 110444734    1 235        241        1       242 Sensory Anchor     0 RGC_R
+#> 2 100009896    2  89         90        2        92 Sensory Anchor     0 RGC_R
+#> 3 100015071    0 128        135        0       135 Sensory Anchor     0 RGC_R
+#> 4 100015468    2 290        316        2       318 Sensory Anchor     0 RGC_R
+#> 5 100017513    7 245        252        7       259 Sensory Anchor     0 RGC_R
+#> 6 100023948    1 167        173        1       174 Sensory Anchor     0 RGC_R
+#>   type connectivityType perNodeSc class keywords comment somaLocation somaId
+#> 1  RGC             <NA>        NA  <NA>     <NA>    <NA>                  NA
+#> 2  RGC             <NA>        NA  <NA>     <NA>    <NA>                  NA
+#> 3  RGC             <NA>        NA  <NA>     <NA>    <NA>                  NA
+#> 4  RGC             <NA>        NA  <NA>     <NA>    <NA>                  NA
+#> 5  RGC             <NA>        NA  <NA>     <NA>    <NA>                  NA
+#> 6  RGC             <NA>        NA  <NA>     <NA>    <NA>                  NA
 #>   somaVoxels zapbenchId closestLandmarkLocation closestLandmarkDistanceMicrons
 #> 1         NA         NA                    <NA>                             NA
 #> 2         NA         NA                    <NA>                             NA
@@ -87,12 +88,12 @@ head(fish_neuprint_meta("RGC"))
 #> 4         NA         NA                    <NA>                             NA
 #> 5         NA         NA                    <NA>                             NA
 #> 6         NA         NA                    <NA>                             NA
-#>   tosomaLocation status  voxels  soma
-#> 1           <NA> Anchor 8805954 FALSE
-#> 2           <NA> Anchor 5075924 FALSE
-#> 3           <NA> Anchor 3678756 FALSE
-#> 4           <NA> Anchor 6228154 FALSE
-#> 5           <NA> Anchor 5774341 FALSE
-#> 6           <NA> Anchor 9488378 FALSE
+#>   tosomaLocation status   voxels  soma
+#> 1           <NA> Anchor 10320550 FALSE
+#> 2           <NA> Anchor  6228154 FALSE
+#> 3           <NA> Anchor  5774341 FALSE
+#> 4           <NA> Anchor  9488378 FALSE
+#> 5           <NA> Anchor 10752622 FALSE
+#> 6           <NA> Anchor  6913578 FALSE
 # }
 ```

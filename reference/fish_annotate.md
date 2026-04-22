@@ -7,13 +7,14 @@ Set one or more Clio body annotations for the fish2 dataset.
 ``` r
 fish_annotate(
   x,
-  test = TRUE,
+  test = FALSE,
   version = NULL,
   write_empty_fields = FALSE,
   allow_new_fields = FALSE,
   designated_user = NULL,
   protect = c("user"),
   chunksize = 50,
+  dry_run = TRUE,
   ...
 )
 ```
@@ -29,10 +30,9 @@ fish_annotate(
 
 - test:
 
-  Whether to do a dry run without writing annotations. Because fish2
-  does not currently appear to have a separate Clio test server, the
-  default `TRUE` returns the supplied annotations and does not send them
-  to Clio.
+  Whether to use the Clio test store. Default `FALSE` writes to
+  production (fish2 has no separate test server); see
+  [`manc_annotate_body`](https://natverse.org/malevnc/reference/manc_annotate_body.html).
 
 - version:
 
@@ -72,6 +72,13 @@ fish_annotate(
   `Inf` to insist that all records are sent in a single request. **NB
   only applies when `x` is a data.frame**.
 
+- dry_run:
+
+  When `TRUE` (the default) no data is written; a preview tibble of the
+  POST body is returned. Pass `dry_run = FALSE` to actually write. See
+  [`manc_annotate_body`](https://natverse.org/malevnc/reference/manc_annotate_body.html)
+  for full details.
+
 - ...:
 
   Additional parameters passed to
@@ -79,9 +86,10 @@ fish_annotate(
 
 ## Value
 
-When `test=FALSE`, the result returned by
-[`manc_annotate_body`](https://natverse.org/malevnc/reference/manc_annotate_body.html).
-When `test=TRUE`, returns the checked input `x`.
+The result returned by
+[`manc_annotate_body`](https://natverse.org/malevnc/reference/manc_annotate_body.html):
+`NULL` invisibly when writing, or a preview `tibble` when
+`dry_run=TRUE`.
 
 ## Details
 
@@ -93,11 +101,11 @@ large/mature bodies.
 
 The function wraps
 `malevnc::`[`manc_annotate_body`](https://natverse.org/malevnc/reference/manc_annotate_body.html)
-for the fish2 dataset. The default `test=TRUE` is retained for safety,
-but there does not currently appear to be a separate fish2 annotation
-test server. Therefore `test=TRUE` currently returns the supplied
-annotations without sending them to Clio. Please inspect these carefully
-before rerunning with `test=FALSE`.
+for the fish2 dataset. Safe-by-default: the default `dry_run=TRUE`
+returns a preview of the POST body that would be sent to Clio without
+writing anything. Inspect the preview and then rerun with
+`dry_run=FALSE` to commit the changes. Fish2 does not currently have a
+separate Clio test server, so `test=FALSE` is the default.
 
 ## See also
 
@@ -108,6 +116,10 @@ Other live-annotations:
 
 ``` r
 if (FALSE) { # \dontrun{
-fish_annotate(data.frame(bodyid = 100003384, group = 100003384), test = TRUE)
+# preview what would be written
+fish_annotate(data.frame(bodyid = 100003384, group = 100003384))
+# actually write
+fish_annotate(data.frame(bodyid = 100003384, group = 100003384),
+              dry_run = FALSE)
 } # }
 ```

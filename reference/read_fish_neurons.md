@@ -75,6 +75,7 @@ Other 3d-meshes-skeletons:
 ``` r
 # \donttest{
 rgcsk3 <- read_fish_neurons(fish_ids("RGC")[1:3])
+#> Warning: NAs introduced by coercion to integer64 range
 plot(rgcsk3, WithNodes=FALSE)
 
 # }
