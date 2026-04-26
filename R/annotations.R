@@ -1,8 +1,6 @@
 #' Read DVID body annotations for fish2 body ids
 #'
-#' @description A thin wrapper around \code{malevnc::\link[malevnc]{manc_dvid_annotations}}
-#'   targeting the fish2 dataset. Supports \code{/field:regex} query strings to
-#'   filter annotations locally (see Details).
+#' @description Read body annotations for the fish2 dataset from DVID.
 #'
 #' @param ids One or more body ids, \code{NULL} (default) to fetch all
 #'   annotations, or a query string (see Details).
@@ -16,7 +14,13 @@
 #' @param cache Whether to cache the result for 5 minutes (default
 #'   \code{FALSE}).
 #'
-#' @details Query string formats for filtering DVID annotations:
+#' @details This function wraps
+#'   \code{malevnc::\link[malevnc]{manc_dvid_annotations}} for the fish2
+#'   dataset. At present this means fetching the full DVID annotation table for
+#'   the chosen node and then subsetting in R, even when \code{ids} are
+#'   supplied.
+#'
+#'   Query string formats for filtering DVID annotations:
 #' \describe{
 #'   \item{\code{"/type:RGC..*"}}{Match the \code{type} field with regex
 #'     \code{RGC..*}.}
