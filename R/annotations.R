@@ -1,7 +1,7 @@
 #' Read DVID body annotations for fish2 body ids
 #'
 #' @description A thin wrapper around \code{malevnc::\link[malevnc]{manc_dvid_annotations}}
-#'   targeting the fish2 dataset.  Supports \code{/field:regex} query strings to
+#'   targeting the fish2 dataset. Supports \code{/field:regex} query strings to
 #'   filter annotations locally (see Details).
 #'
 #' @param ids One or more body ids, \code{NULL} (default) to fetch all
@@ -25,7 +25,7 @@
 #'   \item{\code{"/status:Traced"}}{Match a different field.}
 #' }
 #' Regex queries are automatically anchored (\code{^...$}) unless the pattern
-#' already starts with \code{^}.  Queries fetch all annotations (with
+#' already starts with \code{^}. Queries fetch all annotations (with
 #' \code{cache=TRUE}) and then filter locally.
 #'
 #' For neuprint-based id lookups, use \code{\link{fish_ids}} instead.
@@ -71,9 +71,73 @@ fish_dvid_annotations <- function(ids = NULL,
   df
 }
 
+#' Read Clio body annotations for fish2 body ids
+#'
+#' @description Read live body annotations for the fish2 dataset from Clio.
+#'
+#' @param ids One or more body ids, \code{NULL} (default) to fetch all
+#'   annotations, or anything accepted by \code{\link{fish_ids}}.
+#' @inheritParams malevnc::manc_body_annotations
+#'
+#' @details This function wraps
+#'   \code{malevnc::\link[malevnc]{manc_body_annotations}} for the active fish
+#'   dataset. When \code{ids} are supplied they are first resolved with
+#'   \code{\link{fish_ids}}, so you can pass fish body ids or simple
+#'   neuprint-backed queries such as cell types. Leave \code{ids=NULL} to use
+#'   the \code{query} argument directly, as in
+#'   \code{malevnc::manc_body_annotations}. When querying numeric fields such
+#'   as \code{group}, use numeric values rather than quoted strings.
+#'
+#' @return A \code{data.frame} of body annotations. See
+#'   \code{malevnc::\link[malevnc]{manc_body_annotations}} for further details.
+#' @export
+#' @family live-annotations
+#'
+#' @examples
+#' \dontrun{
+#' fish_clio_annotations(ids = 100003384)
+#' fish_clio_annotations(ids = "RGC")
+#' fish_clio_annotations(query = list(group = 100003384))
+#' }
+fish_clio_annotations <- function(ids = NULL, query = NULL, json = FALSE,
+                                  config = NULL, cache = FALSE,
+                                  update.bodyids = FALSE, test = FALSE,
+                                  show.extra = c("none", "user", "time", "all"),
+                                  ...) {
+  if (!is.null(ids)) {
+    ids <- fish_ids(ids, as_character = FALSE, unique = FALSE)
+  }
+  if (is.list(query) &&
+      "group" %in% names(query) &&
+      is.character(query$group) &&
+      length(query$group) == 1 &&
+      grepl("^[0-9]+$", query$group)) {
+    warning(
+      "`query$group` was supplied as a character string; coercing to numeric ",
+      "for Clio query matching.",
+      call. = FALSE
+    )
+    query$group <- as.numeric(query$group)
+  }
+
+  with_fish(
+    malevnc::manc_body_annotations(
+      ids = ids,
+      query = query,
+      json = json,
+      config = config,
+      cache = cache,
+      update.bodyids = update.bodyids,
+      test = test,
+      show.extra = show.extra,
+      ...
+    )
+  )
+}
+
 #' Set body annotations for fish2 via Clio
 #'
-#' @description Set one or more Clio body annotations for the fish2 dataset.
+#' @description Sets one or more Clio body annotations for the fish2 dataset.
 #'
 #' @details This function sets annotations for one or more bodyids. Logically
 #'   these annotations move with the bodyid (rather than a point location on the
@@ -85,8 +149,11 @@ fish_dvid_annotations <- function(ids = NULL,
 #'   the fish2 dataset. Safe-by-default: the default \code{dry_run=TRUE}
 #'   returns a preview of the POST body that would be sent to Clio without
 #'   writing anything. Inspect the preview and then rerun with
-#'   \code{dry_run=FALSE} to commit the changes. Fish2 does not currently
-#'   have a separate Clio test server, so \code{test=FALSE} is the default.
+#'   \code{dry_run=FALSE} to commit the changes. Note that this preview does
+#'   not model server-side protection checks controlled by \code{protect}, so
+#'   fields shown in the preview may still be refused when you actually write.
+#'   fish2 does not currently have a separate Clio test server, so
+#'   \code{test=FALSE} is the default.
 #'
 #' @param x Annotation data usually as a data.frame containing a bodyid column.
 #'   Please see \code{malevnc::\link[malevnc]{manc_annotate_body}} for other
@@ -95,7 +162,9 @@ fish_dvid_annotations <- function(ids = NULL,
 #'   writes to production (fish2 has no separate test server); see
 #'   \code{\link[malevnc]{manc_annotate_body}}.
 #' @param dry_run When \code{TRUE} (the default) no data is written; a preview
-#'   tibble of the POST body is returned. Pass \code{dry_run = FALSE} to
+#'   tibble of the POST body is returned. This preview shows what differs from
+#'   the current Clio record, but it does not model server-side protection
+#'   checks controlled by \code{protect}. Pass \code{dry_run = FALSE} to
 #'   actually write. See \code{\link[malevnc]{manc_annotate_body}} for full
 #'   details.
 #' @param chunksize When you have many bodies to annotate the request will by
@@ -111,12 +180,50 @@ fish_dvid_annotations <- function(ids = NULL,
 #' @family live-annotations
 #'
 #' @examples
+#' if (nzchar(Sys.getenv("CLIO_TOKEN"))) {
+#'   # preview what would be written for a simple update
+#'
+#'   fish_annotate(data.frame(bodyid = 100003384, group = 100003384))
+#'
+#'   # preview multiple fields at once
+#'   fish_annotate(data.frame(
+#'     bodyid = 100003384,
+#'     group = 100003384,
+#'     type = "RGC"
+#'   ))
+#'
+#'   # preview the payload that would be sent with protect = TRUE
+#'   # note that dry_run does not model server-side protection checks
+#'   fish_annotate(
+#'     data.frame(bodyid = 100003384, group = 100003384, type = "RGC"),
+#'     protect = TRUE
+#'   )
+#'
+#'   # preview an update that would request overwriting existing fields
+#'   fish_annotate(
+#'     data.frame(bodyid = 100003384, group = 100003384, type = "RGC"),
+#'     protect = FALSE
+#'   )
+#'
+#'   # preview clearing a field
+#'   fish_annotate(
+#'     data.frame(bodyid = 100003384, type = ""),
+#'     protect = FALSE,
+#'     write_empty_fields = TRUE
+#'   )
+#' }
+#'
 #' \dontrun{
-#' # preview what would be written
-#' fish_annotate(data.frame(bodyid = 100003384, group = 100003384))
-#' # actually write
+#' # actually write an annotation
 #' fish_annotate(data.frame(bodyid = 100003384, group = 100003384),
 #'               dry_run = FALSE)
+#'
+#' # actually write while allowing overwrites
+#' fish_annotate(
+#'   data.frame(bodyid = 100003384, type = "RGC"),
+#'   protect = FALSE,
+#'   dry_run = FALSE
+#' )
 #' }
 fish_annotate <- function(x, test = FALSE, version = NULL,
                           write_empty_fields = FALSE,

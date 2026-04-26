@@ -35,7 +35,7 @@ A \code{tibble} of body annotations. See
 }
 \description{
 A thin wrapper around \code{malevnc::\link[malevnc]{manc_dvid_annotations}}
-  targeting the fish2 dataset.  Supports \code{/field:regex} query strings to
+  targeting the fish2 dataset. Supports \code{/field:regex} query strings to
   filter annotations locally (see Details).
 }
 \details{
@@ -48,7 +48,7 @@ Query string formats for filtering DVID annotations:
   \item{\code{"/status:Traced"}}{Match a different field.}
 }
 Regex queries are automatically anchored (\code{^...$}) unless the pattern
-already starts with \code{^}.  Queries fetch all annotations (with
+already starts with \code{^}. Queries fetch all annotations (with
 \code{cache=TRUE}) and then filter locally.
 
 For neuprint-based id lookups, use \code{\link{fish_ids}} instead.
@@ -73,6 +73,7 @@ df
 }
 \seealso{
 Other live-annotations: 
-\code{\link{fish_annotate}()}
+\code{\link{fish_annotate}()},
+\code{\link{fish_clio_annotations}()}
 }
 \concept{live-annotations}
