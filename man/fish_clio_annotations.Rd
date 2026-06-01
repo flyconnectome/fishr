@@ -40,7 +40,8 @@ switched to \code{FALSE} as of Feb 2022.}
 
 \item{show.extra}{Extra columns to show with user/timestamp information.}
 
-\item{...}{Additional arguments passed to \code{pbapply::\link{pblapply}}}
+\item{...}{Additional arguments passed to
+\code{\link[pbapply]{pblapply}}.}
 }
 \value{
 A \code{data.frame} of body annotations. See

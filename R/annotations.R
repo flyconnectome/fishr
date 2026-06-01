@@ -81,6 +81,8 @@ fish_dvid_annotations <- function(ids = NULL,
 #'
 #' @param ids One or more body ids, \code{NULL} (default) to fetch all
 #'   annotations, or anything accepted by \code{\link{fish_ids}}.
+#' @param ... Additional arguments passed to
+#'   \code{\link[pbapply]{pblapply}}.
 #' @inheritParams malevnc::manc_body_annotations
 #'
 #' @details This function wraps
@@ -175,6 +177,8 @@ fish_clio_annotations <- function(ids = NULL, query = NULL, json = FALSE,
 #'   default be sent 50 records at a time to avoid any issue with timeouts. Set
 #'   to \code{Inf} to insist that all records are sent in a single request.
 #'   \bold{NB only applies when \code{x} is a data.frame}.
+#' @param ... Additional parameters passed to
+#'   \code{\link[pbapply]{pbsapply}}.
 #' @inheritParams malevnc::manc_annotate_body
 #'
 #' @return The result returned by \code{\link[malevnc]{manc_annotate_body}}:
