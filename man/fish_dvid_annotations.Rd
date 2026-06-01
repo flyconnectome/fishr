@@ -38,12 +38,12 @@ Read body annotations for the fish2 dataset from DVID.
 }
 \details{
 This function wraps
-\code{malevnc::\link[malevnc]{manc_dvid_annotations}} for the fish2
-dataset. At present this means fetching the full DVID annotation table for
-the chosen node and then subsetting in R, even when \code{ids} are
-supplied.
+  \code{malevnc::\link[malevnc]{manc_dvid_annotations}} for the fish2
+  dataset. At present this means fetching the full DVID annotation table for
+  the chosen node and then subsetting in R, even when \code{ids} are
+  supplied.
 
-Query string formats for filtering DVID annotations:
+  Query string formats for filtering DVID annotations:
 \describe{
   \item{\code{"/type:RGC..*"}}{Match the \code{type} field with regex
     \code{RGC..*}.}
@@ -58,7 +58,7 @@ already starts with \code{^}. Queries fetch all annotations (with
 For neuprint-based id lookups, use \code{\link{fish_ids}} instead.
 }
 \examples{
-\donttest{
+\dontrun{
 # fetch annotations for specific bodies
 fish_dvid_annotations(c(100003384, 100003412))
 }
@@ -69,7 +69,7 @@ df <- fish_dvid_annotations(cache=TRUE)
 # filter by type regex
 df <- fish_dvid_annotations("/type:RGC.*", cache=T)
 }
-\donttest{
+\dontrun{
 # shorthand for type field
 df <- fish_dvid_annotations("RGC", cache=T)
 df

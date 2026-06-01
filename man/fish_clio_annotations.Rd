@@ -44,7 +44,7 @@ switched to \code{FALSE} as of Feb 2022.}
 }
 \value{
 A \code{data.frame} of body annotations. See
-  \code{malevnc::\link[malevnc]{manc_body_annotations}} for column details.
+  \code{malevnc::\link[malevnc]{manc_body_annotations}} for further details.
 }
 \description{
 Read live body annotations for the fish2 dataset from Clio.

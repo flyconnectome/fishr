@@ -39,7 +39,7 @@
 #' @export
 #' @family live-annotations
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' # fetch annotations for specific bodies
 #' fish_dvid_annotations(c(100003384, 100003412))
 #' }
@@ -50,7 +50,7 @@
 #' # filter by type regex
 #' df <- fish_dvid_annotations("/type:RGC.*", cache=T)
 #' }
-#' \donttest{
+#' \dontrun{
 #' # shorthand for type field
 #' df <- fish_dvid_annotations("RGC", cache=T)
 #' df
@@ -184,40 +184,37 @@ fish_clio_annotations <- function(ids = NULL, query = NULL, json = FALSE,
 #' @family live-annotations
 #'
 #' @examples
-#' if (nzchar(Sys.getenv("CLIO_TOKEN"))) {
-#'   # preview what would be written for a simple update
-#'
-#'   fish_annotate(data.frame(bodyid = 100003384, group = 100003384))
-#'
-#'   # preview multiple fields at once
-#'   fish_annotate(data.frame(
-#'     bodyid = 100003384,
-#'     group = 100003384,
-#'     type = "RGC"
-#'   ))
-#'
-#'   # preview the payload that would be sent with protect = TRUE
-#'   # note that dry_run does not model server-side protection checks
-#'   fish_annotate(
-#'     data.frame(bodyid = 100003384, group = 100003384, type = "RGC"),
-#'     protect = TRUE
-#'   )
-#'
-#'   # preview an update that would request overwriting existing fields
-#'   fish_annotate(
-#'     data.frame(bodyid = 100003384, group = 100003384, type = "RGC"),
-#'     protect = FALSE
-#'   )
-#'
-#'   # preview clearing a field
-#'   fish_annotate(
-#'     data.frame(bodyid = 100003384, type = ""),
-#'     protect = FALSE,
-#'     write_empty_fields = TRUE
-#'   )
-#' }
-#'
 #' \dontrun{
+#' # preview what would be written for a simple update
+#' fish_annotate(data.frame(bodyid = 100003384, group = 100003384))
+#'
+#' # preview multiple fields at once
+#' fish_annotate(data.frame(
+#'   bodyid = 100003384,
+#'   group = 100003384,
+#'   type = "RGC"
+#' ))
+#'
+#' # preview the payload that would be sent with protect = TRUE
+#' # note that dry_run does not model server-side protection checks
+#' fish_annotate(
+#'   data.frame(bodyid = 100003384, group = 100003384, type = "RGC"),
+#'   protect = TRUE
+#' )
+#'
+#' # preview an update that would request overwriting existing fields
+#' fish_annotate(
+#'   data.frame(bodyid = 100003384, group = 100003384, type = "RGC"),
+#'   protect = FALSE
+#' )
+#'
+#' # preview clearing a field
+#' fish_annotate(
+#'   data.frame(bodyid = 100003384, type = ""),
+#'   protect = FALSE,
+#'   write_empty_fields = TRUE
+#' )
+#'
 #' # actually write an annotation
 #' fish_annotate(data.frame(bodyid = 100003384, group = 100003384),
 #'               dry_run = FALSE)

@@ -70,7 +70,7 @@ The result returned by \code{\link[malevnc]{manc_annotate_body}}:
   \code{dry_run=TRUE}.
 }
 \description{
-Set one or more Clio body annotations for the fish2 dataset.
+Sets one or more Clio body annotations for the fish2 dataset.
 }
 \details{
 This function sets annotations for one or more bodyids. Logically
@@ -86,11 +86,11 @@ This function sets annotations for one or more bodyids. Logically
   \code{dry_run=FALSE} to commit the changes. Note that this preview does
   not model server-side protection checks controlled by \code{protect}, so
   fields shown in the preview may still be refused when you actually write.
-  Fish2 does not currently have a separate Clio test server, so
+  fish2 does not currently have a separate Clio test server, so
   \code{test=FALSE} is the default.
 }
 \examples{
-\if{nzchar(Sys.getenv("CLIO_TOKEN"))}{
+\dontrun{
 # preview what would be written for a simple update
 fish_annotate(data.frame(bodyid = 100003384, group = 100003384))
 
@@ -120,9 +120,7 @@ fish_annotate(
   protect = FALSE,
   write_empty_fields = TRUE
 )
-}
 
-\dontrun{
 # actually write an annotation
 fish_annotate(data.frame(bodyid = 100003384, group = 100003384),
               dry_run = FALSE)
