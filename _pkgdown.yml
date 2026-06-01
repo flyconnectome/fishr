@@ -28,4 +28,5 @@ reference:
 - title: Read and set live annotations
   contents:
   - '`fish_dvid_annotations`'
+  - '`fish_clio_annotations`'
   - '`fish_annotate`'
