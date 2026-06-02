@@ -6,6 +6,8 @@
   toset <- !(names(op.fishr) %in% names(op))
   if (any(toset)) options(op.fishr[toset])
 
+  try(fish_register_xforms(), silent = TRUE)
+
   invisible()
 }
 
