@@ -29,3 +29,6 @@ reference:
   contents:
   - '`fish_dvid_annotations`'
   - '`fish_annotate`'
+- title: Spatial transforms
+  contents:
+  - '`mirror_fish`'
