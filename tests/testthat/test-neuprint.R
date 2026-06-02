@@ -7,6 +7,8 @@ test_that("fish neuprint connection works", {
 })
 
 test_that("fish_neuprint_meta returns metadata", {
+  skip_if_no_fish_clio()
+
   conn <- try(fish_neuprint(), silent = TRUE)
   skip_if(inherits(conn, "try-error"),
           message = "fish2 neuprint connection unavailable")
@@ -21,6 +23,8 @@ test_that("fish_neuprint_meta returns metadata", {
 })
 
 test_that("read_fish_neurons returns a neuronlist", {
+  skip_if_no_fish_clio()
+
   conn <- try(fish_neuprint(), silent = TRUE)
   skip_if(inherits(conn, "try-error"),
           message = "fish2 neuprint connection unavailable")
@@ -34,6 +38,8 @@ test_that("read_fish_neurons returns a neuronlist", {
 })
 
 test_that("fish_connection_table works", {
+  skip_if_no_fish_clio()
+
   conn <- try(fish_neuprint(), silent = TRUE)
   skip_if(inherits(conn, "try-error"),
           message = "fish2 neuprint connection unavailable")
