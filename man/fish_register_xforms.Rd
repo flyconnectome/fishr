@@ -15,7 +15,7 @@ Invisibly returns \code{TRUE} when the registration is added,
   registration (see \code{\link{fish2_mirror_reg}}) to the
   \code{nat.templatebrains} registry so that
   \code{\link[nat.templatebrains]{xform_brain}} can move points between
-  \code{"Fish2"} and \code{"fish2_mirror"}. It is called automatically when
+  \code{"fish2"} and \code{"fish2_mirror"}. It is called automatically when
   the package is loaded.
 }
 \examples{

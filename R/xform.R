@@ -1,16 +1,46 @@
-#' Thin plate spline registration mirroring points in Fish2 space
+#' Mirror points or neurons in Fish2 space
 #'
-#' @description A \code{\link[nat]{tpsreg}} object that maps points in the
-#'   Fish2 EM volume (nm) to their mirror image across the midline. Derived
-#'   from the landmark pairs shipped with the
-#'   \href{https://github.com/schlegelp/navis-fishbrains}{navis-fishbrains}
-#'   Python package; see \code{data-raw/fish2_mirror_reg.R} for the
-#'   construction recipe.
+#' @description \code{mirror_fish} mirrors objects with 3D vertices calibrated
+#'   in nanometres across the Fish2 midline using a thin plate spline
+#'   registration derived from Philipp Schlegel's navis-fishbrains landmarks.
 #'
-#' @format A \code{tpsreg}/\code{reglist} object.
+#' @param x Any object with 3D vertices (calibrated in nm), e.g. a neuron, a
+#'   neuronlist, a mesh, or a 3-column matrix / data frame of points.
+#' @param ... Additional arguments passed to
+#'   \code{\link[nat.templatebrains]{xform_brain}}.
+#'
+#' @return \code{mirror_fish} returns the mirrored object.
+#' @format \code{fish2_mirror_reg} is a \code{tpsreg}/\code{reglist} object.
+#' @export
+#' @examples
+#' \dontrun{
+#' library(nat)
+#' # round-trip: mirroring twice should approximately recover the input
+#' pts <- cbind(x = 500000, y = 400000, z = 150000)
+#' mirror_fish(mirror_fish(pts))
+#' }
+mirror_fish <- function(x, ...) {
+  if (!requireNamespace("nat.templatebrains", quietly = TRUE)) {
+    stop("Package 'nat.templatebrains' is required for mirror_fish().")
+  }
+  nat.templatebrains::xform_brain(x, sample = "fish2_mirror",
+                                  reference = "fish2", ...)
+}
+
+#' @rdname mirror_fish
 #' @docType data
 #' @keywords datasets
-#' @seealso \code{\link{mirror_fish}}, \code{\link{fish_register_xforms}}
+#' @description \code{fish2_mirror_reg} is the underlying
+#'   \code{\link[nat]{tpsreg}} registration object for mirroring.
+#'
+#' @details \code{fish2_mirror_reg} is shipped with the package and added to the
+#'   \code{nat.templatebrains} registry on package load by
+#'   \code{\link{fish_register_xforms}}, so calling \code{mirror_fish} normally
+#'   needs no setup. See \code{data-raw/fish2_mirror_reg.R} for the construction
+#'   recipe from the upstream
+#'   \href{https://github.com/schlegelp/navis-fishbrains}{navis-fishbrains}
+#'   landmark CSV.
+
 "fish2_mirror_reg"
 
 #' Register Fish2 bridging / mirroring transforms
@@ -19,7 +49,7 @@
 #'   registration (see \code{\link{fish2_mirror_reg}}) to the
 #'   \code{nat.templatebrains} registry so that
 #'   \code{\link[nat.templatebrains]{xform_brain}} can move points between
-#'   \code{"Fish2"} and \code{"fish2_mirror"}. It is called automatically when
+#'   \code{"fish2"} and \code{"fish2_mirror"}. It is called automatically when
 #'   the package is loaded.
 #'
 #' @return Invisibly returns \code{TRUE} when the registration is added,
@@ -40,33 +70,4 @@ fish_register_xforms <- function() {
     reference = "fish2"
   )
   invisible(TRUE)
-}
-
-#' Mirror points or neurons in Fish2 space
-#'
-#' @description \code{mirror_fish} mirrors objects with 3D vertices calibrated
-#'   in nanometres across the Fish2 midline using a thin plate spline
-#'   registration derived from Philipp Schlegel's navis-fishbrains landmarks.
-#'
-#' @param x Any object with 3D vertices (calibrated in nm), e.g. a neuron, a
-#'   neuronlist, a mesh, or a 3-column matrix / data frame of points.
-#' @param ... Additional arguments passed to
-#'   \code{\link[nat.templatebrains]{xform_brain}}.
-#'
-#' @return The mirrored object.
-#' @seealso \code{\link{fish2_mirror_reg}}, \code{\link{fish_register_xforms}}
-#' @export
-#' @examples
-#' \dontrun{
-#' library(nat)
-#' # round-trip: mirroring twice should approximately recover the input
-#' pts <- cbind(x = 500000, y = 400000, z = 150000)
-#' mirror_fish(mirror_fish(pts))
-#' }
-mirror_fish <- function(x, ...) {
-  if (!requireNamespace("nat.templatebrains", quietly = TRUE)) {
-    stop("Package 'nat.templatebrains' is required for mirror_fish().")
-  }
-  nat.templatebrains::xform_brain(x, sample = "fish2_mirror",
-                                  reference = "Fish2", ...)
 }
