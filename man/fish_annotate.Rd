@@ -60,7 +60,8 @@ tibble of the POST body is returned. Pass \code{dry_run = FALSE} to
 actually write. See \code{\link[malevnc]{manc_annotate_body}} for full
 details.}
 
-\item{...}{Additional parameters passed to \code{pbapply::\link{pbsapply}}}
+\item{...}{Additional parameters passed to
+\code{\link[pbapply]{pbsapply}}.}
 }
 \value{
 The result returned by \code{\link[malevnc]{manc_annotate_body}}:

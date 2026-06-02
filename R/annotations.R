@@ -102,6 +102,8 @@ fish_dvid_annotations <- function(ids = NULL,
 #'   default be sent 50 records at a time to avoid any issue with timeouts. Set
 #'   to \code{Inf} to insist that all records are sent in a single request.
 #'   \bold{NB only applies when \code{x} is a data.frame}.
+#' @param ... Additional parameters passed to
+#'   \code{\link[pbapply]{pbsapply}}.
 #' @inheritParams malevnc::manc_annotate_body
 #'
 #' @return The result returned by \code{\link[malevnc]{manc_annotate_body}}:
