@@ -1,6 +1,6 @@
 # Set body annotations for fish2 via Clio
 
-Set one or more Clio body annotations for the fish2 dataset.
+Sets one or more Clio body annotations for the fish2 dataset.
 
 ## Usage
 
@@ -75,14 +75,17 @@ fish_annotate(
 - dry_run:
 
   When `TRUE` (the default) no data is written; a preview tibble of the
-  POST body is returned. Pass `dry_run = FALSE` to actually write. See
+  POST body is returned. This preview shows what differs from the
+  current Clio record, but it does not model server-side protection
+  checks controlled by `protect`. Pass `dry_run = FALSE` to actually
+  write. See
   [`manc_annotate_body`](https://natverse.org/malevnc/reference/manc_annotate_body.html)
   for full details.
 
 - ...:
 
   Additional parameters passed to
-  [`pbapply::pbsapply`](https://peter.solymos.org/pbapply/reference/pbapply.html)
+  [`pbsapply`](https://peter.solymos.org/pbapply/reference/pbapply.html).
 
 ## Value
 
@@ -104,22 +107,61 @@ The function wraps
 for the fish2 dataset. Safe-by-default: the default `dry_run=TRUE`
 returns a preview of the POST body that would be sent to Clio without
 writing anything. Inspect the preview and then rerun with
-`dry_run=FALSE` to commit the changes. Fish2 does not currently have a
-separate Clio test server, so `test=FALSE` is the default.
+`dry_run=FALSE` to commit the changes. Note that this preview does not
+model server-side protection checks controlled by `protect`, so fields
+shown in the preview may still be refused when you actually write. fish2
+does not currently have a separate Clio test server, so `test=FALSE` is
+the default.
 
 ## See also
 
 Other live-annotations:
+[`fish_clio_annotations()`](https://flyconnectome.github.io/fishr/reference/fish_clio_annotations.md),
 [`fish_dvid_annotations()`](https://flyconnectome.github.io/fishr/reference/fish_dvid_annotations.md)
 
 ## Examples
 
 ``` r
 if (FALSE) { # \dontrun{
-# preview what would be written
+# preview what would be written for a simple update
 fish_annotate(data.frame(bodyid = 100003384, group = 100003384))
-# actually write
+
+# preview multiple fields at once
+fish_annotate(data.frame(
+  bodyid = 100003384,
+  group = 100003384,
+  type = "RGC"
+))
+
+# preview the payload that would be sent with protect = TRUE
+# note that dry_run does not model server-side protection checks
+fish_annotate(
+  data.frame(bodyid = 100003384, group = 100003384, type = "RGC"),
+  protect = TRUE
+)
+
+# preview an update that would request overwriting existing fields
+fish_annotate(
+  data.frame(bodyid = 100003384, group = 100003384, type = "RGC"),
+  protect = FALSE
+)
+
+# preview clearing a field
+fish_annotate(
+  data.frame(bodyid = 100003384, type = ""),
+  protect = FALSE,
+  write_empty_fields = TRUE
+)
+
+# actually write an annotation
 fish_annotate(data.frame(bodyid = 100003384, group = 100003384),
               dry_run = FALSE)
+
+# actually write while allowing overwrites
+fish_annotate(
+  data.frame(bodyid = 100003384, type = "RGC"),
+  protect = FALSE,
+  dry_run = FALSE
+)
 } # }
 ```

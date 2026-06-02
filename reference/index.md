@@ -43,5 +43,7 @@
 
 - [`fish_dvid_annotations()`](https://flyconnectome.github.io/fishr/reference/fish_dvid_annotations.md)
   : Read DVID body annotations for fish2 body ids
+- [`fish_clio_annotations()`](https://flyconnectome.github.io/fishr/reference/fish_clio_annotations.md)
+  : Read Clio body annotations for fish2 body ids
 - [`fish_annotate()`](https://flyconnectome.github.io/fishr/reference/fish_annotate.md)
   : Set body annotations for fish2 via Clio

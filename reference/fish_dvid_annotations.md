@@ -1,9 +1,6 @@
 # Read DVID body annotations for fish2 body ids
 
-A thin wrapper around
-`malevnc::`[`manc_dvid_annotations`](https://natverse.org/malevnc/reference/manc_dvid_annotations.html)
-targeting the fish2 dataset. Supports `/field:regex` query strings to
-filter annotations locally (see Details).
+Read body annotations for the fish2 dataset from DVID.
 
 ## Usage
 
@@ -51,6 +48,12 @@ for column details.
 
 ## Details
 
+This function wraps
+`malevnc::`[`manc_dvid_annotations`](https://natverse.org/malevnc/reference/manc_dvid_annotations.html)
+for the fish2 dataset. At present this means fetching the full DVID
+annotation table for the chosen node and then subsetting in R, even when
+`ids` are supplied.
+
 Query string formats for filtering DVID annotations:
 
 - `"/type:RGC..*"`:
@@ -76,21 +79,16 @@ instead.
 ## See also
 
 Other live-annotations:
-[`fish_annotate()`](https://flyconnectome.github.io/fishr/reference/fish_annotate.md)
+[`fish_annotate()`](https://flyconnectome.github.io/fishr/reference/fish_annotate.md),
+[`fish_clio_annotations()`](https://flyconnectome.github.io/fishr/reference/fish_clio_annotations.md)
 
 ## Examples
 
 ``` r
-# \donttest{
+if (FALSE) { # \dontrun{
 # fetch annotations for specific bodies
 fish_dvid_annotations(c(100003384, 100003412))
-#> # A tibble: 2 × 11
-#>     bodyid connectivity_type per_node_sc status user  group instance type  class
-#>      <dbl> <chr>                   <dbl> <chr>  <chr> <int> <chr>    <chr> <chr>
-#> 1   1.00e8 NA                         NA Senso… NA        0 RGC_R    RGC   NA   
-#> 2   1.00e8 NA                         NA Senso… bergs     0 RGC_R    RGC   NA   
-#> # ℹ 2 more variables: keywords <chr>, comment <chr>
-# }
+} # }
 if (FALSE) { # \dontrun{
 # fetch all annotations using 5m cache if possible
 df <- fish_dvid_annotations(cache=TRUE)
@@ -98,24 +96,9 @@ df <- fish_dvid_annotations(cache=TRUE)
 # filter by type regex
 df <- fish_dvid_annotations("/type:RGC.*", cache=T)
 } # }
-# \donttest{
+if (FALSE) { # \dontrun{
 # shorthand for type field
 df <- fish_dvid_annotations("RGC", cache=T)
 df
-#> # A tibble: 4,030 × 11
-#>     bodyid connectivity_type per_node_sc status user  group instance type  class
-#>      <dbl> <chr>                   <dbl> <chr>  <chr> <int> <chr>    <chr> <chr>
-#>  1  1.00e8 NA                         NA Senso… NA        0 RGC_R    RGC   NA   
-#>  2  1.00e8 NA                         NA Senso… bergs     0 RGC_R    RGC   NA   
-#>  3  1.00e8 NA                         NA Senso… NA       NA RGC_R    RGC   NA   
-#>  4  1.00e8 NA                         NA Senso… bergs     0 RGC_R    RGC   NA   
-#>  5  1.00e8 NA                         NA Senso… NA        0 RGC_R    RGC   NA   
-#>  6  1.00e8 NA                         NA Senso… NA        0 RGC_R    RGC   NA   
-#>  7  1.00e8 NA                         NA Senso… NA        0 RGC_R    RGC   NA   
-#>  8  1.00e8 NA                         NA Senso… NA        0 RGC_R    RGC   NA   
-#>  9  1.00e8 NA                         NA Senso… NA        0 RGC_R    RGC   NA   
-#> 10  1.00e8 NA                         NA Senso… NA        0 RGC_R    RGC   NA   
-#> # ℹ 4,020 more rows
-#> # ℹ 2 more variables: keywords <chr>, comment <chr>
-# }
+} # }
 ```

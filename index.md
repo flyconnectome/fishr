@@ -41,6 +41,7 @@ To install the fishr package and its dependencies, in your R terminal
 do:
 
 ``` r
+
 # install natmanager if needed
 if (!requireNamespace("natmanager")) install.packages("natmanager")
 natmanager::install(pkgs = "flyconnectome/fishr")
@@ -54,6 +55,7 @@ neuprint.
 Access to neuprint requires authentication. We recommend running:
 
 ``` r
+
 library(fishr)
 fish_setup()
 ```
@@ -80,6 +82,7 @@ fetching metadata and connectivity information, and reading and plotting
 some retinal ganglion cell meshes.
 
 ``` r
+
 library(fishr)
 library(nat)
 # you only have to run this once, but you can 
@@ -112,6 +115,7 @@ interface. This can be very useful but be careful (and ask for help
 quickly on slack if you suspect an accident)!
 
 ``` r
+
 anns=data.frame(bodyid=c(1001,1002), side='R', type='RGC_AF8')
 fish_annotate(anns)
 fish_annotate(anns, test=F)
@@ -134,6 +138,7 @@ wrapping it in
 [`with_fish()`](https://flyconnectome.github.io/fishr/reference/with_fish.md).
 
 ``` r
+
 with_fish(malevnc::clio_fields())
 ```
 
@@ -165,6 +170,7 @@ only) neuprint connection made in a session and will target that
 dataset.
 
 ``` r
+
 fc=fish_neuprint()
 fc
 neuprintr::neuprint_ROIs(conn = fc)
@@ -178,6 +184,7 @@ fly this package provides a uniform approach to connectome analysis
 including connectivity clustering functions.
 
 ``` r
+
 library(dplyr)
 register_fish_coconat()
 rgcmeta=coconatfly::cf_meta(coconatfly::cf_ids(fish2 = "RGC"))
@@ -188,6 +195,7 @@ After fetching metadata we can try connectivity clustering a subset of
 the neurons, in this case those from the right eye …
 
 ``` r
+
 rgcmeta %>% 
   filter(side=="R") %>% 
   # nb we need group = F because the partner neurons aren't really typed yet
