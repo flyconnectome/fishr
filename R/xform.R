@@ -37,7 +37,7 @@ fish_register_xforms <- function() {
   nat.templatebrains::add_reglist(
     fishr::fish2_mirror_reg,
     sample = "fish2_mirror",
-    reference = "Fish2"
+    reference = "fish2"
   )
   invisible(TRUE)
 }
