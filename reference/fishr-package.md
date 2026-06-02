@@ -1,4 +1,4 @@
-# fishr: Access the Fish2 FlyEM Dataset
+# fishr: Access the fish2 FlyEM Dataset
 
 A thin wrapper around the malevnc package providing access to the fish2
 larval zebrafish EM dataset being proofread at Janelia Research Campus

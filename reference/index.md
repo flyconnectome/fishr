@@ -4,7 +4,7 @@
 
 - [`fishr`](https://flyconnectome.github.io/fishr/reference/fishr-package.md)
   [`fishr-package`](https://flyconnectome.github.io/fishr/reference/fishr-package.md)
-  : fishr: Access the Fish2 FlyEM Dataset
+  : fishr: Access the fish2 FlyEM Dataset
 - [`fish_setup()`](https://flyconnectome.github.io/fishr/reference/fish_setup.md)
   : Interactive setup helper for fish2 authentication
 
@@ -47,3 +47,9 @@
   : Read Clio body annotations for fish2 body ids
 - [`fish_annotate()`](https://flyconnectome.github.io/fishr/reference/fish_annotate.md)
   : Set body annotations for fish2 via Clio
+
+## Spatial transforms
+
+- [`mirror_fish()`](https://flyconnectome.github.io/fishr/reference/mirror_fish.md)
+  [`fish2_mirror_reg`](https://flyconnectome.github.io/fishr/reference/mirror_fish.md)
+  : Mirror points or neurons in fish2 space
