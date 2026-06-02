@@ -1,6 +1,6 @@
 Package: fishr
 Type: Package
-Title: Access the Fish2 FlyEM Dataset
+Title: Access the fish2 FlyEM Dataset
 Version: 0.1.0
 Authors@R: person("Gregory","Jefferis", email="jefferis@gmail.com",
       role=c("aut", "cre"), comment = c(ORCID = "0000-0002-0587-9355"))

@@ -2,7 +2,7 @@
 % Please edit documentation in R/xform.R
 \name{fish_register_xforms}
 \alias{fish_register_xforms}
-\title{Register Fish2 bridging / mirroring transforms}
+\title{Register fish2 bridging / mirroring transforms}
 \usage{
 fish_register_xforms()
 }

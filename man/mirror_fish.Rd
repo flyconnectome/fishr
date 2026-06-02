@@ -4,7 +4,7 @@
 \name{mirror_fish}
 \alias{mirror_fish}
 \alias{fish2_mirror_reg}
-\title{Mirror points or neurons in Fish2 space}
+\title{Mirror points or neurons in fish2 space}
 \format{
 \code{fish2_mirror_reg} is a \code{tpsreg}/\code{reglist} object.
 
@@ -27,7 +27,7 @@ neuronlist, a mesh, or a 3-column matrix / data frame of points.}
 }
 \description{
 \code{mirror_fish} mirrors objects with 3D vertices calibrated
-  in nanometres across the Fish2 midline using a thin plate spline
+  in nanometres across the fish2 midline using a thin plate spline
   registration derived from Philipp Schlegel's navis-fishbrains landmarks.
 
 \code{fish2_mirror_reg} is the underlying

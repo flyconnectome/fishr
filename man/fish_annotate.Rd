@@ -81,7 +81,7 @@ This function sets annotations for one or more bodyids. Logically
   the fish2 dataset. Safe-by-default: the default \code{dry_run=TRUE}
   returns a preview of the POST body that would be sent to Clio without
   writing anything. Inspect the preview and then rerun with
-  \code{dry_run=FALSE} to commit the changes. Fish2 does not currently
+  \code{dry_run=FALSE} to commit the changes. fish2 does not currently
   have a separate Clio test server, so \code{test=FALSE} is the default.
 }
 \examples{

@@ -1,8 +1,8 @@
-# Recreate the Fish2 mirroring registration directly from navis-fishbrains.
+# Recreate the fish2 mirroring registration directly from navis-fishbrains.
 #
 # navis-fishbrains ships a CSV of landmark pairs and registers them as a navis
 # "mirror" transform, where the source side is first axis-flipped within the
-# Fish2 bounding box and then a thin plate spline correction is applied. To
+# fish2 bounding box and then a thin plate spline correction is applied. To
 # express the whole operation as a single nat::tpsreg (so a plain
 # nat.templatebrains::xform_brain() call can perform the mirror), we undo the
 # Y-axis flip on the source landmarks before fitting the TPS.
@@ -27,7 +27,7 @@ lm <- utils::read.csv(src_path)
 stopifnot(all(c("x_flip", "y_flip", "z_flip",
                 "x_mirr", "y_mirr", "z_mirr") %in% names(lm)))
 
-# --- Fish2 bounding box (nm) -------------------------------------------------
+# --- fish2 bounding box (nm) -------------------------------------------------
 # Mirrors fishbrains/data/template_meta.json.
 fish2_bbox_nm <- list(
   x = c(0, 1638400),

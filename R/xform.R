@@ -1,7 +1,7 @@
-#' Mirror points or neurons in Fish2 space
+#' Mirror points or neurons in fish2 space
 #'
 #' @description \code{mirror_fish} mirrors objects with 3D vertices calibrated
-#'   in nanometres across the Fish2 midline using a thin plate spline
+#'   in nanometres across the fish2 midline using a thin plate spline
 #'   registration derived from Philipp Schlegel's navis-fishbrains landmarks.
 #'
 #' @param x Any object with 3D vertices (calibrated in nm), e.g. a neuron, a
@@ -43,7 +43,7 @@ mirror_fish <- function(x, ...) {
 
 "fish2_mirror_reg"
 
-#' Register Fish2 bridging / mirroring transforms
+#' Register fish2 bridging / mirroring transforms
 #'
 #' @description \code{fish_register_xforms} adds the package's mirroring
 #'   registration (see \code{\link{fish2_mirror_reg}}) to the

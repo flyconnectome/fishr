@@ -4,7 +4,7 @@
 \name{fishr-package}
 \alias{fishr}
 \alias{fishr-package}
-\title{fishr: Access the Fish2 FlyEM Dataset}
+\title{fishr: Access the fish2 FlyEM Dataset}
 \description{
 A thin wrapper around the malevnc package providing access to the fish2 larval zebrafish EM dataset being proofread at Janelia Research Campus as part of a collaboration with the Engert / Lichtman labs at Harvard and Google Research. Currently provides convenience functions for reading meshes and setting dataset options.
 }
