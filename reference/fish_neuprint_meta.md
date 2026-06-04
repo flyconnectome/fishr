@@ -66,33 +66,33 @@ Other data-queries:
 ``` r
 # \donttest{
 head(fish_neuprint_meta("RGC"))
-#>      bodyid post pre downstream upstream synweight nsoma    statusLabel
-#> 1 110656660    8 219        229        8       237     0 Sensory Anchor
-#> 2 100009896    2  89         90        2        92     0 Sensory Anchor
-#> 3 100015071    0 128        135        0       135     0 Sensory Anchor
-#> 4 100015468    2 290        316        2       318     0 Sensory Anchor
-#> 5 100017513    7 245        252        7       259     0 Sensory Anchor
-#> 6 100023948    1 167        173        1       174     0 Sensory Anchor
-#>   connectivityType perNodeSc proposedType group  name type keywords class
-#> 1             <NA>        NA         <NA>     0 RGC_R  RGC     <NA>  <NA>
-#> 2             <NA>        NA         <NA>     0 RGC_R  RGC     <NA>  <NA>
-#> 3             <NA>        NA         <NA>     0 RGC_R  RGC     <NA>  <NA>
-#> 4             <NA>        NA         <NA>     0 RGC_R  RGC     <NA>  <NA>
-#> 5             <NA>        NA         <NA>     0 RGC_R  RGC     <NA>  <NA>
-#> 6             <NA>        NA         <NA>     0 RGC_R  RGC     <NA>  <NA>
-#>   comment somaLocation somaId somaVoxels zapbenchId closestLandmarkLocation
-#> 1    <NA>                  NA         NA         NA                    <NA>
-#> 2    <NA>                  NA         NA         NA                    <NA>
-#> 3    <NA>                  NA         NA         NA                    <NA>
-#> 4    <NA>                  NA         NA         NA                    <NA>
-#> 5    <NA>                  NA         NA         NA                    <NA>
-#> 6    <NA>                  NA         NA         NA                    <NA>
+#>      bodyid post pre downstream upstream synweight nsoma    statusLabel  name
+#> 1 112060240    3 278        296        3       299     0 Sensory Anchor RGC_R
+#> 2 112158645   10 222        230       10       240     0 Sensory Anchor RGC_R
+#> 3 100009896    2  89         90        2        92     0 Sensory Anchor RGC_R
+#> 4 100015071    0 128        135        0       135     0 Sensory Anchor RGC_R
+#> 5 100015468    2 290        316        2       318     0 Sensory Anchor RGC_R
+#> 6 100017513    7 245        252        7       259     0 Sensory Anchor RGC_R
+#>   type group connectivityType perNodeSc proposedType keywords class comment
+#> 1  RGC     0             <NA>        NA         <NA>     <NA>  <NA>    <NA>
+#> 2  RGC     0             <NA>        NA         <NA>     <NA>  <NA>    <NA>
+#> 3  RGC     0             <NA>        NA         <NA>     <NA>  <NA>    <NA>
+#> 4  RGC     0             <NA>        NA         <NA>     <NA>  <NA>    <NA>
+#> 5  RGC     0             <NA>        NA         <NA>     <NA>  <NA>    <NA>
+#> 6  RGC     0             <NA>        NA         <NA>     <NA>  <NA>    <NA>
+#>   somaLocation somaId somaVoxels zapbenchId closestLandmarkLocation
+#> 1                  NA         NA         NA                    <NA>
+#> 2                  NA         NA         NA                    <NA>
+#> 3                  NA         NA         NA                    <NA>
+#> 4                  NA         NA         NA                    <NA>
+#> 5                  NA         NA         NA                    <NA>
+#> 6                  NA         NA         NA                    <NA>
 #>   closestLandmarkDistanceMicrons tosomaLocation status   voxels  soma
-#> 1                             NA           <NA> Anchor  9735937 FALSE
-#> 2                             NA           <NA> Anchor  6228154 FALSE
-#> 3                             NA           <NA> Anchor  5774341 FALSE
-#> 4                             NA           <NA> Anchor  9488378 FALSE
-#> 5                             NA           <NA> Anchor 10752622 FALSE
-#> 6                             NA           <NA> Anchor  6913578 FALSE
+#> 1                             NA           <NA> Anchor  9665582 FALSE
+#> 2                             NA           <NA> Anchor  8875806 FALSE
+#> 3                             NA           <NA> Anchor  6228154 FALSE
+#> 4                             NA           <NA> Anchor  5774341 FALSE
+#> 5                             NA           <NA> Anchor  9488378 FALSE
+#> 6                             NA           <NA> Anchor 10752622 FALSE
 # }
 ```
