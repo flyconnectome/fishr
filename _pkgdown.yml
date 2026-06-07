@@ -33,3 +33,4 @@ reference:
 - title: Spatial transforms
   contents:
   - '`mirror_fish`'
+  - '`fish_point_side`'

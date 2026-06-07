@@ -28,7 +28,8 @@ Imports:
     rappdirs,
     rlang,
     stringr,
-    coconat
+    coconat,
+    checkmate
 Remotes:
     natverse/malevnc,
     natverse/nat,
