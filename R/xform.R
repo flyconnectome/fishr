@@ -23,6 +23,9 @@ mirror_fish <- function(x, ...) {
   if (!requireNamespace("nat.templatebrains", quietly = TRUE)) {
     stop("Package 'nat.templatebrains' is required for mirror_fish().")
   }
+  # Morpho is a Suggest of nat (used by nat::xform.tpsreg for the actual TPS
+  # transform). Without it xform_brain silently returns NAs.
+  check_package_available("Morpho")
   nat.templatebrains::xform_brain(x, sample = "fish2_mirror",
                                   reference = "fish2", ...)
 }
