@@ -49,6 +49,7 @@ head(fish_neuprint_meta("RGC"))
 Other data-queries: 
 \code{\link{fish_connection_table}()},
 \code{\link{fish_ids}()},
+\code{\link{fish_somapos}()},
 \code{\link{register_fish_coconat}()}
 }
 \concept{data-queries}
