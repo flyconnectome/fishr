@@ -8,3 +8,5 @@
 ^pkgdown$
 ^\.github$
 ^data-raw$
+^.*-plan\.md$
+^samples$
