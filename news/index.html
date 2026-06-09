@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">fishr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,6 +32,25 @@
       <small>Source: <a href="https://github.com/flyconnectome/fishr/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.3.0" id="fishr-030">fishr 0.3.0<a class="anchor" aria-label="anchor" href="#fishr-030"></a></h2>
+<p>Several new features including a L/R-side classifier, soma-position helpers and a unified xyz coordinate converter, plus DVID body lookup at points.</p>
+<div class="section level3">
+<h3 id="whats-changed-0-3-0">What’s Changed<a class="anchor" aria-label="anchor" href="#whats-changed-0-3-0"></a></h3>
+<ul><li>Add <code><a href="../reference/fish_point_side.html">fish_point_side()</a></code> to predict the L/R/M side of points in fish2 space by applying <code><a href="../reference/mirror_fish.html">mirror_fish()</a></code> and measuring the signed y displacement across the midline; supports <code>units = "nm" / "raw" / "emraw" / "microns"</code>, a configurable midline <code>threshold</code> and <code>rval = "side" / "distance"</code>. By <a href="https://github.com/jefferis" class="external-link">@jefferis</a> in <a href="https://github.com/flyconnectome/fishr/pull/4" class="external-link uri">https://github.com/flyconnectome/fishr/pull/4</a>
+</li>
+<li>Add <code><a href="../reference/fish_somapos.html">fish_somapos()</a></code> and <code><a href="../reference/fish_somapos.html">fish_soma_side()</a></code> for soma queries against fish2 metadata. <code><a href="../reference/fish_somapos.html">fish_somapos()</a></code> returns an Nx3 matrix of soma positions (preferring <code>somaLocation</code>, falling back row-wise to <code>tosomaLocation</code>) in the requested units; <code><a href="../reference/fish_somapos.html">fish_soma_side()</a></code> classifies the logical side of each body via <code>auto</code> / <code>instance</code> (<code>_L</code>/<code>_R</code>/<code>_M</code>/<code>_U</code> suffix) / <code>position</code> (<code><a href="../reference/fish_point_side.html">fish_point_side()</a></code> on the soma), with <code>manual</code> reserved for a future <code>somaSide</code> column. By <a href="https://github.com/jefferis" class="external-link">@jefferis</a> in <a href="https://github.com/flyconnectome/fishr/pull/4" class="external-link uri">https://github.com/flyconnectome/fishr/pull/4</a>
+</li>
+<li>Add <code><a href="../reference/fish_coords.html">fish_coords()</a></code> as a single public converter between fish2’s voxel scales: nm, raw (the (16, 16, 15) nm grid stored in neuprint’s <code>somaLocation</code> and accepted by the DVID <code>segmentation/labels</code> endpoint), emraw (the (8, 8, 30) nm acquisition grid used in Clio / Neuroglancer URLs) and microns. <code>as_character = TRUE</code> returns <code>"x,y,z"</code> strings via <code><a href="https://rdrr.io/pkg/nat/man/xyzmatrix.html" class="external-link">nat::xyzmatrix2str()</a></code>. By <a href="https://github.com/jefferis" class="external-link">@jefferis</a> in <a href="https://github.com/flyconnectome/fishr/pull/7" class="external-link uri">https://github.com/flyconnectome/fishr/pull/7</a>
+</li>
+<li>Add <code><a href="../reference/fish_xyz2bodyid.html">fish_xyz2bodyid()</a></code> to look up the segmentation body id at each 3D point via <code><a href="https://natverse.org/malevnc/reference/manc_xyz2bodyid.html" class="external-link">malevnc::manc_xyz2bodyid()</a></code>, returning character ids. Default <code>units = "emraw"</code> matches the typical interactive case of pasting coordinates from a fish2 neuroglancer URL; <code>raw</code>, <code>nm</code> and <code>microns</code> are also accepted. By <a href="https://github.com/jefferis" class="external-link">@jefferis</a> in <a href="https://github.com/flyconnectome/fishr/pull/7" class="external-link uri">https://github.com/flyconnectome/fishr/pull/7</a>
+</li>
+<li>Fix <code>fish_neuprint_meta(NULL)</code> to return the same soma-related columns (<code>somaLocation</code>, <code>nsoma</code>, <code>somaSide</code>, …) as <code>fish_neuprint_meta(ids)</code> by passing the full <code>possibleFields</code> list to <code><a href="https://natverse.org/neuprintr/reference/neuprint_get_meta.html" class="external-link">neuprintr::neuprint_get_meta()</a></code> on the all-bodies code path. By <a href="https://github.com/jefferis" class="external-link">@jefferis</a> in <a href="https://github.com/flyconnectome/fishr/pull/4" class="external-link uri">https://github.com/flyconnectome/fishr/pull/4</a>
+</li>
+<li>Refactor <code><a href="../reference/fish_point_side.html">fish_point_side()</a></code> and <code><a href="../reference/fish_somapos.html">fish_somapos()</a></code> to delegate unit conversion to <code><a href="../reference/fish_coords.html">fish_coords()</a></code> (and both gain <code>"emraw"</code> as a <code>units</code> value). <code><a href="../reference/fish_somapos.html">fish_somapos()</a></code> now returns matrices with natverse-standard uppercase <code>X</code>/<code>Y</code>/<code>Z</code> column names. By <a href="https://github.com/jefferis" class="external-link">@jefferis</a> in <a href="https://github.com/flyconnectome/fishr/pull/7" class="external-link uri">https://github.com/flyconnectome/fishr/pull/7</a>
+</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.2.0" id="fishr-020">fishr 0.2.0<a class="anchor" aria-label="anchor" href="#fishr-020"></a></h2>
 <p>First versioned release with a NEWS file.</p>

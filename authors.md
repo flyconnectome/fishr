@@ -11,12 +11,12 @@ Source:
 [`DESCRIPTION`](https://github.com/flyconnectome/fishr/blob/main/DESCRIPTION)
 
 Jefferis G (2026). *fishr: Access the fish2 FlyEM Dataset*. R package
-version 0.2.0, <https://flyconnectome.github.io/fishr/>.
+version 0.3.0, <https://flyconnectome.github.io/fishr/>.
 
     @Manual{,
       title = {fishr: Access the fish2 FlyEM Dataset},
       author = {Gregory Jefferis},
       year = {2026},
-      note = {R package version 0.2.0},
+      note = {R package version 0.3.0},
       url = {https://flyconnectome.github.io/fishr/},
     }
