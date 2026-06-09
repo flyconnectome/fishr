@@ -7,7 +7,7 @@ test_that("fish_somapos returns nm matrix from somaLocation", {
   )
   xyz <- fish_somapos(df)
   expect_equal(dim(xyz), c(1L, 3L))
-  expect_identical(colnames(xyz), c("x", "y", "z"))
+  expect_identical(colnames(xyz), c("X", "Y", "Z"))
   # nm = raw * (16, 16, 15)
   expect_equal(as.numeric(xyz), c(36844 * 16, 40493 * 16, 16389 * 15))
   # raw passes through unchanged.
@@ -37,9 +37,9 @@ test_that("fish_somapos falls back to tosomaLocation row-wise", {
   )
   # raw output keeps the comparisons simple.
   xyz <- fish_somapos(df, units = "raw")
-  expect_equal(xyz[1, ], c(x = 4, y = 5, z = 6))
+  expect_equal(xyz[1, ], c(X = 4, Y = 5, Z = 6))
   # Row 2 must NOT fall back, because somaLocation is non-NA.
-  expect_equal(xyz[2, ], c(x = 1, y = 2, z = 3))
+  expect_equal(xyz[2, ], c(X = 1, Y = 2, Z = 3))
 })
 
 test_that("fish_somapos returns NA row when both locations missing", {
@@ -50,7 +50,7 @@ test_that("fish_somapos returns NA row when both locations missing", {
   )
   xyz <- fish_somapos(df, units = "raw")
   expect_true(all(is.na(xyz[1, ])))
-  expect_equal(xyz[2, ], c(x = 1, y = 2, z = 3))
+  expect_equal(xyz[2, ], c(X = 1, Y = 2, Z = 3))
 })
 
 test_that("fish_somapos errors when neither column is present", {

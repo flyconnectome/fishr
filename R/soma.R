@@ -94,12 +94,10 @@ fish_somapos <- function(ids, units = c("nm", "raw", "emraw", "microns"),
   # rebuild a full Nx3 with NAs where the location string was NA / unparsable.
   if (nrow(xyz) != length(loc)) {
     out <- matrix(NA_real_, nrow = length(loc), ncol = 3L,
-                  dimnames = list(NULL, c("x", "y", "z")))
+                  dimnames = list(NULL, c("X", "Y", "Z")))
     parsed <- !is.na(loc) & nzchar(loc)
     out[parsed, ] <- xyz
     xyz <- out
-  } else {
-    colnames(xyz) <- c("x", "y", "z")
   }
 
   # somaLocation / tosomaLocation are stored on the neuprint raw grid.
