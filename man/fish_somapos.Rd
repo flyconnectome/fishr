@@ -5,7 +5,11 @@
 \alias{fish_soma_side}
 \title{Soma positions and logical sides for fish2 neurons}
 \usage{
-fish_somapos(ids, units = c("nm", "raw", "microns"), as_character = FALSE)
+fish_somapos(
+  ids,
+  units = c("nm", "raw", "emraw", "microns"),
+  as_character = FALSE
+)
 
 fish_soma_side(
   ids,
@@ -17,9 +21,13 @@ fish_soma_side(
 \item{ids}{Body ids, a query string (see \code{\link{fish_ids}}), or a
 metadata data.frame as returned by \code{\link{fish_neuprint_meta}}.}
 
-\item{units}{Units for the returned coordinates. \code{"nm"} (the default)
-leaves the neuprint values unchanged; \code{"raw"} divides by the fish2
-voxel size \code{(16, 16, 15)}; \code{"microns"} divides by 1000.}
+\item{units}{Units for the returned coordinates. The neuprint
+\code{somaLocation} / \code{tosomaLocation} values are stored in raw
+voxel coordinates; \code{\link{fish_coords}} converts to the requested
+units. \code{"nm"} (the default) scales by the fish2 raw voxel size
+\code{(16, 16, 15)}; \code{"raw"} passes through; \code{"emraw"}
+returns the (8, 8, 30) nm acquisition grid; \code{"microns"} returns
+\code{nm / 1000}.}
 
 \item{as_character}{If \code{TRUE}, return a character vector of
 \code{"x,y,z"} strings (the fishr convention for location columns).

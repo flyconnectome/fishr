@@ -6,7 +6,7 @@
 \usage{
 fish_point_side(
   xyz,
-  units = c("nm", "raw", "microns"),
+  units = c("nm", "raw", "emraw", "microns"),
   threshold = 5000,
   rval = c("side", "distance")
 )
@@ -19,8 +19,8 @@ comma-separated \code{"x,y,z"} strings (the fishr convention for location
 columns).}
 
 \item{units}{Units of the input coordinates. \code{"nm"} (the default)
-matches \code{\link{mirror_fish}}; \code{"raw"} (16, 16, 15 nm voxel
-spacing) and \code{"microns"} are scaled to nm first.}
+matches \code{\link{mirror_fish}}; \code{"raw"}, \code{"emraw"} and
+\code{"microns"} are scaled to nm via \code{\link{fish_coords}} first.}
 
 \item{threshold}{Distance from midline below which points are reported as M
 rather than L or R. Default 5000 nm (~5 \eqn{\mu}m, ~1\% of the y
@@ -30,8 +30,8 @@ or R}
 \item{rval}{What to return. \code{"side"} (the default) gives a character
 vector of side labels (\code{"L"}, \code{"R"} or \code{"M"}).
 \code{"distance"} gives a signed distance from the midline in nm (always
-nm, regardless of \code{units}), positive on the left, negative on the
-right.}
+nm, regardless of \code{units}), positive on the right, negative on the
+left.}
 }
 \value{
 When \code{rval = "side"}, a character vector of \code{"L"},

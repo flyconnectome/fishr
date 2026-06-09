@@ -39,9 +39,11 @@
 #'   metadata data.frame as returned by \code{\link{fish_neuprint_meta}}.
 #' @param units Units for the returned coordinates. The neuprint
 #'   \code{somaLocation} / \code{tosomaLocation} values are stored in raw
-#'   voxel coordinates. \code{"nm"} (the default) scales them up by the
-#'   fish2 voxel size \code{(16, 16, 15)}; \code{"raw"} leaves them
-#'   unchanged; \code{"microns"} returns \code{"nm" / 1000}.
+#'   voxel coordinates; \code{\link{fish_coords}} converts to the requested
+#'   units. \code{"nm"} (the default) scales by the fish2 raw voxel size
+#'   \code{(16, 16, 15)}; \code{"raw"} passes through; \code{"emraw"}
+#'   returns the (8, 8, 30) nm acquisition grid; \code{"microns"} returns
+#'   \code{nm / 1000}.
 #' @param as_character If \code{TRUE}, return a character vector of
 #'   \code{"x,y,z"} strings (the fishr convention for location columns).
 #'   Default \code{FALSE}.
@@ -72,7 +74,7 @@
 #' fish_somapos(meta, units = "microns")
 #' fish_soma_side(meta)
 #' }
-fish_somapos <- function(ids, units = c("nm", "raw", "microns"),
+fish_somapos <- function(ids, units = c("nm", "raw", "emraw", "microns"),
                          as_character = FALSE) {
   units <- match.arg(units)
 
@@ -83,7 +85,7 @@ fish_somapos <- function(ids, units = c("nm", "raw", "microns"),
 
   loc <- meta$somaLocation
   if ("tosomaLocation" %in% colnames(meta)) {
-    missing <- is.na(nat::xyzmatrix(loc))[,1]
+    missing <- is.na(nat::xyzmatrix(loc))[, 1]
     if (any(missing)) loc[missing] <- meta$tosomaLocation[missing]
   }
 
@@ -92,22 +94,14 @@ fish_somapos <- function(ids, units = c("nm", "raw", "microns"),
   # rebuild a full Nx3 with NAs where the location string was NA / unparsable.
   if (nrow(xyz) != length(loc)) {
     out <- matrix(NA_real_, nrow = length(loc), ncol = 3L,
-                  dimnames = list(NULL, c("x", "y", "z")))
+                  dimnames = list(NULL, c("X", "Y", "Z")))
     parsed <- !is.na(loc) & nzchar(loc)
     out[parsed, ] <- xyz
     xyz <- out
-  } else {
-    colnames(xyz) <- c("x", "y", "z")
   }
 
-  scaleup <- switch(units,
-                  nm = c(16, 16, 15),
-                  raw = 1,
-                  microns = c(16, 16, 15)/1000)
-  if (!identical(scaleup, 1))
-    xyz <- scale(xyz, center=F, scale=1/scaleup)
-
-  if (isTRUE(as_character)) nat::xyzmatrix2str(xyz) else xyz
+  # somaLocation / tosomaLocation are stored on the neuprint raw grid.
+  fish_coords(xyz, from = "raw", to = units, as_character = as_character)
 }
 
 #' @rdname fish_somapos
