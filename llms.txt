@@ -2,7 +2,7 @@
 
 [![A zebrafish wielding a butterfly net on a starry purple hex
 background — the fishr package
-logo.](reference/figures/fishr-logo-250.png)](https://flyconnectome.github.io/fishr/man/figures/fishr-logo.png)
+logo.](reference/figures/fishr-logo-250.png)](https://flyconnectome.github.io/fishr/reference/figures/fishr-logo.png)
 
 The goal of **fishr** is to provide [natverse](https://natverse.org)
 access to the **fish2** larval zebrafish whole-brain EM dataset. It
