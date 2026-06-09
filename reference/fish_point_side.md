@@ -10,7 +10,7 @@ on.
 ``` r
 fish_point_side(
   xyz,
-  units = c("nm", "raw", "microns"),
+  units = c("nm", "raw", "emraw", "microns"),
   threshold = 5000,
   rval = c("side", "distance")
 )
@@ -30,7 +30,8 @@ fish_point_side(
 
   Units of the input coordinates. `"nm"` (the default) matches
   [`mirror_fish`](https://flyconnectome.github.io/fishr/reference/mirror_fish.md);
-  `"raw"` (16, 16, 15 nm voxel spacing) and `"microns"` are scaled to nm
+  `"raw"`, `"emraw"` and `"microns"` are scaled to nm via
+  [`fish_coords`](https://flyconnectome.github.io/fishr/reference/fish_coords.md)
   first.
 
 - threshold:
@@ -44,7 +45,7 @@ fish_point_side(
   What to return. `"side"` (the default) gives a character vector of
   side labels (`"L"`, `"R"` or `"M"`). `"distance"` gives a signed
   distance from the midline in nm (always nm, regardless of `units`),
-  positive on the left, negative on the right.
+  positive on the right, negative on the left.
 
 ## Value
 

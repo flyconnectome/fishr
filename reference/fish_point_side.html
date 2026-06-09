@@ -47,7 +47,7 @@
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">fish_point_side</span><span class="op">(</span></span>
 <span>  <span class="va">xyz</span>,</span>
-<span>  units <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"nm"</span>, <span class="st">"raw"</span>, <span class="st">"microns"</span><span class="op">)</span>,</span>
+<span>  units <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"nm"</span>, <span class="st">"raw"</span>, <span class="st">"emraw"</span>, <span class="st">"microns"</span><span class="op">)</span>,</span>
 <span>  threshold <span class="op">=</span> <span class="fl">5000</span>,</span>
 <span>  rval <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"side"</span>, <span class="st">"distance"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -67,8 +67,8 @@ columns).</p></dd>
 
 <dt id="arg-units">units<a class="anchor" aria-label="anchor" href="#arg-units"></a></dt>
 <dd><p>Units of the input coordinates. <code>"nm"</code> (the default)
-matches <code><a href="mirror_fish.html">mirror_fish</a></code>; <code>"raw"</code> (16, 16, 15 nm voxel
-spacing) and <code>"microns"</code> are scaled to nm first.</p></dd>
+matches <code><a href="mirror_fish.html">mirror_fish</a></code>; <code>"raw"</code>, <code>"emraw"</code> and
+<code>"microns"</code> are scaled to nm via <code><a href="fish_coords.html">fish_coords</a></code> first.</p></dd>
 
 
 <dt id="arg-threshold">threshold<a class="anchor" aria-label="anchor" href="#arg-threshold"></a></dt>
@@ -82,8 +82,8 @@ or R</p></dd>
 <dd><p>What to return. <code>"side"</code> (the default) gives a character
 vector of side labels (<code>"L"</code>, <code>"R"</code> or <code>"M"</code>).
 <code>"distance"</code> gives a signed distance from the midline in nm (always
-nm, regardless of <code>units</code>), positive on the left, negative on the
-right.</p></dd>
+nm, regardless of <code>units</code>), positive on the right, negative on the
+left.</p></dd>
 
 </dl></div>
     <div class="section level2">

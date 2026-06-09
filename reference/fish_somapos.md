@@ -12,7 +12,11 @@ the fish2 midline.
 ## Usage
 
 ``` r
-fish_somapos(ids, units = c("nm", "raw", "microns"), as_character = FALSE)
+fish_somapos(
+  ids,
+  units = c("nm", "raw", "emraw", "microns"),
+  as_character = FALSE
+)
 
 fish_soma_side(
   ids,
@@ -32,9 +36,13 @@ fish_soma_side(
 
 - units:
 
-  Units for the returned coordinates. `"nm"` (the default) leaves the
-  neuprint values unchanged; `"raw"` divides by the fish2 voxel size
-  `(16, 16, 15)`; `"microns"` divides by 1000.
+  Units for the returned coordinates. The neuprint `somaLocation` /
+  `tosomaLocation` values are stored in raw voxel coordinates;
+  [`fish_coords`](https://flyconnectome.github.io/fishr/reference/fish_coords.md)
+  converts to the requested units. `"nm"` (the default) scales by the
+  fish2 raw voxel size `(16, 16, 15)`; `"raw"` passes through; `"emraw"`
+  returns the (8, 8, 30) nm acquisition grid; `"microns"` returns
+  `nm / 1000`.
 
 - as_character:
 
@@ -115,15 +123,11 @@ Other data-queries:
 # \donttest{
 meta <- fish_neuprint_meta(109192746)
 fish_somapos(meta)
-#>           x      y      z
+#>           X      Y      Z
 #> [1,] 898128 426816 158175
-#> attr(,"scaled:scale")
-#> [1] 0.06250000 0.06250000 0.06666667
 fish_somapos(meta, units = "microns")
-#>            x       y       z
+#>            X       Y       Z
 #> [1,] 898.128 426.816 158.175
-#> attr(,"scaled:scale")
-#> [1] 62.50000 62.50000 66.66667
 fish_soma_side(meta)
 #> [1] "L"
 # }

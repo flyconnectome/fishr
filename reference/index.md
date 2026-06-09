@@ -25,6 +25,8 @@
   : Fetch neuprint metadata for fish2 neurons
 - [`fish_connection_table()`](https://flyconnectome.github.io/fishr/reference/fish_connection_table.md)
   : Connectivity query for fish2 neurons
+- [`fish_xyz2bodyid()`](https://flyconnectome.github.io/fishr/reference/fish_xyz2bodyid.md)
+  : Map xyz points to fish2 body ids via DVID
 - [`register_fish_coconat()`](https://flyconnectome.github.io/fishr/reference/register_fish_coconat.md)
   : Register fish2 dataset for coconatfly
 
@@ -48,8 +50,10 @@
 - [`fish_annotate()`](https://flyconnectome.github.io/fishr/reference/fish_annotate.md)
   : Set body annotations for fish2 via Clio
 
-## Spatial transforms and point locations
+## Coordinates, spatial transforms and point locations
 
+- [`fish_coords()`](https://flyconnectome.github.io/fishr/reference/fish_coords.md)
+  : Convert xyz points between fish2 coordinate systems
 - [`mirror_fish()`](https://flyconnectome.github.io/fishr/reference/mirror_fish.md)
   [`fish2_mirror_reg`](https://flyconnectome.github.io/fishr/reference/mirror_fish.md)
   : Mirror points or neurons in fish2 space
