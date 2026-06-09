@@ -84,24 +84,15 @@ fish_neuprint_meta <- function(ids = NULL, conn = NULL, roiInfo = FALSE,
     conn <- fish_neuprint(dataset = dataset)
   }
 
-  if (is.null(ids)) {
-    # bypass manc_neuprint_meta(NULL) which tries to resolve DVID annotations;
-    # query neuprint directly for all bodies
-    res <- neuprintr::neuprint_get_meta(
-      "where:exists(n.bodyId)", conn = conn, ...
-    )
-  } else {
-    res <- with_fish(
-      malevnc::manc_neuprint_meta(
-        ids,
-        conn = conn,
-        roiInfo = roiInfo,
-        ...
-      ),
-      dataset = dataset
-    )
-  }
-  res$bodyid <- as.character(res$bodyid)
+  res <- with_fish(
+    malevnc::manc_neuprint_meta(
+      if(is.null(ids)) "where:exists(n.bodyId)" else ids,
+      conn = conn,
+      roiInfo = roiInfo,
+      ...
+    ),
+    dataset = dataset
+  )
 
   if (isTRUE(simplify.xyz)) {
     loc_cols <- grep("Location$", colnames(res))

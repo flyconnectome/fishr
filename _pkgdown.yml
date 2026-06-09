@@ -30,6 +30,9 @@ reference:
   - '`fish_dvid_annotations`'
   - '`fish_clio_annotations`'
   - '`fish_annotate`'
-- title: Spatial transforms
+- title: Spatial transforms and point locations
   contents:
   - '`mirror_fish`'
+  - '`fish_point_side`'
+  - '`fish_somapos`'
+  - '`fish_soma_side`'

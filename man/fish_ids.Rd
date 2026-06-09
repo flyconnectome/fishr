@@ -63,6 +63,7 @@ fish_ids(df)
 Other data-queries: 
 \code{\link{fish_connection_table}()},
 \code{\link{fish_neuprint_meta}()},
+\code{\link{fish_somapos}()},
 \code{\link{register_fish_coconat}()}
 }
 \concept{data-queries}

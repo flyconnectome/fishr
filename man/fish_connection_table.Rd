@@ -73,6 +73,7 @@ fish_connection_table("RGC", partners = "outputs", summary = TRUE)
 Other data-queries: 
 \code{\link{fish_ids}()},
 \code{\link{fish_neuprint_meta}()},
+\code{\link{fish_somapos}()},
 \code{\link{register_fish_coconat}()}
 }
 \concept{data-queries}
