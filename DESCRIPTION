@@ -1,7 +1,7 @@
 Package: fishr
 Type: Package
 Title: Access the fish2 FlyEM Dataset
-Version: 0.2.0
+Version: 0.3.0
 Authors@R: person("Gregory","Jefferis", email="jefferis@gmail.com",
       role=c("aut", "cre"), comment = c(ORCID = "0000-0002-0587-9355"))
 Description: A thin wrapper around the malevnc package providing access to
