@@ -1,4 +1,4 @@
-<a href="man/figures/fishr-logo.png"><img src="man/figures/fishr-logo-250.png" align="right" alt="A zebrafish wielding a butterfly net on a starry purple hex background — the fishr package logo." /></a>
+<a href="https://flyconnectome.github.io/fishr/reference/figures/fishr-logo.png"><img src="man/figures/fishr-logo-250.png" align="right" alt="A zebrafish wielding a butterfly net on a starry purple hex background — the fishr package logo." /></a>
 
 # fishr
 
