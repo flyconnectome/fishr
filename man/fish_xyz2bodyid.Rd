@@ -39,12 +39,12 @@ Look up the segmentation body id at each 3D point. Thin wrapper
   microns; see \code{\link{fish_coords}} for what each means.
 }
 \details{
-The DVID \code{segmentation/labels} endpoint indexes the
-  segmentation at the neuprint (16, 16, 15) "raw" grid, so input
-  coordinates are first converted to raw via \code{\link{fish_coords}} and
-  then rounded to integer voxel positions before the call (as in
-  \code{manc_xyz2bodyid}). Points with \code{NA} coordinates yield
-  \code{NA_character_} in the output.
+The DVID \code{segmentation/labels} endpoint accepts coordinates
+  on the neuprint (16, 16, 15) "raw" grid, so input coordinates are first
+  converted to raw via \code{\link{fish_coords}} and then rounded to
+  integer voxel positions before the call (as in \code{manc_xyz2bodyid}).
+  Points with \code{NA} coordinates yield \code{NA_character_} in the
+  output.
 }
 \examples{
 \dontrun{

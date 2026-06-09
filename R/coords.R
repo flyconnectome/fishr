@@ -3,19 +3,18 @@
 #' @description fish2 uses three distinct voxel scales that all turn up in
 #'   day-to-day work: nm (the canonical unit for spatial transforms like
 #'   \code{\link{mirror_fish}}), raw (the (16, 16, 15) nm voxel grid stored in
-#'   neuprint's \code{somaLocation} and friends), and emraw (the (8, 8, 30) nm
-#'   voxel grid of the EM imagery and the Clio / DVID URL conventions).
+#'   neuprint's \code{somaLocation} and friends, and accepted by the DVID
+#'   \code{segmentation/labels} endpoint), and emraw (the (8, 8, 30) nm voxel
+#'   grid of the EM imagery and the Clio / Neuroglancer URL conventions).
 #'   \code{fish_coords} converts between any of these, plus microns.
 #'
-#' @details fish2 has two "raw" voxel grids because neuprint indexes the
-#'   segmentation at a coarser (16, 16, 15) nm grid (the natural unit for
-#'   computations against the segmentation volume), while the underlying EM
-#'   image stack and the Clio annotation server use the finer (8, 8, 30) nm
-#'   acquisition grid. Coordinates copied from neuroglancer URLs that point at
-#'   the EM imagery (or pasted from Clio) are in emraw; coordinates pulled
-#'   from \code{somaLocation} / \code{tosomaLocation} or sent to the DVID
-#'   \code{segmentation/labels} endpoint are in raw. raw and emraw are related
-#'   by \code{emraw = raw * c(2, 2, 0.5)}.
+#' @details fish2 has two "raw" voxel grids. \code{raw} is the (16, 16, 15)
+#'   nm grid used by neuprint (it stores \code{somaLocation} and friends in
+#'   raw, and the DVID \code{segmentation/labels} endpoint accepts raw
+#'   coordinates). \code{emraw} is the (8, 8, 30) nm acquisition grid of the
+#'   EM imagery and the convention used in Clio / Neuroglancer URLs. The two
+#'   grids differ per axis (emraw is twice the XY resolution of raw and half
+#'   the Z resolution): \code{emraw = raw * c(2, 2, 0.5)}.
 #'
 #' @param xyz Point coordinates. Anything accepted by
 #'   \code{\link[nat]{xyzmatrix}} (vector, matrix, data.frame, "x,y,z" strings).
@@ -77,12 +76,12 @@ fish_coords <- function(xyz, from = "nm", to = "nm", as_character = FALSE) {
 #'   active fish2 DVID node. Input may be in emraw (default), raw, nm or
 #'   microns; see \code{\link{fish_coords}} for what each means.
 #'
-#' @details The DVID \code{segmentation/labels} endpoint indexes the
-#'   segmentation at the neuprint (16, 16, 15) "raw" grid, so input
-#'   coordinates are first converted to raw via \code{\link{fish_coords}} and
-#'   then rounded to integer voxel positions before the call (as in
-#'   \code{manc_xyz2bodyid}). Points with \code{NA} coordinates yield
-#'   \code{NA_character_} in the output.
+#' @details The DVID \code{segmentation/labels} endpoint accepts coordinates
+#'   on the neuprint (16, 16, 15) "raw" grid, so input coordinates are first
+#'   converted to raw via \code{\link{fish_coords}} and then rounded to
+#'   integer voxel positions before the call (as in \code{manc_xyz2bodyid}).
+#'   Points with \code{NA} coordinates yield \code{NA_character_} in the
+#'   output.
 #'
 #' @param xyz Point coordinates: a length-3 numeric vector for a single point,
 #'   an Nx3 numeric matrix / data.frame, or anything else accepted by
