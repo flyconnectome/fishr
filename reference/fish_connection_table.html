@@ -29,7 +29,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Connectivity query for fish2 neurons</h1>
-      <small class="dont-index">Source: <a href="https://github.com/flyconnectome/fishr/blob/v0.3.0/R/neuprint.R" class="external-link"><code>R/neuprint.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/flyconnectome/fishr/blob/main/R/neuprint.R" class="external-link"><code>R/neuprint.R</code></a></small>
       <div class="d-none name"><code>fish_connection_table.Rd</code></div>
     </div>
 
@@ -134,6 +134,7 @@ current connection, is used. See <code><a href="https://natverse.org/neuprintr/r
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="fu">fish_connection_table</span><span class="op">(</span><span class="st">"RGC"</span>, partners <span class="op">=</span> <span class="st">"outputs"</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Clio dataset lookup failed; falling back to baked-in neuprint settings for `fish2`. Clio-backed functionality may be unavailable in this session.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          bodyid   partner prepost weight        name      type</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1     101033639 100018795       1     48        &lt;NA&gt;      &lt;NA&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2     106959773 100381874       1     44        &lt;NA&gt;      &lt;NA&gt;</span>
@@ -16803,6 +16804,7 @@ current connection, is used. See <code><a href="https://natverse.org/neuprintr/r
 <span class="r-out co"><span class="r-pr">#&gt;</span> 16666 103442856 119162065       1      5        &lt;NA&gt;      &lt;NA&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [ reached 'max' / getOption("max.print") -- omitted 359011 rows ]</span>
 <span class="r-in"><span><span class="fu">fish_connection_table</span><span class="op">(</span><span class="st">"RGC"</span>, partners <span class="op">=</span> <span class="st">"outputs"</span>, summary <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Clio dataset lookup failed; falling back to baked-in neuprint settings for `fish2`. Clio-backed functionality may be unavailable in this session.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 31,887 × 6</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    partner   prepost weight name  type      n</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>

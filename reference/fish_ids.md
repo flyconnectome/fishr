@@ -73,6 +73,7 @@ Other data-queries:
 # \donttest{
 # neuprint query by type
 fish_ids("RGC")
+#> Warning: Clio dataset lookup failed; falling back to baked-in neuprint settings for `fish2`. Clio-backed functionality may be unavailable in this session.
 #>    [1] "110656660" "100009896" "100015071" "100015468" "100017513" "100023948"
 #>    [7] "100040150" "100057379" "100061403" "100068896" "100079855" "100106910"
 #>   [13] "100109349" "100129744" "100144381" "100296057" "100296109" "100301144"
@@ -1085,6 +1086,7 @@ fish_ids("RGC")
 #> [6055] "105511010" "105398119"
 # neuprint where clause
 fish_ids("where:n.type='RGC'")
+#> Warning: Clio dataset lookup failed; falling back to baked-in neuprint settings for `fish2`. Clio-backed functionality may be unavailable in this session.
 #>    [1] "110656660" "100009896" "100015071" "100015468" "100017513" "100023948"
 #>    [7] "100040150" "100057379" "100061403" "100068896" "100079855" "100106910"
 #>   [13] "100109349" "100129744" "100144381" "100296057" "100296109" "100301144"

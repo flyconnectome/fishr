@@ -41,7 +41,7 @@ fish_soma_side returns the logical side of each
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Soma positions and logical sides for fish2 neurons</h1>
-      <small class="dont-index">Source: <a href="https://github.com/flyconnectome/fishr/blob/v0.3.0/R/soma.R" class="external-link"><code>R/soma.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/flyconnectome/fishr/blob/main/R/soma.R" class="external-link"><code>R/soma.R</code></a></small>
       <div class="d-none name"><code>fish_somapos.Rd</code></div>
     </div>
 
@@ -127,14 +127,13 @@ reports a soma as midline (<code>"M"</code>). Default <code>0</code>. Ignored by
   side before entering the imaged volume; the assigned side will follow
   the entry nerve, not the soma.</p>
 <p>Methods for <code>fish_soma_side</code>:</p><dl><dt><code>auto</code></dt>
-<dd><p>Try <code>manual</code> first (when implemented), then
-      fill remaining <code>NA</code>s with <code>instance</code>, then with
-      <code>position</code>. At present, <code>manual</code> is not yet implemented,
-      so <code>auto</code> chains <code>instance</code> -&gt; <code>position</code>.</p></dd>
+<dd><p>Try <code>manual</code> first, then fill remaining
+      <code>NA</code>s with <code>instance</code>, then with <code>position</code>.</p></dd>
 
     <dt><code>manual</code></dt>
-<dd><p>Not yet implemented; errors. Will read a
-      <code>somaSide</code> column once neuprintr exposes one.</p></dd>
+<dd><p>Read the neuprint <code>somaSide</code> column
+      directly. Returns <code>NA</code> for bodies that do not have a manual
+      assignment.</p></dd>
 
     <dt><code>instance</code></dt>
 <dd><p>Match <code>_([LRMU])$</code> against the
@@ -165,6 +164,7 @@ reports a soma as midline (<code>"M"</code>). Default <code>0</code>. Ignored by
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="va">meta</span> <span class="op">&lt;-</span> <span class="fu"><a href="fish_neuprint_meta.html">fish_neuprint_meta</a></span><span class="op">(</span><span class="fl">109192746</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Clio dataset lookup failed; falling back to baked-in neuprint settings for `fish2`. Clio-backed functionality may be unavailable in this session.</span>
 <span class="r-in"><span><span class="fu">fish_somapos</span><span class="op">(</span><span class="va">meta</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           X      Y      Z</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 898128 426816 158175</span>
@@ -172,7 +172,7 @@ reports a soma as midline (<code>"M"</code>). Default <code>0</code>. Ignored by
 <span class="r-out co"><span class="r-pr">#&gt;</span>            X       Y       Z</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 898.128 426.816 158.175</span>
 <span class="r-in"><span><span class="fu">fish_soma_side</span><span class="op">(</span><span class="va">meta</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "L"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "R"</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>

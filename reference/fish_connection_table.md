@@ -105,6 +105,7 @@ Other data-queries:
 ``` r
 # \donttest{
 fish_connection_table("RGC", partners = "outputs")
+#> Warning: Clio dataset lookup failed; falling back to baked-in neuprint settings for `fish2`. Clio-backed functionality may be unavailable in this session.
 #>          bodyid   partner prepost weight        name      type
 #> 1     101033639 100018795       1     48        <NA>      <NA>
 #> 2     106959773 100381874       1     44        <NA>      <NA>
@@ -16774,6 +16775,7 @@ fish_connection_table("RGC", partners = "outputs")
 #> 16666 103442856 119162065       1      5        <NA>      <NA>
 #>  [ reached 'max' / getOption("max.print") -- omitted 359011 rows ]
 fish_connection_table("RGC", partners = "outputs", summary = TRUE)
+#> Warning: Clio dataset lookup failed; falling back to baked-in neuprint settings for `fish2`. Clio-backed functionality may be unavailable in this session.
 #> # A tibble: 31,887 × 6
 #>    partner   prepost weight name  type      n
 #>    <chr>       <dbl>  <int> <chr> <chr> <int>

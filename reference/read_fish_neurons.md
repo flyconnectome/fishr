@@ -75,6 +75,8 @@ Other 3d-meshes-skeletons:
 ``` r
 # \donttest{
 rgcsk3 <- read_fish_neurons(fish_ids("RGC")[1:3])
+#> Warning: Clio dataset lookup failed; falling back to baked-in neuprint settings for `fish2`. Clio-backed functionality may be unavailable in this session.
+#> Warning: Clio dataset lookup failed; falling back to baked-in neuprint settings for `fish2`. Clio-backed functionality may be unavailable in this session.
 plot(rgcsk3, WithNodes=FALSE)
 
 # }

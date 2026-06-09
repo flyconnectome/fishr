@@ -67,6 +67,7 @@ Other data-queries:
 ``` r
 # \donttest{
 head(fish_neuprint_meta("RGC"))
+#> Warning: Clio dataset lookup failed; falling back to baked-in neuprint settings for `fish2`. Clio-backed functionality may be unavailable in this session.
 #>      bodyid post pre downstream upstream synweight nsoma    statusLabel group
 #> 1 110656660    8 219        229        8       237     0 Sensory Anchor     0
 #> 2 100009896    2  89         90        2        92     0 Sensory Anchor     0

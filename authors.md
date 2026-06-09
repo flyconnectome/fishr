@@ -8,7 +8,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/flyconnectome/fishr/blob/v0.3.0/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/flyconnectome/fishr/blob/main/DESCRIPTION)
 
 Jefferis G (2026). *fishr: Access the fish2 FlyEM Dataset*. R package
 version 0.3.0, <https://flyconnectome.github.io/fishr/>.

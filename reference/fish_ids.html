@@ -35,7 +35,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Resolve fish2 body ids from a variety of inputs</h1>
-      <small class="dont-index">Source: <a href="https://github.com/flyconnectome/fishr/blob/v0.3.0/R/ids.R" class="external-link"><code>R/ids.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/flyconnectome/fishr/blob/main/R/ids.R" class="external-link"><code>R/ids.R</code></a></small>
       <div class="d-none name"><code>fish_ids.Rd</code></div>
     </div>
 
@@ -113,6 +113,7 @@ integer limit of double-precision floating point (<code>2^53 - 1</code>).</p></d
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="co"># neuprint query by type</span></span></span>
 <span class="r-in"><span><span class="fu">fish_ids</span><span class="op">(</span><span class="st">"RGC"</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Clio dataset lookup failed; falling back to baked-in neuprint settings for `fish2`. Clio-backed functionality may be unavailable in this session.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    [1] "110656660" "100009896" "100015071" "100015468" "100017513" "100023948"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    [7] "100040150" "100057379" "100061403" "100068896" "100079855" "100106910"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [13] "100109349" "100129744" "100144381" "100296057" "100296109" "100301144"</span>
@@ -1125,6 +1126,7 @@ integer limit of double-precision floating point (<code>2^53 - 1</code>).</p></d
 <span class="r-out co"><span class="r-pr">#&gt;</span> [6055] "105511010" "105398119"</span>
 <span class="r-in"><span><span class="co"># neuprint where clause</span></span></span>
 <span class="r-in"><span><span class="fu">fish_ids</span><span class="op">(</span><span class="st">"where:n.type='RGC'"</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Clio dataset lookup failed; falling back to baked-in neuprint settings for `fish2`. Clio-backed functionality may be unavailable in this session.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    [1] "110656660" "100009896" "100015071" "100015468" "100017513" "100023948"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    [7] "100040150" "100057379" "100061403" "100068896" "100079855" "100106910"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [13] "100109349" "100129744" "100144381" "100296057" "100296109" "100301144"</span>
