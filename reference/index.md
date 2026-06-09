@@ -48,8 +48,13 @@
 - [`fish_annotate()`](https://flyconnectome.github.io/fishr/reference/fish_annotate.md)
   : Set body annotations for fish2 via Clio
 
-## Spatial transforms
+## Spatial transforms and point locations
 
 - [`mirror_fish()`](https://flyconnectome.github.io/fishr/reference/mirror_fish.md)
   [`fish2_mirror_reg`](https://flyconnectome.github.io/fishr/reference/mirror_fish.md)
   : Mirror points or neurons in fish2 space
+- [`fish_point_side()`](https://flyconnectome.github.io/fishr/reference/fish_point_side.md)
+  : Predict the L/R side of points in fish2 space
+- [`fish_somapos()`](https://flyconnectome.github.io/fishr/reference/fish_somapos.md)
+  [`fish_soma_side()`](https://flyconnectome.github.io/fishr/reference/fish_somapos.md)
+  : Soma positions and logical sides for fish2 neurons

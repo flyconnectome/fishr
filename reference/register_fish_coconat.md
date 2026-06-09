@@ -24,7 +24,8 @@ Invisible `NULL`.
 Other data-queries:
 [`fish_connection_table()`](https://flyconnectome.github.io/fishr/reference/fish_connection_table.md),
 [`fish_ids()`](https://flyconnectome.github.io/fishr/reference/fish_ids.md),
-[`fish_neuprint_meta()`](https://flyconnectome.github.io/fishr/reference/fish_neuprint_meta.md)
+[`fish_neuprint_meta()`](https://flyconnectome.github.io/fishr/reference/fish_neuprint_meta.md),
+[`fish_somapos()`](https://flyconnectome.github.io/fishr/reference/fish_somapos.md)
 
 ## Examples
 
