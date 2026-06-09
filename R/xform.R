@@ -62,8 +62,8 @@ mirror_fish <- function(x, ...) {
 #'   comma-separated \code{"x,y,z"} strings (the fishr convention for location
 #'   columns).
 #' @param units Units of the input coordinates. \code{"nm"} (the default)
-#'   matches \code{\link{mirror_fish}}; \code{"raw"} (16, 16, 15 nm voxel
-#'   spacing) and \code{"microns"} are scaled to nm first.
+#'   matches \code{\link{mirror_fish}}; \code{"raw"}, \code{"emraw"} and
+#'   \code{"microns"} are scaled to nm via \code{\link{fish_coords}} first.
 #' @param threshold Distance from midline below which points are reported as M
 #'   rather than L or R. Default 5000 nm (~5 \eqn{\mu}m, ~1\% of the y
 #'   (medio-lateral) extent of the fish2 brain). Set to 0 for all values to be L
@@ -94,23 +94,16 @@ mirror_fish <- function(x, ...) {
 #' # signed distance from the midline (always in nm)
 #' fish_point_side(xyz_nm, rval = "distance")
 fish_point_side <- function(xyz,
-                            units = c("nm", "raw", "microns"),
+                            units = c("nm", "raw", "emraw", "microns"),
                             threshold = 5000,
                             rval = c("side", "distance")) {
   units <- match.arg(units)
   rval <- match.arg(rval)
-  checkmate::assert_number(threshold, lower=0, upper = Inf)
+  checkmate::assert_number(threshold, lower = 0, upper = Inf)
 
-  xyz <- nat::xyzmatrix(xyz)
+  xyz <- fish_coords(xyz, from = units, to = "nm")
   if (nrow(xyz) == 0L)
     return(if (rval == "side") character(0) else numeric(0))
-
-  scaleup <- switch(units,
-                  nm = 1,
-                  raw = c(16, 16, 15),
-                  microns = c(1000, 1000, 1000))
-  if (!identical(scaleup, 1))
-    xyz <- scale(xyz, scale = 1/scaleup, center = F)
 
   mxyz <- mirror_fish(xyz)
   # |dy| is twice distance from midline (point and mirror sit at +d and -d)
