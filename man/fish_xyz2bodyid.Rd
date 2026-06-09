@@ -6,7 +6,7 @@
 \usage{
 fish_xyz2bodyid(
   xyz,
-  units = c("raw", "nm", "microns"),
+  units = c("emraw", "raw", "nm", "microns"),
   node = "neutu",
   cache = FALSE
 )
@@ -16,11 +16,11 @@ fish_xyz2bodyid(
 an Nx3 numeric matrix / data.frame, or anything else accepted by
 \code{\link[nat]{xyzmatrix}} (including \code{"x,y,z"} strings).}
 
-\item{units}{Units of the input coordinates. \code{"raw"} (the default)
-leaves them unchanged; \code{"nm"} divides by the fish2 voxel size
-\code{(16, 16, 15)}; \code{"microns"} divides by \code{(16, 16, 15) /
-1000}. The default is \code{"raw"} because the most common interactive
-use is pasting coordinates from neuroglancer.}
+\item{units}{Units of the input coordinates. \code{"emraw"} (the default)
+matches coordinates copied from neuroglancer URLs against the fish2 EM
+imagery; \code{"raw"} matches the neuprint segmentation grid;
+\code{"nm"} and \code{"microns"} are self-explanatory. See
+\code{\link{fish_coords}} for the underlying voxel sizes.}
 
 \item{node}{The DVID node (UUID) to query. The default \code{"neutu"} uses
 the active neutu node, normally the most up-to-date.}
@@ -35,26 +35,31 @@ A character vector of body ids, one per input point.
 \description{
 Look up the segmentation body id at each 3D point. Thin wrapper
   around \code{malevnc::\link[malevnc]{manc_xyz2bodyid}} that targets the
-  active fish2 DVID node and accepts coordinates in raw voxels (default), nm,
-  or microns.
+  active fish2 DVID node. Input may be in emraw (default), raw, nm or
+  microns; see \code{\link{fish_coords}} for what each means.
 }
 \details{
-Coordinates are rounded to integer voxel positions before the DVID
-  call (\code{segmentation/labels}), as in \code{manc_xyz2bodyid}. Points
-  with \code{NA} coordinates yield \code{NA_character_} in the output.
+The DVID \code{segmentation/labels} endpoint indexes the
+  segmentation at the neuprint (16, 16, 15) "raw" grid, so input
+  coordinates are first converted to raw via \code{\link{fish_coords}} and
+  then rounded to integer voxel positions before the call (as in
+  \code{manc_xyz2bodyid}). Points with \code{NA} coordinates yield
+  \code{NA_character_} in the output.
 }
 \examples{
 \dontrun{
-# single point from a neuroglancer URL (raw voxel coords)
-fish_xyz2bodyid(c(36844, 40493, 16389))
+# default emraw matches a point copied from a fish2 EM neuroglancer URL
+fish_xyz2bodyid(c(115560, 56056, 5492))                # -> 100001043
 
-# batch in nm (e.g. from fish_somapos())
-meta <- fish_neuprint_meta(109192746)
-fish_xyz2bodyid(fish_somapos(meta), units = "nm")
+# same body looked up via neuprint-raw coordinates
+fish_xyz2bodyid(c(57780, 28028, 10984), units = "raw") # -> 100001043
 }
 }
 \seealso{
-\code{\link{fish_neuprint_meta}}, \code{\link{fish_somapos}},
+\code{\link{fish_neuprint_meta}}, \code{\link{fish_coords}},
   \code{malevnc::\link[malevnc]{manc_xyz2bodyid}}
+
+Other coords: 
+\code{\link{fish_coords}()}
 }
 \concept{coords}
