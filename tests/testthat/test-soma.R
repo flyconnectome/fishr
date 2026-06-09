@@ -58,10 +58,35 @@ test_that("fish_somapos errors when neither column is present", {
                regexp = "somaLocation or tosomaLocation")
 })
 
-test_that("fish_soma_side(method='manual') errors for now", {
-  df <- data.frame(name = "x_L")
+test_that("fish_soma_side(method='manual') returns the somaSide column", {
+  df <- data.frame(
+    name = c("x_L", "y_R", "z_no_suffix"),
+    somaSide = c("L", "R", NA_character_),
+    stringsAsFactors = FALSE
+  )
+  expect_identical(fish_soma_side(df, method = "manual"),
+                   c("L", "R", NA_character_))
+})
+
+test_that("fish_soma_side(method='manual') errors when somaSide is absent", {
+  df <- data.frame(name = "x_L", stringsAsFactors = FALSE)
   expect_error(fish_soma_side(df, method = "manual"),
-               regexp = "manual.*not yet implemented")
+               regexp = "somaSide")
+})
+
+test_that("fish_soma_side(method='auto') prefers manual over instance/position", {
+  # Row 1: manual=L; instance would say R; position would say L. Auto must say L.
+  # Row 2: manual NA, instance R fills in.
+  # Row 3: manual NA, no instance suffix, position resolves it.
+  df <- data.frame(
+    name = c("foo_R", "bar_R", "baz_no_suffix"),
+    somaSide = c("L", NA, NA),
+    somaLocation = c("36844,40493,16389",
+                     "36844,13365,16389",
+                     "36844,13365,16389"),
+    stringsAsFactors = FALSE
+  )
+  expect_identical(fish_soma_side(df), c("L", "R", "R"))
 })
 
 test_that("fish_soma_side(method='instance') extracts L/R/M/U or NA", {

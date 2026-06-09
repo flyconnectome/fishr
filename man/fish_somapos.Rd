@@ -72,12 +72,11 @@ The "side" returned by \code{fish_soma_side} is the **logical**
 
 Methods for \code{fish_soma_side}:
   \describe{
-    \item{\code{auto}}{Try \code{manual} first (when implemented), then
-      fill remaining \code{NA}s with \code{instance}, then with
-      \code{position}. At present, \code{manual} is not yet implemented,
-      so \code{auto} chains \code{instance} -> \code{position}.}
-    \item{\code{manual}}{Not yet implemented; errors. Will read a
-      \code{somaSide} column once neuprintr exposes one.}
+    \item{\code{auto}}{Try \code{manual} first, then fill remaining
+      \code{NA}s with \code{instance}, then with \code{position}.}
+    \item{\code{manual}}{Read the neuprint \code{somaSide} column
+      directly. Returns \code{NA} for bodies that do not have a manual
+      assignment.}
     \item{\code{instance}}{Match \code{_([LRMU])$} against the
       \code{name} (or \code{instance}) column.}
     \item{\code{position}}{Classify each soma by its signed displacement

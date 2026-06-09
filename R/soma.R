@@ -19,12 +19,11 @@
 #'
 #' @details Methods for \code{fish_soma_side}:
 #'   \describe{
-#'     \item{\code{auto}}{Try \code{manual} first (when implemented), then
-#'       fill remaining \code{NA}s with \code{instance}, then with
-#'       \code{position}. At present, \code{manual} is not yet implemented,
-#'       so \code{auto} chains \code{instance} -> \code{position}.}
-#'     \item{\code{manual}}{Not yet implemented; errors. Will read a
-#'       \code{somaSide} column once neuprintr exposes one.}
+#'     \item{\code{auto}}{Try \code{manual} first, then fill remaining
+#'       \code{NA}s with \code{instance}, then with \code{position}.}
+#'     \item{\code{manual}}{Read the neuprint \code{somaSide} column
+#'       directly. Returns \code{NA} for bodies that do not have a manual
+#'       assignment.}
 #'     \item{\code{instance}}{Match \code{_([LRMU])$} against the
 #'       \code{name} (or \code{instance}) column.}
 #'     \item{\code{position}}{Classify each soma by its signed displacement
@@ -111,15 +110,26 @@ fish_soma_side <- function(ids,
                            threshold = 0) {
   method <- match.arg(method)
 
+  # For manual we only need the somaSide column; fetch it if not already
+  # present on a data.frame input.
   if (method == "manual") {
-    stop("method=\"manual\" is not yet implemented; ",
-         "no somaSide column is exposed for fish2 yet.")
+    if (is.data.frame(ids)) {
+      if (!"somaSide" %in% colnames(ids))
+        stop("metadata must contain a somaSide column.")
+      return(ids$somaSide)
+    }
+    meta <- fish_neuprint_meta(ids)
+    if (nrow(meta) == 0L) return(character(0))
+    if (!"somaSide" %in% colnames(meta))
+      stop("fish_neuprint_meta did not return a somaSide column.")
+    return(meta$somaSide)
   }
 
   meta <- if (is.data.frame(ids)) ids else fish_neuprint_meta(ids)
   if (nrow(meta) == 0L) return(character(0))
   name_col <- intersect(c("name", "instance"), colnames(meta))[1]
   has_loc <- any(c("somaLocation", "tosomaLocation") %in% colnames(meta))
+  has_side <- "somaSide" %in% colnames(meta)
 
   if (method == "instance") {
     if (is.na(name_col))
@@ -141,14 +151,19 @@ fish_soma_side <- function(ids,
     return(res)
   }
 
-  # method == "auto": instance -> position (manual to be added later).
-  if (is.na(name_col) && !has_loc) {
-    stop("metadata must contain at least one of somaLocation and tosomaLocation",
-         " and at least one of name or instance.")
+  # method == "auto": manual -> instance -> position.
+  if (!has_side && is.na(name_col) && !has_loc) {
+    stop("metadata must contain at least one of somaSide, name/instance, ",
+         "somaLocation/tosomaLocation.")
   }
-  res <- fish_soma_side(meta, method='instance')
+  res <- if (has_side) meta$somaSide else rep(NA_character_, nrow(meta))
   missing <- is.na(res)
-  if (any(missing)) {
+  if (any(missing) && !is.na(name_col)) {
+    res[missing] <- fish_soma_side(meta[missing, , drop = FALSE],
+                                   method = "instance")
+    missing <- is.na(res)
+  }
+  if (any(missing) && has_loc) {
     res[missing] <- fish_soma_side(meta[missing, , drop = FALSE],
                                    method = "position",
                                    threshold = threshold)
