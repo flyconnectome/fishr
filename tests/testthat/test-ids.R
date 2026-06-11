@@ -48,6 +48,11 @@ test_that("fish_ids passes through numeric ids", {
   expect_equal(ids, c("111", "222"))
 })
 
+test_that("fish_ids accepts comma or space separated ids", {
+  ids <- fish_ids("111, 222 333\n444", mustWork = FALSE)
+  expect_equal(ids, c("111", "222", "333", "444"))
+})
+
 test_that("fish_ids extracts bodyid from data.frame", {
   df <- data.frame(bodyid = c(10, 20, 30))
   ids <- fish_ids(df, mustWork = FALSE)
