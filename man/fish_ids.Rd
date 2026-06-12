@@ -25,8 +25,8 @@ found.}
 Character is the safest default because body ids may exceed the 53-bit
 integer limit of double-precision floating point (\code{2^53 - 1}).}
 
-\item{integer64}{Whether to return ids as \code{bit64::integer64}
-(default \code{FALSE}). Takes precedence over \code{as_character}.}
+\item{integer64}{Whether to return ids as \code{bit64::integer64} (default
+\code{FALSE}). Takes precedence over \code{as_character}.}
 
 \item{unique}{Whether to de-duplicate the result (default \code{TRUE}).}
 
@@ -34,14 +34,14 @@ integer limit of double-precision floating point (\code{2^53 - 1}).}
 \code{\link{fish_neuprint}}).}
 }
 \value{
-A character vector of body ids (default), or
-  \code{bit64::integer64} when \code{integer64=TRUE} or
-  \code{as_character=FALSE}.
+A character vector of body ids (default), or \code{bit64::integer64}
+  when \code{integer64=TRUE} or \code{as_character=FALSE}.
 }
 \description{
-Extracts body ids from vectors, data.frames, or query strings.
-  Query strings are passed to \code{malevnc::\link[malevnc]{manc_ids}} via
-  the fish2 neuprint server.  For filtering DVID annotations by field, see
+Extracts body ids from vectors, comma/space separated strings,
+  data.frames, or query strings. Query strings are passed to
+  \code{malevnc::\link[malevnc]{manc_ids}} via the fish2 neuprint server.
+  For filtering DVID annotations by field, see
   \code{\link{fish_dvid_annotations}}.
 }
 \examples{
@@ -51,9 +51,14 @@ fish_ids("RGC")
 # neuprint where clause
 fish_ids("where:n.type='RGC'")
 }
-\dontrun{
 # numeric ids passed through
 fish_ids(c(12345, 67890))
+# space / comma separated string
+fish_ids("112, 234,345")
+\dontrun{
+# handy for receiving ids from neuroglancer via the clipboard
+ids=fish_ids(clipr::read_clip())
+
 # from a data.frame
 df <- fish_dvid_annotations()
 fish_ids(df)

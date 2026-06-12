@@ -1,8 +1,9 @@
 #' Resolve fish2 body ids from a variety of inputs
 #'
-#' @description Extracts body ids from vectors, data.frames, or query strings.
-#'   Query strings are passed to \code{malevnc::\link[malevnc]{manc_ids}} via
-#'   the fish2 neuprint server.  For filtering DVID annotations by field, see
+#' @description Extracts body ids from vectors, comma/space separated strings,
+#'   data.frames, or query strings. Query strings are passed to
+#'   \code{malevnc::\link[malevnc]{manc_ids}} via the fish2 neuprint server.
+#'   For filtering DVID annotations by field, see
 #'   \code{\link{fish_dvid_annotations}}.
 #'
 #' @param x A numeric/character vector of body ids, a \code{data.frame} with a
@@ -13,15 +14,14 @@
 #' @param as_character Whether to return ids as character (default \code{TRUE}).
 #'   Character is the safest default because body ids may exceed the 53-bit
 #'   integer limit of double-precision floating point (\code{2^53 - 1}).
-#' @param integer64 Whether to return ids as \code{bit64::integer64}
-#'   (default \code{FALSE}). Takes precedence over \code{as_character}.
+#' @param integer64 Whether to return ids as \code{bit64::integer64} (default
+#'   \code{FALSE}). Takes precedence over \code{as_character}.
 #' @param unique Whether to de-duplicate the result (default \code{TRUE}).
 #' @param conn A \code{neuprint_connection} object (default \code{NULL} uses
 #'   \code{\link{fish_neuprint}}).
 #'
-#' @return A character vector of body ids (default), or
-#'   \code{bit64::integer64} when \code{integer64=TRUE} or
-#'   \code{as_character=FALSE}.
+#' @return A character vector of body ids (default), or \code{bit64::integer64}
+#'   when \code{integer64=TRUE} or \code{as_character=FALSE}.
 #' @export
 #' @family data-queries
 #' @examples
@@ -31,9 +31,14 @@
 #' # neuprint where clause
 #' fish_ids("where:n.type='RGC'")
 #' }
-#' \dontrun{
 #' # numeric ids passed through
 #' fish_ids(c(12345, 67890))
+#' # space / comma separated string
+#' fish_ids("112, 234,345")
+#' \dontrun{
+#' # handy for receiving ids from neuroglancer via the clipboard
+#' ids=fish_ids(clipr::read_clip())
+#'
 #' # from a data.frame
 #' df <- fish_dvid_annotations()
 #' fish_ids(df)
@@ -43,20 +48,29 @@ fish_ids <- function(x, mustWork = TRUE, as_character = TRUE,
   if (is.data.frame(x)) {
     stopifnot("bodyid" %in% colnames(x))
     ids <- x[["bodyid"]]
-  } else if (is.character(x) && length(x) == 1 && .fish_is_query(x)) {
-    if (is.null(conn))
-      conn <- fish_neuprint()
-    ids <- with_fish(
-      malevnc::manc_ids(x, mustWork = mustWork, as_character = as_character,
-                         integer64 = integer64, unique = unique, conn = conn)
-    )
-    return(ids)
+  } else if (is.character(x) && length(x) == 1) {
+    split_ids <- unlist(strsplit(trimws(x), "[,[:space:]]+"))
+    split_ids <- split_ids[nzchar(split_ids)]
+    looks_like_ids <- length(split_ids) > 0 && all(grepl("^[0-9]+$", split_ids))
+    if (looks_like_ids) {
+      ids <- split_ids
+    } else if (.fish_is_query(x)) {
+      if (is.null(conn))
+        conn <- fish_neuprint()
+      ids <- with_fish(
+        malevnc::manc_ids(x, mustWork = mustWork, as_character = as_character,
+                           integer64 = integer64, unique = unique, conn = conn)
+      )
+      return(ids)
+    } else {
+      ids <- x
+    }
   } else {
     ids <- x
   }
 
-  ids <- if (isTRUE(integer64)) bit64::as.integer64(ids)
-         else if (as_character) as.character(ids)
+  ids <- if (integer64) bit64::as.integer64(ids)
+         else if (as_character) neuprintr:::id2char(ids)
          else bit64::as.integer64(ids)
   if (unique) ids <- unique(ids)
   if (mustWork && length(ids) == 0)

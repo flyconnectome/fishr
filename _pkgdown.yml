@@ -38,3 +38,7 @@ reference:
   - '`fish_point_side`'
   - '`fish_somapos`'
   - '`fish_soma_side`'
+- title: "Utility: URL helpers"
+  contents:
+  - '`flyem_shorten_url`'
+  - '`flyem_expand_url`'
