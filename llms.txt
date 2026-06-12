@@ -277,3 +277,10 @@ hcm = coconat::add_cluster_info(cf_meta(hc), hc, h = 1)
   [`fish_soma_side()`](https://flyconnectome.github.io/fishr/reference/fish_somapos.md)
   : Soma positions and logical sides for fish2 neurons
 
+## Utility: URL helpers
+
+- [`reexports`](https://flyconnectome.github.io/fishr/reference/reexports.md)
+  [`flyem_shorten_url`](https://flyconnectome.github.io/fishr/reference/reexports.md)
+  [`flyem_expand_url`](https://flyconnectome.github.io/fishr/reference/reexports.md)
+  : Objects exported from other packages
+

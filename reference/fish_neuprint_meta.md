@@ -68,27 +68,27 @@ Other data-queries:
 # \donttest{
 head(fish_neuprint_meta("RGC"))
 #> Warning: Clio dataset lookup failed; falling back to baked-in neuprint settings for `fish2`. Clio-backed functionality may be unavailable in this session.
-#>      bodyid post pre downstream upstream synweight nsoma    statusLabel group
-#> 1 110656660    8 219        229        8       237     0 Sensory Anchor     0
-#> 2 100009896    2  89         90        2        92     0 Sensory Anchor     0
-#> 3 100015071    0 128        135        0       135     0 Sensory Anchor     0
-#> 4 100015468    2 290        316        2       318     0 Sensory Anchor     0
-#> 5 100017513    7 245        252        7       259     0 Sensory Anchor     0
-#> 6 100023948    1 167        173        1       174     0 Sensory Anchor     0
-#>    name type somaSide connectivityType perNodeSc proposedType keywords class
-#> 1 RGC_R  RGC     <NA>             <NA>        NA         <NA>     <NA>  <NA>
-#> 2 RGC_R  RGC     <NA>             <NA>        NA         <NA>     <NA>  <NA>
-#> 3 RGC_R  RGC     <NA>             <NA>        NA         <NA>     <NA>  <NA>
-#> 4 RGC_R  RGC     <NA>             <NA>        NA         <NA>     <NA>  <NA>
-#> 5 RGC_R  RGC     <NA>             <NA>        NA         <NA>     <NA>  <NA>
-#> 6 RGC_R  RGC     <NA>             <NA>        NA         <NA>     <NA>  <NA>
-#>   comment somaLocation somaId somaVoxels zapbenchId closestLandmarkLocation
-#> 1    <NA>         <NA>     NA         NA         NA                    <NA>
-#> 2    <NA>         <NA>     NA         NA         NA                    <NA>
-#> 3    <NA>         <NA>     NA         NA         NA                    <NA>
-#> 4    <NA>         <NA>     NA         NA         NA                    <NA>
-#> 5    <NA>         <NA>     NA         NA         NA                    <NA>
-#> 6    <NA>         <NA>     NA         NA         NA                    <NA>
+#>      bodyid post pre downstream upstream synweight nsoma somaSide
+#> 1 110656660    8 219        229        8       237     0     <NA>
+#> 2 100009896    2  89         90        2        92     0     <NA>
+#> 3 100015071    0 128        135        0       135     0     <NA>
+#> 4 100015468    2 290        316        2       318     0     <NA>
+#> 5 100017513    7 245        252        7       259     0     <NA>
+#> 6 100023948    1 167        173        1       174     0     <NA>
+#>      statusLabel connectivityType  name type group perNodeSc proposedType
+#> 1 Sensory Anchor             <NA> RGC_R  RGC     0        NA         <NA>
+#> 2 Sensory Anchor             <NA> RGC_R  RGC     0        NA         <NA>
+#> 3 Sensory Anchor             <NA> RGC_R  RGC     0        NA         <NA>
+#> 4 Sensory Anchor             <NA> RGC_R  RGC     0        NA         <NA>
+#> 5 Sensory Anchor             <NA> RGC_R  RGC     0        NA         <NA>
+#> 6 Sensory Anchor             <NA> RGC_R  RGC     0        NA         <NA>
+#>   keywords class comment somaLocation somaId somaVoxels zapbenchId
+#> 1     <NA>  <NA>    <NA>         <NA>     NA         NA         NA
+#> 2     <NA>  <NA>    <NA>         <NA>     NA         NA         NA
+#> 3     <NA>  <NA>    <NA>         <NA>     NA         NA         NA
+#> 4     <NA>  <NA>    <NA>         <NA>     NA         NA         NA
+#> 5     <NA>  <NA>    <NA>         <NA>     NA         NA         NA
+#> 6     <NA>  <NA>    <NA>         <NA>     NA         NA         NA
 #>   closestLandmarkDistanceMicrons tosomaLocation status   voxels  soma
 #> 1                             NA           <NA> Anchor  9735937 FALSE
 #> 2                             NA           <NA> Anchor  6228154 FALSE
