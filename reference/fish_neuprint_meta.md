@@ -75,20 +75,20 @@ head(fish_neuprint_meta("RGC"))
 #> 4 100015468    2 290        316        2       318     0     <NA>
 #> 5 100017513    7 245        252        7       259     0     <NA>
 #> 6 100023948    1 167        173        1       174     0     <NA>
-#>      statusLabel connectivityType  name type group perNodeSc proposedType
-#> 1 Sensory Anchor             <NA> RGC_R  RGC     0        NA         <NA>
-#> 2 Sensory Anchor             <NA> RGC_R  RGC     0        NA         <NA>
-#> 3 Sensory Anchor             <NA> RGC_R  RGC     0        NA         <NA>
-#> 4 Sensory Anchor             <NA> RGC_R  RGC     0        NA         <NA>
-#> 5 Sensory Anchor             <NA> RGC_R  RGC     0        NA         <NA>
-#> 6 Sensory Anchor             <NA> RGC_R  RGC     0        NA         <NA>
-#>   keywords class comment somaLocation somaId somaVoxels zapbenchId
-#> 1     <NA>  <NA>    <NA>         <NA>     NA         NA         NA
-#> 2     <NA>  <NA>    <NA>         <NA>     NA         NA         NA
-#> 3     <NA>  <NA>    <NA>         <NA>     NA         NA         NA
-#> 4     <NA>  <NA>    <NA>         <NA>     NA         NA         NA
-#> 5     <NA>  <NA>    <NA>         <NA>     NA         NA         NA
-#> 6     <NA>  <NA>    <NA>         <NA>     NA         NA         NA
+#>      statusLabel connectivityType perNodeSc group  name proposedType type class
+#> 1 Sensory Anchor             <NA>        NA     0 RGC_R         <NA>  RGC  <NA>
+#> 2 Sensory Anchor             <NA>        NA     0 RGC_R         <NA>  RGC  <NA>
+#> 3 Sensory Anchor             <NA>        NA     0 RGC_R         <NA>  RGC  <NA>
+#> 4 Sensory Anchor             <NA>        NA     0 RGC_R         <NA>  RGC  <NA>
+#> 5 Sensory Anchor             <NA>        NA     0 RGC_R         <NA>  RGC  <NA>
+#> 6 Sensory Anchor             <NA>        NA     0 RGC_R         <NA>  RGC  <NA>
+#>   keywords comment somaLocation somaId somaVoxels zapbenchId
+#> 1     <NA>    <NA>         <NA>     NA         NA         NA
+#> 2     <NA>    <NA>         <NA>     NA         NA         NA
+#> 3     <NA>    <NA>         <NA>     NA         NA         NA
+#> 4     <NA>    <NA>         <NA>     NA         NA         NA
+#> 5     <NA>    <NA>         <NA>     NA         NA         NA
+#> 6     <NA>    <NA>         <NA>     NA         NA         NA
 #>   closestLandmarkDistanceMicrons tosomaLocation status   voxels  soma
 #> 1                             NA           <NA> Anchor  9735937 FALSE
 #> 2                             NA           <NA> Anchor  6228154 FALSE
