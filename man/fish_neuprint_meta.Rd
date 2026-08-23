@@ -46,10 +46,10 @@ head(fish_neuprint_meta("RGC"))
 \seealso{
 \code{\link[malevnc]{manc_neuprint_meta}}
 
-Other data-queries: 
-\code{\link{fish_connection_table}()},
-\code{\link{fish_ids}()},
-\code{\link{fish_somapos}()},
-\code{\link{register_fish_coconat}()}
+Other data-queries:
+\code{\link[=fish_connection_table]{fish_connection_table()}},
+\code{\link[=fish_ids]{fish_ids()}},
+\code{\link[=fish_somapos]{fish_somapos()}},
+\code{\link[=register_fish_coconat]{register_fish_coconat()}}
 }
 \concept{data-queries}

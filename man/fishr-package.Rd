@@ -53,13 +53,18 @@ Useful links:
 }
 
 
-Other setup-data-access: 
-\code{\link{fish_neuprint}()},
-\code{\link{fish_setup}()},
-\code{\link{with_fish}()}
+Other setup-data-access:
+\code{\link[=fish_neuprint]{fish_neuprint()}},
+\code{\link[=fish_setup]{fish_setup()}},
+\code{\link[=with_fish]{with_fish()}}
 }
 \author{
 \strong{Maintainer}: Gregory Jefferis \email{jefferis@gmail.com} (\href{https://orcid.org/0000-0002-0587-9355}{ORCID})
+
+Authors:
+\itemize{
+  \item Gregory Jefferis \email{jefferis@gmail.com} (\href{https://orcid.org/0000-0002-0587-9355}{ORCID})
+}
 
 }
 \concept{setup-data-access}

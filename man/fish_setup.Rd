@@ -35,9 +35,9 @@ fish_setup()
 }
 }
 \seealso{
-Other setup-data-access: 
-\code{\link{fish_neuprint}()},
+Other setup-data-access:
+\code{\link[=fish_neuprint]{fish_neuprint()}},
 \code{\link{fishr-package}},
-\code{\link{with_fish}()}
+\code{\link[=with_fish]{with_fish()}}
 }
 \concept{setup-data-access}

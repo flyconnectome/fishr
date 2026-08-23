@@ -76,9 +76,9 @@ read_fish_meshes(12345)
 \code{\link[malevnc]{choose_flyem_dataset}},
   \code{\link[malevnc]{choose_malevnc_dataset}}
 
-Other setup-data-access: 
-\code{\link{fish_neuprint}()},
-\code{\link{fish_setup}()},
+Other setup-data-access:
+\code{\link[=fish_neuprint]{fish_neuprint()}},
+\code{\link[=fish_setup]{fish_setup()}},
 \code{\link{fishr-package}}
 }
 \concept{setup-data-access}

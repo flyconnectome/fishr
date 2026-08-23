@@ -48,9 +48,9 @@ head(fish_rois())
 \code{\link[neuprintr]{neuprint_ROI_hierarchy}},
   \code{\link{fish_roi_meshes}}
 
-Other 3d-meshes-skeletons: 
-\code{\link{fish_roi_meshes}()},
-\code{\link{read_fish_meshes}()},
-\code{\link{read_fish_neurons}()}
+Other 3d-meshes-skeletons:
+\code{\link[=fish_roi_meshes]{fish_roi_meshes()}},
+\code{\link[=read_fish_meshes]{read_fish_meshes()}},
+\code{\link[=read_fish_neurons]{read_fish_neurons()}}
 }
 \concept{3d-meshes-skeletons}

@@ -48,9 +48,9 @@ fish_roi_meshes(c("Midbrain", "Hindbrain"), .progress = "none")
 \code{\link[neuprintr]{neuprint_ROI_mesh}},
   \code{\link[nat]{nlapply}}, \code{\link{fish_rois}}
 
-Other 3d-meshes-skeletons: 
-\code{\link{fish_rois}()},
-\code{\link{read_fish_meshes}()},
-\code{\link{read_fish_neurons}()}
+Other 3d-meshes-skeletons:
+\code{\link[=fish_rois]{fish_rois()}},
+\code{\link[=read_fish_meshes]{read_fish_meshes()}},
+\code{\link[=read_fish_neurons]{read_fish_neurons()}}
 }
 \concept{3d-meshes-skeletons}

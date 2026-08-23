@@ -65,10 +65,10 @@ fish_ids(df)
 }
 }
 \seealso{
-Other data-queries: 
-\code{\link{fish_connection_table}()},
-\code{\link{fish_neuprint_meta}()},
-\code{\link{fish_somapos}()},
-\code{\link{register_fish_coconat}()}
+Other data-queries:
+\code{\link[=fish_connection_table]{fish_connection_table()}},
+\code{\link[=fish_neuprint_meta]{fish_neuprint_meta()}},
+\code{\link[=fish_somapos]{fish_somapos()}},
+\code{\link[=register_fish_coconat]{register_fish_coconat()}}
 }
 \concept{data-queries}

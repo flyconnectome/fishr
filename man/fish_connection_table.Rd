@@ -70,10 +70,10 @@ fish_connection_table("RGC", partners = "outputs", summary = TRUE)
 \seealso{
 \code{\link[malevnc]{manc_connection_table}}
 
-Other data-queries: 
-\code{\link{fish_ids}()},
-\code{\link{fish_neuprint_meta}()},
-\code{\link{fish_somapos}()},
-\code{\link{register_fish_coconat}()}
+Other data-queries:
+\code{\link[=fish_ids]{fish_ids()}},
+\code{\link[=fish_neuprint_meta]{fish_neuprint_meta()}},
+\code{\link[=fish_somapos]{fish_somapos()}},
+\code{\link[=register_fish_coconat]{register_fish_coconat()}}
 }
 \concept{data-queries}

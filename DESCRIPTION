@@ -40,6 +40,6 @@ Suggests:
     rgl,
     Morpho
 Config/testthat/edition: 3
-RoxygenNote: 7.3.3
 URL: https://flyconnectome.github.io/fishr/, https://github.com/flyconnectome/fishr
 BugReports: https://github.com/flyconnectome/fishr/issues
+Config/roxygen2/version: 8.1.0

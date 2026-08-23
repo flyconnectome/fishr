@@ -43,9 +43,9 @@ plot3d(rgcs)
 }
 }
 \seealso{
-Other 3d-meshes-skeletons: 
-\code{\link{fish_roi_meshes}()},
-\code{\link{fish_rois}()},
-\code{\link{read_fish_neurons}()}
+Other 3d-meshes-skeletons:
+\code{\link[=fish_roi_meshes]{fish_roi_meshes()}},
+\code{\link[=fish_rois]{fish_rois()}},
+\code{\link[=read_fish_neurons]{read_fish_neurons()}}
 }
 \concept{3d-meshes-skeletons}

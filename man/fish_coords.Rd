@@ -53,7 +53,7 @@ fish_coords(rbind(c(115560, 56056, 5492), c(0, 0, 0)),
 \seealso{
 \code{\link{fish_xyz2bodyid}}
 
-Other coords: 
-\code{\link{fish_xyz2bodyid}()}
+Other coords:
+\code{\link[=fish_xyz2bodyid]{fish_xyz2bodyid()}}
 }
 \concept{coords}

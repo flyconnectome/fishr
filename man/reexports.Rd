@@ -12,6 +12,6 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{malevnc}{\code{\link[malevnc:flyem_shorten_url]{flyem_expand_url}}, \code{\link[malevnc]{flyem_shorten_url}}}
+  \item{malevnc}{\code{\link[malevnc:flyem_expand_url]{flyem_expand_url()}}, \code{\link[malevnc:flyem_shorten_url]{flyem_shorten_url()}}}
 }}
 

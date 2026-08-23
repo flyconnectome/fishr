@@ -135,8 +135,8 @@ fish_annotate(
 }
 }
 \seealso{
-Other live-annotations: 
-\code{\link{fish_clio_annotations}()},
-\code{\link{fish_dvid_annotations}()}
+Other live-annotations:
+\code{\link[=fish_clio_annotations]{fish_clio_annotations()}},
+\code{\link[=fish_dvid_annotations]{fish_dvid_annotations()}}
 }
 \concept{live-annotations}

@@ -76,8 +76,8 @@ df
 }
 }
 \seealso{
-Other live-annotations: 
-\code{\link{fish_annotate}()},
-\code{\link{fish_clio_annotations}()}
+Other live-annotations:
+\code{\link[=fish_annotate]{fish_annotate()}},
+\code{\link[=fish_clio_annotations]{fish_clio_annotations()}}
 }
 \concept{live-annotations}

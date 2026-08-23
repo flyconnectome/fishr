@@ -99,10 +99,10 @@ fish_soma_side(meta)
 \code{\link{fish_neuprint_meta}}, \code{\link{fish_point_side}},
   \code{\link{mirror_fish}}
 
-Other data-queries: 
-\code{\link{fish_connection_table}()},
-\code{\link{fish_ids}()},
-\code{\link{fish_neuprint_meta}()},
-\code{\link{register_fish_coconat}()}
+Other data-queries:
+\code{\link[=fish_connection_table]{fish_connection_table()}},
+\code{\link[=fish_ids]{fish_ids()}},
+\code{\link[=fish_neuprint_meta]{fish_neuprint_meta()}},
+\code{\link[=register_fish_coconat]{register_fish_coconat()}}
 }
 \concept{data-queries}

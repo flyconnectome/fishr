@@ -59,7 +59,7 @@ fish_xyz2bodyid(c(57780, 28028, 10984), units = "raw") # -> 100001043
 \code{\link{fish_neuprint_meta}}, \code{\link{fish_coords}},
   \code{malevnc::\link[malevnc]{manc_xyz2bodyid}}
 
-Other coords: 
-\code{\link{fish_coords}()}
+Other coords:
+\code{\link[=fish_coords]{fish_coords()}}
 }
 \concept{coords}

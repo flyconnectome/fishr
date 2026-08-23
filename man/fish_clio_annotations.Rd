@@ -68,8 +68,8 @@ fish_clio_annotations(query = list(group = 100003384))
 }
 }
 \seealso{
-Other live-annotations: 
-\code{\link{fish_annotate}()},
-\code{\link{fish_dvid_annotations}()}
+Other live-annotations:
+\code{\link[=fish_annotate]{fish_annotate()}},
+\code{\link[=fish_dvid_annotations]{fish_dvid_annotations()}}
 }
 \concept{live-annotations}

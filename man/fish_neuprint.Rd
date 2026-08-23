@@ -57,9 +57,9 @@ conn
 \seealso{
 \code{\link[malevnc]{manc_neuprint}}
 
-Other setup-data-access: 
-\code{\link{fish_setup}()},
+Other setup-data-access:
+\code{\link[=fish_setup]{fish_setup()}},
 \code{\link{fishr-package}},
-\code{\link{with_fish}()}
+\code{\link[=with_fish]{with_fish()}}
 }
 \concept{setup-data-access}
