@@ -53,6 +53,27 @@ test_that("fish_somapos returns NA row when both locations missing", {
   expect_equal(xyz[2, ], c(X = 1, Y = 2, Z = 3))
 })
 
+test_that("fish_somapos returns NA rows when no location parses", {
+  # single body with no soma (e.g. RGC 109786996) used to error
+  one <- data.frame(bodyid = "x", somaLocation = NA)
+  xyz <- fish_somapos(one)
+  expect_equal(dim(xyz), c(1L, 3L))
+  expect_true(all(is.na(xyz)))
+
+  many <- data.frame(somaLocation = c(NA, "", NA),
+                     tosomaLocation = NA_character_)
+  xyz <- fish_somapos(many, units = "raw")
+  expect_equal(dim(xyz), c(3L, 3L))
+  expect_true(all(is.na(xyz)))
+})
+
+test_that("fish_somapos works with only a tosomaLocation column", {
+  df <- data.frame(tosomaLocation = c("1,2,3", NA))
+  xyz <- fish_somapos(df, units = "raw")
+  expect_equal(xyz[1, ], c(X = 1, Y = 2, Z = 3))
+  expect_true(all(is.na(xyz[2, ])))
+})
+
 test_that("fish_somapos errors when neither column is present", {
   expect_error(fish_somapos(data.frame(bodyid = "x")),
                regexp = "somaLocation or tosomaLocation")
