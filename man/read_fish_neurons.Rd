@@ -21,7 +21,9 @@ read_fish_neurons(
 (default \code{FALSE} in contrast to
 \code{\link[neuprintr]{neuprint_read_neurons}}).}
 
-\item{units}{Units of the returned neurons (default \code{"nm"}).}
+\item{units}{Units of the returned neurons: \code{"nm"} (default),
+\code{"raw"} (16 x 16 x 15 nm voxels) or \code{"microns"}. Node radii are
+scaled by the x voxel size (16 nm) for \code{"raw"}.}
 
 \item{heal.threshold}{The threshold for healing disconnected skeleton
 fragments. The default of \code{Inf} ensures that all fragments are joined
@@ -42,6 +44,13 @@ A \code{\link[nat:neuronlist]{neuronlist}} object containing one or
 }
 \description{
 Read neuron skeletons via neuprint
+}
+\details{
+Since September 2026 the fish2 neuprint server returns skeletons
+  with coordinates and radii in nm (previously they were in 16 x 16 x 15 nm
+  voxels). If the dataset metadata advertise a \code{skeletonSize} (nm per
+  skeleton unit) this is used to calibrate the skeletons; otherwise they are
+  assumed to be in nm.
 }
 \examples{
 \donttest{

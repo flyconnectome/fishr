@@ -1,3 +1,12 @@
+# fishr (development version)
+
+* `read_fish_neurons()` and `fish_roi_meshes()` now expect fish2 skeletons and
+  ROI meshes in nm, matching the change on the fish2 neuprint server
+  (September 2026). Previously the default `units = "nm"` output was 16x too
+  large. Skeleton radii are now also correctly scaled for every `units`
+  option. If neuprint advertises a `skeletonSize` for the dataset,
+  `read_fish_neurons()` uses it to calibrate skeletons.
+
 # fishr 0.3.0
 
 Several new features including a L/R-side classifier, soma-position helpers and

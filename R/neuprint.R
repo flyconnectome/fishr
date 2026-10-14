@@ -154,9 +154,9 @@ fish_rois <- function(root = NULL, rval = c("edgelist", "graph"),
 #' @param ... Additional arguments passed to \code{\link[nat]{nlapply}}. This
 #'   allows progress reporting and simple parallelisation.
 #' @inheritParams with_fish
-#' @details It seems that the nominal voxel dimensions of the dataset are 16 x
-#' 16 x 15 nm. ROI meshes are returned from neuprint in raw voxel space and are
-#' scaled up by this factor to give the default nm scaling.
+#' @details Since September 2026 fish2 ROI meshes are returned from neuprint in
+#'   nm (previously they were in raw 16 x 16 x 15 nm voxel space). For
+#'   \code{units="raw"} they are scaled down by these voxel dimensions.
 #'
 #' @return A \code{shapelist3d} containing one or more ROI \code{mesh3d}
 #'   objects. Missing meshes are dropped with a warning.
@@ -213,9 +213,7 @@ fish_roi_meshes <- function(rois, units = c("nm", "raw", "microns"),
     res <- res[!failed]
   }
   class(res) <- union("shapelist3d", class(res))
-  voxdims_nm=c(16,16,15)
-  res=switch(units, raw = res, nm = res*voxdims_nm, res * (voxdims_nm / 1000))
-  res
+  switch(units, raw = res / c(16, 16, 15), microns = res / 1000, res)
 }
 
 #' Connectivity query for fish2 neurons
