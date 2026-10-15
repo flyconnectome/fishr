@@ -82,21 +82,13 @@ fish_somapos <- function(ids, units = c("nm", "raw", "emraw", "microns"),
     stop("metadata must contain a somaLocation or tosomaLocation column.")
   }
 
-  loc <- meta$somaLocation
+  loc <- if ("somaLocation" %in% colnames(meta)) meta$somaLocation else
+    rep(NA_character_, nrow(meta))
+  xyz <- fish_parse_locations(loc)
   if ("tosomaLocation" %in% colnames(meta)) {
-    missing <- is.na(nat::xyzmatrix(loc))[, 1]
-    if (any(missing)) loc[missing] <- meta$tosomaLocation[missing]
-  }
-
-  xyz <- nat::xyzmatrix(loc)
-  # nat::xyzmatrix may drop rows that fail to parse; guard against that and
-  # rebuild a full Nx3 with NAs where the location string was NA / unparsable.
-  if (nrow(xyz) != length(loc)) {
-    out <- matrix(NA_real_, nrow = length(loc), ncol = 3L,
-                  dimnames = list(NULL, c("X", "Y", "Z")))
-    parsed <- !is.na(loc) & nzchar(loc)
-    out[parsed, ] <- xyz
-    xyz <- out
+    missing <- is.na(xyz[, 1])
+    if (any(missing))
+      xyz[missing, ] <- fish_parse_locations(meta$tosomaLocation[missing])
   }
 
   # somaLocation / tosomaLocation are stored on the neuprint raw grid.
@@ -169,4 +161,18 @@ fish_soma_side <- function(ids,
                                    threshold = threshold)
   }
   res
+}
+
+# Parse location strings into an Nx3 matrix, with NA rows for NA / empty /
+# unparsable entries (nat::xyzmatrix errors when nothing parses).
+fish_parse_locations <- function(loc) {
+  loc <- as.character(loc)
+  out <- matrix(NA_real_, nrow = length(loc), ncol = 3L,
+                dimnames = list(NULL, c("X", "Y", "Z")))
+  ok <- !is.na(loc) & nzchar(loc)
+  if (any(ok)) {
+    xyz <- nat::xyzmatrix(loc[ok])
+    if (nrow(xyz) == sum(ok)) out[ok, ] <- xyz
+  }
+  out
 }
