@@ -35,9 +35,9 @@ A \code{shapelist3d} containing one or more ROI \code{mesh3d}
 Fetch one or more ROI meshes for fish2
 }
 \details{
-It seems that the nominal voxel dimensions of the dataset are 16 x
-16 x 15 nm. ROI meshes are returned from neuprint in raw voxel space and are
-scaled up by this factor to give the default nm scaling.
+Since September 2026 fish2 ROI meshes are returned from neuprint in
+  nm (previously they were in raw 16 x 16 x 15 nm voxel space). For
+  \code{units="raw"} they are scaled down by these voxel dimensions.
 }
 \examples{
 \donttest{

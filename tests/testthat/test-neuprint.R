@@ -98,5 +98,44 @@ test_that("fish_roi_meshes supports one or more ROI meshes and units", {
   expect_length(meshes_raw, 2)
   expect_true(inherits(meshes_nm, "shapelist3d"))
   expect_length(meshes_nm, 1)
-  expect_equal(meshes_nm[[1]]$vb[1:3, ], meshes_raw[[1]]$vb[1:3, ] * c(16,16,15))
+  expect_equal(meshes_raw[[1]]$vb[1:3, ], meshes_nm[[1]]$vb[1:3, ] / c(16,16,15))
+  # ROI meshes are delivered in nm: Midbrain spans hundreds of microns
+  expect_gt(max(meshes_nm[[1]]$vb[1, ]), 1e5)
+})
+
+test_that("fish_scale_skeletons converts nm skeletons to other units", {
+  n <- nat::Cell07PNs[[1]]
+  nm <- fish_scale_skeletons(n, "nm")
+  expect_equal(nat::xyzmatrix(nm), nat::xyzmatrix(n))
+  expect_equal(nm$d$W, n$d$W)
+
+  raw <- fish_scale_skeletons(n, "raw")
+  expect_equal(nat::xyzmatrix(raw),
+               sweep(nat::xyzmatrix(n), 2, c(16, 16, 15), "/"))
+  expect_equal(raw$d$W, n$d$W / 16)
+
+  um <- fish_scale_skeletons(n, "microns")
+  expect_equal(nat::xyzmatrix(um), nat::xyzmatrix(n) / 1000)
+  expect_equal(um$d$W, n$d$W / 1000)
+
+  # skeletons delivered in voxels are calibrated to nm first
+  vox <- fish_scale_skeletons(n, "nm", skel_nm = c(16, 16, 15))
+  expect_equal(nat::xyzmatrix(vox),
+               sweep(nat::xyzmatrix(n), 2, c(16, 16, 15), "*"))
+  expect_equal(vox$d$W, n$d$W * 16)
+})
+
+test_that("read_fish_neurons skeletons agree with DVID meshes in nm", {
+  skip_if_no_fish_clio()
+
+  conn <- try(fish_neuprint(), silent = TRUE)
+  skip_if(inherits(conn, "try-error"),
+          message = "fish2 neuprint connection unavailable")
+
+  id <- fish_ids("RGC", conn = conn)[1]
+  sk <- suppressWarnings(read_fish_neurons(id, conn = conn))
+  m <- read_fish_meshes(id)
+  # skeleton nodes sit inside the mesh so bounding boxes nearly coincide
+  expect_equal(apply(nat::xyzmatrix(sk), 2, range),
+               apply(nat::xyzmatrix(m), 2, range), tolerance = 0.05)
 })
