@@ -80,6 +80,6 @@ conn
 #>   https://neuprint-fish2.janelia.org
 #> with default dataset:
 #>    fish2 
-#> Login active since: Thu, 15 Oct 2026 11:22:43 GMT
+#> Login active since: Thu, 15 Oct 2026 11:26:26 GMT
 # }
 ```
