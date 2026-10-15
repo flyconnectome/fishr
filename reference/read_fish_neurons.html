@@ -65,7 +65,9 @@
 
 
 <dt id="arg-units">units<a class="anchor" aria-label="anchor" href="#arg-units"></a></dt>
-<dd><p>Units of the returned neurons (default <code>"nm"</code>).</p></dd>
+<dd><p>Units of the returned neurons: <code>"nm"</code> (default),
+<code>"raw"</code> (16 x 16 x 15 nm voxels) or <code>"microns"</code>. Node radii are
+scaled by the x voxel size (16 nm) for <code>"raw"</code>.</p></dd>
 
 
 <dt id="arg-heal-threshold">heal.threshold<a class="anchor" aria-label="anchor" href="#arg-heal-threshold"></a></dt>
@@ -95,6 +97,14 @@ together.</p></dd>
   more neurons.</p>
     </div>
     <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p>Since September 2026 the fish2 neuprint server returns skeletons
+  with coordinates and radii in nm (previously they were in 16 x 16 x 15 nm
+  voxels). If the dataset metadata advertise a <code>skeletonSize</code> (nm per
+  skeleton unit) this is used to calibrate the skeletons; otherwise they are
+  assumed to be in nm.</p>
+    </div>
+    <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p><code><a href="https://natverse.org/malevnc/reference/manc_read_neurons.html" class="external-link">manc_read_neurons</a></code>, and nat functions
   including <code><a href="https://rdrr.io/pkg/nat/man/neuron.html" class="external-link">neuron</a></code>, <code><a href="https://rdrr.io/pkg/nat/man/neuronlist.html" class="external-link">neuronlist</a></code>.</p>
@@ -108,8 +118,6 @@ together.</p></dd>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="va">rgcsk3</span> <span class="op">&lt;-</span> <span class="fu">read_fish_neurons</span><span class="op">(</span><span class="fu"><a href="fish_ids.html">fish_ids</a></span><span class="op">(</span><span class="st">"RGC"</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Clio dataset lookup failed; falling back to baked-in neuprint settings for `fish2`. Clio-backed functionality may be unavailable in this session.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Clio dataset lookup failed; falling back to baked-in neuprint settings for `fish2`. Clio-backed functionality may be unavailable in this session.</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">rgcsk3</span>, WithNodes<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="read_fish_neurons-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span><span class="co"># }</span></span></span>

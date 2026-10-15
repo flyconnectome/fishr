@@ -67,34 +67,40 @@ Other data-queries:
 ``` r
 # \donttest{
 head(fish_neuprint_meta("RGC"))
-#> Warning: Clio dataset lookup failed; falling back to baked-in neuprint settings for `fish2`. Clio-backed functionality may be unavailable in this session.
-#>      bodyid post pre downstream upstream synweight nsoma somaSide
-#> 1 110656660    8 219        229        8       237     0     <NA>
-#> 2 100009896    2  89         90        2        92     0     <NA>
-#> 3 100015071    0 128        135        0       135     0     <NA>
-#> 4 100015468    2 290        316        2       318     0     <NA>
-#> 5 100017513    7 245        252        7       259     0     <NA>
-#> 6 100023948    1 167        173        1       174     0     <NA>
-#>      statusLabel connectivityType perNodeSc group  name proposedType type class
-#> 1 Sensory Anchor             <NA>        NA     0 RGC_R         <NA>  RGC  <NA>
-#> 2 Sensory Anchor             <NA>        NA     0 RGC_R         <NA>  RGC  <NA>
-#> 3 Sensory Anchor             <NA>        NA     0 RGC_R         <NA>  RGC  <NA>
-#> 4 Sensory Anchor             <NA>        NA     0 RGC_R         <NA>  RGC  <NA>
-#> 5 Sensory Anchor             <NA>        NA     0 RGC_R         <NA>  RGC  <NA>
-#> 6 Sensory Anchor             <NA>        NA     0 RGC_R         <NA>  RGC  <NA>
-#>   keywords comment somaLocation somaId somaVoxels zapbenchId
-#> 1     <NA>    <NA>         <NA>     NA         NA         NA
-#> 2     <NA>    <NA>         <NA>     NA         NA         NA
-#> 3     <NA>    <NA>         <NA>     NA         NA         NA
-#> 4     <NA>    <NA>         <NA>     NA         NA         NA
-#> 5     <NA>    <NA>         <NA>     NA         NA         NA
-#> 6     <NA>    <NA>         <NA>     NA         NA         NA
-#>   closestLandmarkDistanceMicrons tosomaLocation status   voxels  soma
-#> 1                             NA           <NA> Anchor  9735937 FALSE
-#> 2                             NA           <NA> Anchor  6228154 FALSE
-#> 3                             NA           <NA> Anchor  5774341 FALSE
-#> 4                             NA           <NA> Anchor  9488378 FALSE
-#> 5                             NA           <NA> Anchor 10752622 FALSE
-#> 6                             NA           <NA> Anchor  6913578 FALSE
+#>      bodyid post pre downstream upstream synweight axonIn dendriteIn axonOut
+#> 1 110847565   13 102        105       13       118     10          3     105
+#> 2 111011778   14 147        158       14       172     13          1     158
+#> 3 100046022   21 194        202       21       223     19          2     202
+#> 4 100061403   36 168        177       36       213     34          2     177
+#> 5 100063360   55 309        334       55       389     52          3     334
+#> 6 100106910   12 142        148       12       160     11          1     148
+#>   dendriteOut nsoma somaSide    statusLabel group  name type
+#> 1           0     0     <NA> Sensory Anchor     0 RGC_R  RGC
+#> 2           0     0     <NA> Sensory Anchor     0 RGC_R  RGC
+#> 3           0     0     <NA> Sensory Anchor     0 RGC_R  RGC
+#> 4           0     0     <NA> Sensory Anchor     0 RGC_R  RGC
+#> 5           0     0     <NA> Sensory Anchor     0 RGC_R  RGC
+#> 6           0     0     <NA> Sensory Anchor     0 RGC_R  RGC
+#>   connectivityTypeV11 connectivityType perNodeSc proposedType keywords class
+#> 1                <NA>             <NA>        NA         <NA>     <NA>  <NA>
+#> 2                <NA>             <NA>        NA         <NA>     <NA>  <NA>
+#> 3                <NA>             <NA>        NA         <NA>     <NA>  <NA>
+#> 4                <NA>             <NA>        NA         <NA>     <NA>  <NA>
+#> 5                <NA>             <NA>        NA         <NA>     <NA>  <NA>
+#> 6                <NA>             <NA>        NA         <NA>     <NA>  <NA>
+#>   comment somaLocation somaId somaVoxels zapbenchId
+#> 1    <NA>         <NA>     NA         NA         NA
+#> 2    <NA>         <NA>     NA         NA         NA
+#> 3    <NA>         <NA>     NA         NA         NA
+#> 4    <NA>         <NA>     NA         NA         NA
+#> 5    <NA>         <NA>     NA         NA         NA
+#> 6    <NA>         <NA>     NA         NA         NA
+#>   closestLandmarkDistanceMicrons tosomaLocation status  voxels  soma
+#> 1                             NA           <NA> Anchor 4580954 FALSE
+#> 2                             NA           <NA> Anchor 4697626 FALSE
+#> 3                             NA           <NA> Anchor 5945526 FALSE
+#> 4                             NA           <NA> Anchor 7070914 FALSE
+#> 5                             NA           <NA> Anchor 8442180 FALSE
+#> 6                             NA           <NA> Anchor 6493266 FALSE
 # }
 ```

@@ -31,7 +31,9 @@ read_fish_neurons(
 
 - units:
 
-  Units of the returned neurons (default `"nm"`).
+  Units of the returned neurons: `"nm"` (default), `"raw"` (16 x 16 x 15
+  nm voxels) or `"microns"`. Node radii are scaled by the x voxel size
+  (16 nm) for `"raw"`.
 
 - heal.threshold:
 
@@ -58,6 +60,14 @@ read_fish_neurons(
 A [`neuronlist`](https://rdrr.io/pkg/nat/man/neuronlist.html) object
 containing one or more neurons.
 
+## Details
+
+Since September 2026 the fish2 neuprint server returns skeletons with
+coordinates and radii in nm (previously they were in 16 x 16 x 15 nm
+voxels). If the dataset metadata advertise a `skeletonSize` (nm per
+skeleton unit) this is used to calibrate the skeletons; otherwise they
+are assumed to be in nm.
+
 ## See also
 
 [`manc_read_neurons`](https://natverse.org/malevnc/reference/manc_read_neurons.html),
@@ -75,8 +85,6 @@ Other 3d-meshes-skeletons:
 ``` r
 # \donttest{
 rgcsk3 <- read_fish_neurons(fish_ids("RGC")[1:3])
-#> Warning: Clio dataset lookup failed; falling back to baked-in neuprint settings for `fish2`. Clio-backed functionality may be unavailable in this session.
-#> Warning: Clio dataset lookup failed; falling back to baked-in neuprint settings for `fish2`. Clio-backed functionality may be unavailable in this session.
 plot(rgcsk3, WithNodes=FALSE)
 
 # }

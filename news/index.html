@@ -33,6 +33,11 @@
     </div>
 
     <div class="section level2">
+<h2 class="pkg-version" data-toc-text="development version" id="fishr-development-version">fishr (development version)<a class="anchor" aria-label="anchor" href="#fishr-development-version"></a></h2>
+<ul><li>
+<code><a href="../reference/read_fish_neurons.html">read_fish_neurons()</a></code> and <code><a href="../reference/fish_roi_meshes.html">fish_roi_meshes()</a></code> now expect fish2 skeletons and ROI meshes in nm, matching the change on the fish2 neuprint server (September 2026). Previously the default <code>units = "nm"</code> output was 16x too large. Skeleton radii are now also correctly scaled for every <code>units</code> option. If neuprint advertises a <code>skeletonSize</code> for the dataset, <code><a href="../reference/read_fish_neurons.html">read_fish_neurons()</a></code> uses it to calibrate skeletons.</li>
+</ul></div>
+    <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.3.0" id="fishr-030">fishr 0.3.0<a class="anchor" aria-label="anchor" href="#fishr-030"></a></h2>
 <p>Several new features including a L/R-side classifier, soma-position helpers and a unified xyz coordinate converter, plus DVID body lookup at points.</p>
 <div class="section level3">

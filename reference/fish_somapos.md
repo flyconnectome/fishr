@@ -121,7 +121,6 @@ Other data-queries:
 ``` r
 # \donttest{
 meta <- fish_neuprint_meta(109192746)
-#> Warning: Clio dataset lookup failed; falling back to baked-in neuprint settings for `fish2`. Clio-backed functionality may be unavailable in this session.
 fish_somapos(meta)
 #>           X      Y      Z
 #> [1,] 898128 426816 158175
@@ -129,6 +128,6 @@ fish_somapos(meta, units = "microns")
 #>            X       Y       Z
 #> [1,] 898.128 426.816 158.175
 fish_soma_side(meta)
-#> [1] "R"
+#> [1] "L"
 # }
 ```

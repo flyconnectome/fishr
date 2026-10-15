@@ -47,9 +47,9 @@ meshes are dropped with a warning.
 
 ## Details
 
-It seems that the nominal voxel dimensions of the dataset are 16 x 16 x
-15 nm. ROI meshes are returned from neuprint in raw voxel space and are
-scaled up by this factor to give the default nm scaling.
+Since September 2026 fish2 ROI meshes are returned from neuprint in nm
+(previously they were in raw 16 x 16 x 15 nm voxel space). For
+`units="raw"` they are scaled down by these voxel dimensions.
 
 ## See also
 
@@ -68,7 +68,7 @@ Other 3d-meshes-skeletons:
 # \donttest{
 fish_roi_meshes(c("Midbrain", "Hindbrain"), .progress = "none")
 #>  shapelist3d object with 2 items:
-#> [[1]] mesh3d object with 39619 vertices, 78938 triangles.
-#> [[2]] mesh3d object with 38987 vertices, 77864 triangles.
+#> [[1]] mesh3d object with 288612 vertices, 577186 triangles.
+#> [[2]] mesh3d object with 282739 vertices, 565580 triangles.
 # }
 ```

@@ -83,9 +83,9 @@ allows progress reporting and simple parallelisation.</p></dd>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>It seems that the nominal voxel dimensions of the dataset are 16 x
-16 x 15 nm. ROI meshes are returned from neuprint in raw voxel space and are
-scaled up by this factor to give the default nm scaling.</p>
+    <p>Since September 2026 fish2 ROI meshes are returned from neuprint in
+  nm (previously they were in raw 16 x 16 x 15 nm voxel space). For
+  <code>units="raw"</code> they are scaled down by these voxel dimensions.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -102,8 +102,8 @@ scaled up by this factor to give the default nm scaling.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="fu">fish_roi_meshes</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Midbrain"</span>, <span class="st">"Hindbrain"</span><span class="op">)</span>, .progress <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  shapelist3d object with 2 items:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [[1]] mesh3d object with 39619 vertices, 78938 triangles.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [[2]] mesh3d object with 38987 vertices, 77864 triangles.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [[1]] mesh3d object with 288612 vertices, 577186 triangles.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [[2]] mesh3d object with 282739 vertices, 565580 triangles.</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
