@@ -132,6 +132,10 @@ test_that("read_fish_neurons skeletons agree with DVID meshes in nm", {
   skip_if(inherits(conn, "try-error"),
           message = "fish2 neuprint connection unavailable")
 
+  ss <- fish_skeleton_size(conn)
+  expect_type(ss, "double")
+  expect_length(ss, 3)
+
   id <- fish_ids("RGC", conn = conn)[1]
   sk <- suppressWarnings(read_fish_neurons(id, conn = conn))
   m <- read_fish_meshes(id)
