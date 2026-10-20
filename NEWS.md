@@ -4,8 +4,9 @@
   ROI meshes in nm, matching the change on the fish2 neuprint server
   (September 2026). Previously the default `units = "nm"` output was 16x too
   large. Skeleton radii are now also correctly scaled for every `units`
-  option. If neuprint advertises a `skeletonSize` for the dataset,
-  `read_fish_neurons()` uses it to calibrate skeletons.
+  option. Skeleton units are read from the neuprint `Meta` node's
+  `skeletonCoordinateResolutionNm` field, falling back to 16 x 16 x 15 nm
+  voxels when it is absent.
 
 # fishr 0.3.0
 

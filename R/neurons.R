@@ -18,9 +18,10 @@
 #'
 #' @details Since September 2026 the fish2 neuprint server returns skeletons
 #'   with coordinates and radii in nm (previously they were in 16 x 16 x 15 nm
-#'   voxels). If the dataset metadata advertise a \code{skeletonSize} (nm per
-#'   skeleton unit) this is used to calibrate the skeletons; otherwise they are
-#'   assumed to be in nm.
+#'   voxels). The skeleton units are read from the
+#'   \code{skeletonCoordinateResolutionNm} field of the neuprint \code{Meta}
+#'   node; when this is absent (older releases) skeletons are assumed to be in
+#'   16 x 16 x 15 nm voxels.
 #'
 #' @return A \code{\link[nat:neuronlist]{neuronlist}} object containing one or
 #'   more neurons.
@@ -72,17 +73,15 @@ fish_scale_skeletons <- function(x, units = c("nm", "raw", "microns"),
 
 #' nm per unit of skeletons returned by neuprint
 #'
-#' @description Uses the optional \code{skeletonSize} field of the neuprint
-#'   dataset metadata when present, otherwise assumes skeletons are in nm (as
-#'   for fish2 since September 2026).
+#' @description Reads \code{skeletonCoordinateResolutionNm} from the neuprint
+#'   \code{Meta} node. Older datasets lack this field, in which case skeletons
+#'   are in voxel units (16 x 16 x 15 nm for fish2).
 #' @return Numeric vector of length 3.
 #' @noRd
 fish_skeleton_size <- function(conn, dataset = fish_default_dataset()) {
-  ds <- try(neuprintr::neuprint_datasets(conn = conn, cache = TRUE),
-            silent = TRUE)
-  ss <- if (!inherits(ds, "try-error")) ds[[dataset]][["skeletonSize"]]
-  ss <- suppressWarnings(as.numeric(unlist(ss)))
-  if (length(ss) == 1) ss <- rep(ss, 3)
-  if (length(ss) != 3 || anyNA(ss)) ss <- c(1, 1, 1)
-  ss
+  res <- neuprintr::neuprint_fetch_custom(
+    cypher = "MATCH (m:Meta) RETURN m.skeletonCoordinateResolutionNm",
+    dataset = dataset, conn = conn)
+  ss <- as.numeric(unlist(res$data))
+  if (length(ss) == 3) ss else c(16, 16, 15)
 }
