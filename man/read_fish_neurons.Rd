@@ -48,9 +48,10 @@ Read neuron skeletons via neuprint
 \details{
 Since September 2026 the fish2 neuprint server returns skeletons
   with coordinates and radii in nm (previously they were in 16 x 16 x 15 nm
-  voxels). If the dataset metadata advertise a \code{skeletonSize} (nm per
-  skeleton unit) this is used to calibrate the skeletons; otherwise they are
-  assumed to be in nm.
+  voxels). The skeleton units are read from the
+  \code{skeletonCoordinateResolutionNm} field of the neuprint \code{Meta}
+  node; when this is absent (older releases) skeletons are assumed to be in
+  16 x 16 x 15 nm voxels.
 }
 \examples{
 \donttest{
